@@ -16,13 +16,13 @@ public interface IBillDao {
 	 */
 	public PagerBean findAllUserBillByCondition(PagerBean page);
 	 
+	
 	/**
 	 * 找到某账务账号的所有业务账号账单，按年月查询,参数：UserBean；年份；月份；天
 	 * 查询表：
 	 * @param page
 	 * @return
 	 */
-	 
 	public PagerBean findAllServiceBillByCondition(PagerBean page);
 	
 	/**

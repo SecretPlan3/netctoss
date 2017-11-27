@@ -22,7 +22,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class BillBean implements Serializable {
 
 	private static final long serialVersionUID = -924609537236557091L;
-  
+   
 	@Id
 	@Column(name = "id")
 	@GenericGenerator(name = "hibernate.identity", strategy = "identity")

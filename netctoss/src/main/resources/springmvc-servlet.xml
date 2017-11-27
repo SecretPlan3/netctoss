@@ -13,9 +13,8 @@
         http://www.springframework.org/schema/aop 
         http://www.springframework.org/schema/aop/spring-aop.xsd
         ">
-        <!-- 开启springmvc框架的注解支持 -->
         
-        
+        <!-- 开启springmvc框架的注解支持 --> 
        <mvc:annotation-driven enable-matrix-variables="true" conversion-service="tc"/>
        
         <mvc:resources location="/js/" mapping="/js/*"/>
@@ -23,7 +22,7 @@
         <mvc:resources location="/html/" mapping="/html/**"/>
         <mvc:resources location="/static/" mapping="/static/**"></mvc:resources>
         <!-- 开启自动扫描,并且只扫描WEB层的组件 -->
-        <context:component-scan base-package="com.easy">
+        <context:component-scan base-package="org.project.netctoss">
         	<!-- spring框架所提供的两大过滤器 -->
         	<!-- 除了有annotation,还有这么几个过滤器assignable（类名）,regex（正则）,aspectj(切面) -->
         	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
@@ -35,7 +34,7 @@
         <bean id="tc" class="org.springframework.context.support.ConversionServiceFactoryBean">
 			<property name="converters">
 				<set>
-					<bean class="com.easy.converter.GolbalUtilDateConverter"></bean>
+					<bean class="org.project.netctoss.converter.GolbalUtilDateConverter"></bean>
 				</set>
 			</property>
 		</bean>

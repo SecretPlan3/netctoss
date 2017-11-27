@@ -1,0 +1,40 @@
+8
+
+dir
+52
+https://127.0.0.1:8443/svn/netctoss/src/main/java/org/project/netctoss/permissionmag/dao
+https://127.0.0.1:8443/svn/netctoss
+
+
+
+2017-11-27T03:20:04.345396Z
+45
+xlb
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+b6c3b8db-b51c-2e40-a0ae-1c423ddf9a73
+
+IPermissionDao.java
+file
+
+
+
+
+2017-11-27T04:54:18.136000Z
+7c28e6f7bf787ff85f48e77e63a5308d
+2017-11-27T03:20:04.345396Z
+45
+xlb
+

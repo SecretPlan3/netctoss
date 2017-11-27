@@ -1,0 +1,40 @@
+8
+
+dir
+52
+https://127.0.0.1:8443/svn/netctoss/src/main/java/org/project/netctoss/rolemag/service/serviceImpl
+https://127.0.0.1:8443/svn/netctoss
+
+
+
+2017-11-27T03:20:12.749877Z
+46
+xlb
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+b6c3b8db-b51c-2e40-a0ae-1c423ddf9a73
+
+RoleServiceImpl.java
+file
+
+
+
+
+2017-11-27T04:54:16.580000Z
+7035a27102c54488bb3ef1f2e35873e3
+2017-11-27T03:20:12.749877Z
+46
+xlb
+

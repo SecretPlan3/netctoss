@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/netctoss/!svn/ver/47/target/classes
+END
+mysql.properties
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/netctoss/!svn/ver/47/target/classes/mysql.properties
+END
+ehcache.xml
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/netctoss/!svn/ver/47/target/classes/ehcache.xml
+END
+applicationContext.xml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/netctoss/!svn/ver/47/target/classes/applicationContext.xml
+END
+log4j.properties
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/netctoss/!svn/ver/47/target/classes/log4j.properties
+END
+springmvc-servlet.xml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/netctoss/!svn/ver/47/target/classes/springmvc-servlet.xml
+END

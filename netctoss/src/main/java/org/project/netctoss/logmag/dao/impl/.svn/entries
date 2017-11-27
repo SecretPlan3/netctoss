@@ -1,0 +1,40 @@
+8
+
+dir
+52
+https://127.0.0.1:8443/svn/netctoss/src/main/java/org/project/netctoss/logmag/dao/impl
+https://127.0.0.1:8443/svn/netctoss
+
+
+
+2017-11-27T02:55:36.141420Z
+37
+yance
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+b6c3b8db-b51c-2e40-a0ae-1c423ddf9a73
+
+LogmagDaoImpl.java
+file
+
+
+
+
+2017-11-27T04:54:16.376000Z
+8ed2044d2f22d52989dfcd30df53a9e3
+2017-11-27T02:55:36.141420Z
+37
+yance
+

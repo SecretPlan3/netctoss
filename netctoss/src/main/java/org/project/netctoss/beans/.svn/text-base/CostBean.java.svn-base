@@ -2,17 +2,52 @@ package org.project.netctoss.beans;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+
+@Entity
+@Table(name="t_cost")
 public class CostBean {
+	@Id
+	@GenericGenerator(name="hibernate.identity",strategy="identity")
+	@GeneratedValue(generator="hibernate.identity")
 	private long id;
+	
+	@Column(name="name",length=50)
 	private String name;//资费名称
-	private long type;//资费类型；分为三种：包月套餐/自助类型/计时套餐
+	
+	@Column(name="type")
+	private int type;//资费类型；分为三种：包月套餐/自助类型/计时套餐
+	
+	@Column(name="basic_time")
 	private Date basicTime;//基本时长
+	
+	@Column(name="basic_cost")
 	private Double basicCost;//基本费用
+	
+	@Column(name="unit_cost")
 	private Double unitCost;//单位费用
-	private long status;//资费状态
-	private String description;
-	private Date createTime;
-	private Date closeTime;
+	
+	@Column(name="status")
+	private int status;//资费状态
+	
+	@Column(name="description",length=100)
+	private String description;//资费说明
+	
+	@Column(name="create_time")
+	private Date createTime;//创建时间
+	
+	@Column(name="start_time")
+	private Date startTime;//开始时间
+	
+	@Column(name="close_time")
+	private Date closeTime;//关闭时间
 	
 	public long getId() {
 		return id;
@@ -29,7 +64,7 @@ public class CostBean {
 	public long getType() {
 		return type;
 	}
-	public void setType(long type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 	public Date getBasicTime() {
@@ -53,7 +88,7 @@ public class CostBean {
 	public long getStatus() {
 		return status;
 	}
-	public void setStatus(long status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	public String getDescription() {
@@ -68,18 +103,23 @@ public class CostBean {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
+	public Date getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
 	public Date getCloseTime() {
 		return closeTime;
 	}
 	public void setCloseTime(Date closeTime) {
 		this.closeTime = closeTime;
 	}
-	
 	//用于测试
 	@Override
 	public String toString() {
 		return "CostBean [id=" + id + ", name=" + name + ", type=" + type + ", basicTime=" + basicTime + ", basicCost="
 				+ basicCost + ", unitCost=" + unitCost + ", status=" + status + ", description=" + description
-				+ ", createTime=" + createTime + ", closeTime=" + closeTime + "]";
+				+ ", createTime=" + createTime + ", startTime=" + startTime + "]";
 	}
 }

@@ -5,12 +5,14 @@ import java.util.List;
 import org.project.netctoss.beans.CostBean;
 import org.project.netctoss.costmag.dao.ICostDao;
 import org.project.netctoss.pojos.PagerBean;
-
-public class CostDaoImpl implements ICostDao {
+import org.project.netctoss.utils.BaseDao;
+import org.springframework.stereotype.Repository;
+@Repository
+public class CostDaoImpl extends BaseDao implements ICostDao {
 
 	public void insertCosts(CostBean costBean) {
 		// TODO Auto-generated method stub
-		
+		getSession().save(costBean);
 	}
 
 	public CostBean selectCosts(long id) {

@@ -5,7 +5,7 @@ import java.util.Date;
 public class ManagerOperationLogBean {
 	private long id;
 	private Date operationTime;//操作时间
-	private long type;//操作类型
+	private int type;//操作类型
 	private ManagerBean operationManager;//操作管理人员
 	private String address;//操作位置
 	public long getId() {
@@ -23,7 +23,7 @@ public class ManagerOperationLogBean {
 	public long getType() {
 		return type;
 	}
-	public void setType(long type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 	public ManagerBean getOperationManager() {

@@ -1,7 +1,7 @@
 8
 
 dir
-52
+67
 https://127.0.0.1:8443/svn/netctoss/target/m2e-wtp
 https://127.0.0.1:8443/svn/netctoss
 
@@ -28,4 +28,8 @@ b6c3b8db-b51c-2e40-a0ae-1c423ddf9a73
 
 web-resources
 dir
+
+
+
+delete
 

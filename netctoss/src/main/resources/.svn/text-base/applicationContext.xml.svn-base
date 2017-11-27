@@ -23,7 +23,7 @@
 	 	 <context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
             <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
 	 </context:component-scan>  
-    
+     
     <!-- 引入外部的mysql.properties -->
     <context:property-placeholder location="classpath:mysql.properties" ignore-unresolvable="true" ignore-resource-not-found="true"/>
 
@@ -115,7 +115,7 @@
         </tx:attributes>
     </tx:advice>
 	
-	<aop:config>
+	<aop:config> 
         <aop:pointcut id="serviceMethods" expression="execution(* org.project.netctoss.*mag.service.impl.*ServiceImpl.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
     </aop:config>

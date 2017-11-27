@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 44
-/svn/netctoss/!svn/ver/52/src/main/resources
+/svn/netctoss/!svn/ver/59/src/main/resources
 END
 mysql.properties
 K 25
@@ -19,7 +19,7 @@ applicationContext.xml
 K 25
 svn:wc:ra_dav:version-url
 V 67
-/svn/netctoss/!svn/ver/30/src/main/resources/applicationContext.xml
+/svn/netctoss/!svn/ver/59/src/main/resources/applicationContext.xml
 END
 log4j.properties
 K 25

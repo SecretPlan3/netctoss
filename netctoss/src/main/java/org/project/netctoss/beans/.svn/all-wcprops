@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 66
-/svn/netctoss/!svn/ver/42/src/main/java/org/project/netctoss/beans
+/svn/netctoss/!svn/ver/63/src/main/java/org/project/netctoss/beans
 END
 ServiceTimeBean.java
 K 25
@@ -30,20 +30,20 @@ END
 CostBean.java
 K 25
 svn:wc:ra_dav:version-url
-V 79
-/svn/netctoss/!svn/ver/8/src/main/java/org/project/netctoss/beans/CostBean.java
+V 80
+/svn/netctoss/!svn/ver/61/src/main/java/org/project/netctoss/beans/CostBean.java
 END
 ManagerLogBean.java
 K 25
 svn:wc:ra_dav:version-url
-V 85
-/svn/netctoss/!svn/ver/9/src/main/java/org/project/netctoss/beans/ManagerLogBean.java
+V 86
+/svn/netctoss/!svn/ver/62/src/main/java/org/project/netctoss/beans/ManagerLogBean.java
 END
 ManagerOperationLogBean.java
 K 25
 svn:wc:ra_dav:version-url
 V 95
-/svn/netctoss/!svn/ver/10/src/main/java/org/project/netctoss/beans/ManagerOperationLogBean.java
+/svn/netctoss/!svn/ver/63/src/main/java/org/project/netctoss/beans/ManagerOperationLogBean.java
 END
 RoleBean.java
 K 25

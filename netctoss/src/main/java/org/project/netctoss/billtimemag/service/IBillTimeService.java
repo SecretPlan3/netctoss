@@ -2,6 +2,7 @@ package org.project.netctoss.billtimemag.service;
 
 import org.project.netctoss.pojos.PagerBean;
 
+
 public interface IBillTimeService {
 	
 	/**

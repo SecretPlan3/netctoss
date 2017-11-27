@@ -36,7 +36,7 @@ public class ManagerLogBean {
 	@JoinColumn(name="fk_manager_id")
 	private ManagerBean managerOperation;//操作者
 	
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="cls")
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<ManagerOperationLogBean> operationLog;//在这时间段内该管理员所有的操作
 	public long getId() {
 		return id;

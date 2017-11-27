@@ -2,12 +2,41 @@ package org.project.netctoss.beans;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+@Entity
+@Table(name="t_manageroperationlog")
 public class ManagerOperationLogBean {
+	@Id
+	@GenericGenerator(name="hibernate.identity",strategy="identity")
+	@GeneratedValue(generator="hibernate.identity")
 	private long id;
+	
+	@Column(name="operation_time")
 	private Date operationTime;//操作时间
+	
+	@Column(name="type")
 	private int type;//操作类型
+	
+	@JsonIgnore
+	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinColumn(name="fk_manager_id")
 	private ManagerBean operationManager;//操作管理人员
+	
+	@Column(name="address",length=50)
 	private String address;//操作位置
+	
 	public long getId() {
 		return id;
 	}

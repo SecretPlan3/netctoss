@@ -22,6 +22,9 @@ public class CostBean {
 	@Column(name="name",length=50)
 	private String name;//资费名称
 	
+	@Column(name="cost_number")
+	private String costNumber;//套餐编号
+	
 	@Column(name="type")
 	private int type;//资费类型；分为三种：包月套餐/自助类型/计时套餐
 	
@@ -115,11 +118,18 @@ public class CostBean {
 	public void setCloseTime(Date closeTime) {
 		this.closeTime = closeTime;
 	}
+	public String getCostNumber() {
+		return costNumber;
+	}
+	public void setCostNumber(String costNumber) {
+		this.costNumber = costNumber;
+	}
 	//用于测试
 	@Override
 	public String toString() {
-		return "CostBean [id=" + id + ", name=" + name + ", type=" + type + ", basicTime=" + basicTime + ", basicCost="
-				+ basicCost + ", unitCost=" + unitCost + ", status=" + status + ", description=" + description
-				+ ", createTime=" + createTime + ", startTime=" + startTime + "]";
+		return "CostBean [id=" + id + ", name=" + name + ", costNumber=" + costNumber + ", type=" + type
+				+ ", basicTime=" + basicTime + ", basicCost=" + basicCost + ", unitCost=" + unitCost + ", status="
+				+ status + ", description=" + description + ", createTime=" + createTime + ", startTime=" + startTime
+				+ ", closeTime=" + closeTime + "]";
 	}
 }

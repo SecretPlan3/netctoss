@@ -1,7 +1,7 @@
 K 25
 svn:wc:ra_dav:version-url
 V 66
-/svn/netctoss/!svn/ver/63/src/main/java/org/project/netctoss/beans
+/svn/netctoss/!svn/ver/71/src/main/java/org/project/netctoss/beans
 END
 ServiceTimeBean.java
 K 25
@@ -91,5 +91,5 @@ BillBean.java
 K 25
 svn:wc:ra_dav:version-url
 V 80
-/svn/netctoss/!svn/ver/12/src/main/java/org/project/netctoss/beans/BillBean.java
+/svn/netctoss/!svn/ver/71/src/main/java/org/project/netctoss/beans/BillBean.java
 END

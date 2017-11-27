@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,14 +15,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
-
+import org.hibernate.annotations.OptimisticLockType;
+import org.hibernate.annotations.OptimisticLocking;
 
 @Entity
 @Table(name = "t_userMonthlyCost")
 public class BillBean implements Serializable {
 
 	private static final long serialVersionUID = -924609537236557091L;
-   
+  
 	@Id
 	@Column(name = "id")
 	@GenericGenerator(name = "hibernate.identity", strategy = "identity")

@@ -17,17 +17,17 @@ public class CostDaoImpl extends BaseDao implements ICostDao {
 
 	public CostBean selectCosts(long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return (CostBean) getSession().get(CostBean.class, id);
 	}
 
 	public void deleteCosts(CostBean costBean) {
 		// TODO Auto-generated method stub
-		
+		getSession().delete(costBean);
 	}
 
 	public void updateCosts(CostBean costBean) {
 		// TODO Auto-generated method stub
-		
+		getSession().update(costBean);
 	}
 
 	public PagerBean findAllCostsByPager(PagerBean pager) {

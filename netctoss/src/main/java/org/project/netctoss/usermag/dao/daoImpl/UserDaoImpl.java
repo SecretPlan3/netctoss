@@ -7,7 +7,8 @@ import org.project.netctoss.beans.UserBean;
 import org.project.netctoss.pojos.PagerBean;
 import org.project.netctoss.usermag.dao.UserDao;
 import org.project.netctoss.utils.BaseDao;
-
+import org.springframework.stereotype.Repository;
+@Repository
 public class UserDaoImpl extends BaseDao implements UserDao {
 
 	

@@ -131,7 +131,7 @@
    </bean>
 	
 	<!-- 配置shiro权限（在其中自定义 权限与资源的对应关系）过滤器 -->
-	 <bean id="myRealm" class="org.project.netctoss.shiro.MyRealm"/>
+	 <bean id="myRealm" class="org.project.netctoss.shiro.UserRealm"/>
 	 <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
          <!-- 调用我们配置的权限管理器 -->
          <property name="securityManager" ref="securityManager"/>
@@ -150,6 +150,7 @@
                	/js/** = anon
                	/login.jsp = anon
                	/user/login = anon
+               	/jsp/** = anon
            		/jsp/manger01.jsp= roles[superadmin]
            		/manger01 = roles[superadmin]
            		/jsp/manger02.jsp= roles[admin]

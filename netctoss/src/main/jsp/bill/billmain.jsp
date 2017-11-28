@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	欢迎来到账务管理主页！
+	"${pb}"
 </body>
 </html>

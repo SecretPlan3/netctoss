@@ -1,5 +1,7 @@
 package org.project.netctoss.pojos;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,8 +12,8 @@ public class PagerBean {
 	private int index;//分页开始行数（数据库的下标）
 	private int totalRows;//满足条件的总行数
 	private int totalPage;//总页数
-	private List<?> datas;//满足条件的具体的数据
-	private Map params;//查询条件
+	private List<?> datas = new ArrayList<>();//满足条件的具体的数据
+	private Map params = new HashMap<>();//查询条件
 	public PagerBean() {
 		super();
 		// TODO Auto-generated constructor stub

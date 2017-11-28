@@ -22,6 +22,18 @@ public class TestBillTime {
 	
 	
 	@Test
+	public void testFindAllServicessBillTimeByCondition() {
+		
+		System.out.println("hello+++++++++++++++++++");
+		Map<String, String> params = new HashMap<>();
+		PagerBean page = new PagerBean(1, 3, params);
+		
+		page = billTimeserviceImpl.findAllServicessBillTimeByCondition(page);
+		System.out.println("page+++++++++++++++++++" + page);
+	
+	}
+	
+	
 	public void testFindAllUsersBillTimeByCondition() {
 		
 		System.out.println("hello+++++++++++++++++++");
@@ -32,4 +44,5 @@ public class TestBillTime {
 		page = billTimeserviceImpl.findAllUsersBillTimeByCondition(page);
 		System.out.println("page+++++++++++++++++++" + page);
 	}
+	
 }

@@ -42,7 +42,7 @@ public class BillBean implements Serializable {
 
 	@Column(name = "cost")
 	// 总费用
-	private Double cost;
+	private Double cost; 
 
 	@Column(name = "pay_status")
 	// 支付状态，0代表未支付，1代表已支付

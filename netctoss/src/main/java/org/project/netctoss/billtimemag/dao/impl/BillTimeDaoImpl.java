@@ -6,7 +6,8 @@ import org.hibernate.Query;
 import org.project.netctoss.billtimemag.dao.IBillTimeDao;
 import org.project.netctoss.pojos.PagerBean;
 import org.project.netctoss.utils.BaseDao;
-
+import org.springframework.stereotype.Repository;
+@Repository
 public class BillTimeDaoImpl  extends BaseDao implements IBillTimeDao{
 
 	@Override

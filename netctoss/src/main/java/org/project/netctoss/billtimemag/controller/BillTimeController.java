@@ -8,19 +8,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
-@RequestMapping(value="/billtime")
+//@Controller
+//@RequestMapping(value="/billtime")
 public class BillTimeController {
 	
-	@Resource
-	private IBillTimeService BillTimeServiceImpl;
-	
-	@RequestMapping(value="/findAll")
-	public ModelAndView findBillTeme() {
-		
-		
-		return null;
-		
-	}
+//	@Resource
+//	private IBillTimeService BillTimeServiceImpl;
+//	
+//	@RequestMapping(value="/findAll")
+//	public ModelAndView findBillTeme() {
+//		
+//		
+//		return null;
+//		
+//	}
 	
 }

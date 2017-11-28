@@ -91,6 +91,22 @@ public class ServiceDailyBean {
 		this.service = service;
 	}
 
+	public Long getSumTime() {
+		return sumTime;
+	}
+
+	public void setSumTime(Long sumTime) {
+		this.sumTime = sumTime;
+	}
+
+	public ServiceMonthlyBean getServiceMonthly() {
+		return serviceMonthly;
+	}
+
+	public void setServiceMonthly(ServiceMonthlyBean serviceMonthly) {
+		this.serviceMonthly = serviceMonthly;
+	}
+
 	@Override
 	public String toString() {
 		return "ServiceDailyBean [id=" + id + ", day=" + day + ", onlineTime=" + onlineTime + ", cost=" + cost

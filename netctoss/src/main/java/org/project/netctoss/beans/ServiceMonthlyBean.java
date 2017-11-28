@@ -40,6 +40,14 @@ public class ServiceMonthlyBean {
 	@JoinColumn(name = "fk_serviceyearly_id")
 	private ServiceYearlyBean serviceYearly;
 
+	public ServiceYearlyBean getServiceYearly() {
+		return serviceYearly;
+	}
+
+	public void setServiceYearly(ServiceYearlyBean serviceYearly) {
+		this.serviceYearly = serviceYearly;
+	}
+
 	@Transient
 	// 某业务账号
 	private ServiceBean service;

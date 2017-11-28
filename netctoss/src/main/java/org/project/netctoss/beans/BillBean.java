@@ -51,7 +51,7 @@ public class BillBean implements Serializable {
 	@Column(name = "pay_method")
 	// 支付方式
 	private String payMothod;
-
+ 
 	@Column(name = "pay_time")
 	// 支付时间
 	private Date payTime;

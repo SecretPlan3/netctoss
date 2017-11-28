@@ -67,13 +67,6 @@ public class ServiceDailyBean {
 		this.day = day;
 	}
 
-	public Long getSumTime() {
-		return sumTime;
-	}
-
-	public void setSumTime(Long sumTime) {
-		this.sumTime = sumTime;
-	}
 
 	public Long getOnlineTime() {
 		return onlineTime;

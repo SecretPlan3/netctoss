@@ -61,9 +61,6 @@ public class BillBean implements Serializable {
 	// 账务账号
 	private UserBean user;
 
-	@Transient
-	// 业务账单集合
-	private Set<ServiceBillBean> serviceBill;
 
 	public BillBean() {
 
@@ -133,13 +130,6 @@ public class BillBean implements Serializable {
 		this.user = user;
 	}
 
-	public Set<ServiceBillBean> getServiceBill() {
-		return serviceBill;
-	}
-
-	public void setServiceBill(Set<ServiceBillBean> serviceBill) {
-		this.serviceBill = serviceBill;
-	}
 
 	@Override
 	public String toString() {

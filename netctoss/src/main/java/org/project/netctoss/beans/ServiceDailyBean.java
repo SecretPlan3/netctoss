@@ -15,7 +15,7 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "t_userDaily")
+@Table(name = "t_serviceDaily")
 public class ServiceDailyBean {
 	@Id
 	@Column(name = "id")

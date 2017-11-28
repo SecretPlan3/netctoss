@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -30,21 +31,19 @@ public class ServiceYearlyBean {
 	@Column(name = "online_time")
 	private Long onlineTime;
 	
-	@Column(name = "cost")
+	@Transient
 	private Double cost;
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_service_id")
 	//这一年中的所有业务账号
 	private ServiceBean service;
-	
+		
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="serviceYearly")
 	//这一年中的所有月
 	private Set<ServiceMonthlyBean> serviceMonthly;
 
-	
-	
-	
+
 	public ServiceYearlyBean() {
 		
 	}

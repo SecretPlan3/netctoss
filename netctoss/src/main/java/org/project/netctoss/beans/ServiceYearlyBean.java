@@ -33,10 +33,10 @@ public class ServiceYearlyBean {
 	@Column(name = "cost")
 	private Double cost;
 	
-	@OneToMany(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_service_id")
 	//这一年中的所有业务账号
-	private Set<ServiceBean> serviceList;
+	private ServiceBean service;
 	
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="serviceYearly")
 	//这一年中的所有月
@@ -73,13 +73,20 @@ public class ServiceYearlyBean {
 		this.onlineTime = onlineTime;
 	}
 
-
-	public Set<ServiceBean> getServiceList() {
-		return serviceList;
+	public Double getCost() {
+		return cost;
 	}
 
-	public void setServiceList(Set<ServiceBean> serviceList) {
-		this.serviceList = serviceList;
+	public void setCost(Double cost) {
+		this.cost = cost;
+	}
+
+	public ServiceBean getService() {
+		return service;
+	}
+
+	public void setService(ServiceBean service) {
+		this.service = service;
 	}
 
 	public Set<ServiceMonthlyBean> getServiceMonthly() {

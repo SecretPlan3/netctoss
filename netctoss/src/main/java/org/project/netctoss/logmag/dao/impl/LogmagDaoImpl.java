@@ -4,21 +4,20 @@ import java.util.List;
 
 import org.project.netctoss.beans.ManagerLogBean;
 import org.project.netctoss.logmag.dao.ILogmagDao;
+import org.project.netctoss.pojos.PagerBean;
 
 public class LogmagDaoImpl implements ILogmagDao {
 
-	public List<ManagerLogBean> findAllManagerLog(ManagerLogBean managerLogBean) {
+	@Override
+	public PagerBean findManagerLog(PagerBean pagerBean) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ManagerLogBean selectManagerLog(ManagerLogBean managerLogBean) {
+	@Override
+	public PagerBean findManagerOperationLog(PagerBean pagerBean) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<ManagerLogBean> findAllManagerLogByPage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

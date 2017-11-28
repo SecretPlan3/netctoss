@@ -3,24 +3,19 @@ package org.project.netctoss.logmag.dao;
 import java.util.List;
 
 import org.project.netctoss.beans.ManagerLogBean;
+import org.project.netctoss.pojos.PagerBean;
 
 public interface ILogmagDao {
 	/**
-	 * 查询管理员操作日志
-	 * @param managerLogBean
+	 * 通过管理员名字，查询管理员登陆/退出系统时间(分页查询)
+	 * @param pagerBean
 	 * @return
 	 */
-	public List<ManagerLogBean> findAllManagerLog(ManagerLogBean managerLogBean);
-	
+	public PagerBean findManagerLog(PagerBean pagerBean);
 	/**
-	 * 查询管理员登陆时间/退出时间（通过管理员）
-	 * @param managerLogBean
+	 * 查询管理员在线操作信息
+	 * @param pagerBean
 	 * @return
 	 */
-	public ManagerLogBean selectManagerLog(ManagerLogBean managerLogBean);
-	/**
-	 * 分页查询/模糊查询
-	 * @return
-	 */
-	public List<ManagerLogBean> findAllManagerLogByPage();
+	public PagerBean findManagerOperationLog(PagerBean pagerBean);
 }

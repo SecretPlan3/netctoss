@@ -11,41 +11,41 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl extends BaseDao implements IUserService {
 	@Resource
-	private IUserDao UserDaoImpl;
+	private IUserDao userDaoImpl;
 	
 	public UserBean findUserById(Long id) {
 		// TODO Auto-generated method stub
-		return UserDaoImpl.findUserById(id);
+		return userDaoImpl.findUserById(id);
 	}
 
 	public void deleteUserById(UserBean user) {
 		// TODO Auto-generated method stub  
-		UserDaoImpl.deleteUserById(user);
+		userDaoImpl.deleteUserById(user);
 	}
 
 	public void addUser(UserBean user) {
 		// TODO Auto-generated method stub
-		UserDaoImpl.addUser(user);
+		userDaoImpl.addUser(user);
 	}
 
 	public void updateUser(UserBean user) {
 		// TODO Auto-generated method stub
-		UserDaoImpl.updateUser(user);
+		userDaoImpl.updateUser(user);
 	}
 	
 	public PagerBean findUserByPager(PagerBean pager) {
 		// TODO Auto-generated method stub
-		return UserDaoImpl.findUserByPager(pager);
+		return userDaoImpl.findUserByPager(pager);
 	}
 
 	public UserBean findUserByLoginNameAndPassword(String loginName,String passWord) {
 		// TODO Auto-generated method stub
-		return UserDaoImpl.findUserByLoginNameAndPassword(loginName,passWord);
+		return userDaoImpl.findUserByLoginNameAndPassword(loginName,passWord);
 	}
 	
 	public UserBean findUserByLoginName(String LoginName) {
 		// TODO Auto-generated method stub
-		return UserDaoImpl.findUserByLoginName(LoginName);
+		return userDaoImpl.findUserByLoginName(LoginName);
 	}
 	
 }

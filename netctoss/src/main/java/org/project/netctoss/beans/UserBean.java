@@ -66,8 +66,8 @@ public class UserBean implements Serializable{
 	private String qq;
 	
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "fk_permission_id")
-	private PermissionBean permission;
+	@JoinColumn(name = "fk_role_id")
+	private RoleBean roler;
 	
 
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="user")
@@ -176,12 +176,7 @@ public class UserBean implements Serializable{
 		this.qq = qq;
 	}
 	
-	public PermissionBean getPermission() {
-		return permission;
-	}
-	public void setPermission(PermissionBean permission) {
-		this.permission = permission;
-	}
+	
 	public String getBalance() {
 		return balance;
 	}
@@ -194,8 +189,14 @@ public class UserBean implements Serializable{
 		return "UserBean [userId=" + userId + ", userName=" + userName + ", loginName=" + loginName + ", passWord="
 				+ passWord + ", status=" + status + ", createDate=" + createDate + ", pauseDate=" + pauseDate
 				+ ", closeDate=" + closeDate + ", gender=" + gender + ", idcard=" + idcard + ", tel=" + tel
-				+ ", address=" + address + ", postcode=" + postcode + ", qq=" + qq + ", permission=" + permission
-				+ ", services=" + services + ", balance=" + balance + "]";
+				+ ", address=" + address + ", postcode=" + postcode + ", qq=" + qq + ", roler=" + roler + ", services="
+				+ services + ", balance=" + balance + "]";
+	}
+	public RoleBean getRoler() {
+		return roler;
+	}
+	public void setRoler(RoleBean roler) {
+		this.roler = roler;
 	}
 	
 }

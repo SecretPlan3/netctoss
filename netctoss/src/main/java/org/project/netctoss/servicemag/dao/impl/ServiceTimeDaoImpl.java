@@ -1,5 +1,6 @@
 package org.project.netctoss.servicemag.dao.impl;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,7 +17,16 @@ import org.project.netctoss.beans.ServiceTimeBean;
 import org.project.netctoss.servicemag.dao.IServiceBeanDao;
 import org.project.netctoss.servicemag.dao.IServiceTimeDao;
 import org.project.netctoss.utils.BaseDao;
+import java.util.Set;
 
+import org.hibernate.Query;
+import org.project.netctoss.beans.ServiceBean;
+import org.project.netctoss.beans.UserBean;
+import org.project.netctoss.pojos.PagerBean;
+import org.project.netctoss.servicemag.dao.IServiceBeanDao;
+import org.project.netctoss.utils.BaseDao;
+import org.springframework.stereotype.Repository;
+@Repository
 public class ServiceTimeDaoImpl extends BaseDao implements IServiceTimeDao  {
 	@Resource			
 	IServiceBeanDao serviceBeanDaoImpl;
@@ -30,8 +40,18 @@ public class ServiceTimeDaoImpl extends BaseDao implements IServiceTimeDao  {
 		int nowDay = nowTime.getDate();
 		int nowMonth = nowTime.getMonth()+1;
 		int nowYear = nowTime.getYear();
-		String hql ="From ServiceTimeBean";
+		String beginTime=nowYear+"-"+nowMonth+"-"+"01 00:00:00";
+		Date beginDate =null;
+		try {
+			beginDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(beginTime);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String hql ="From ServiceTimeBean as s where s.loginTime between ? and ? ";
 		Query query = getSession().createQuery(hql);
+		query.setDate(0, beginDate);
+		query.setDate(0, nowTime);
 		List<ServiceTimeBean> allSeriviceTime = query.list();
 		for (ServiceTimeBean serviceTimeBean : allSeriviceTime) {
 			 ServiceBean sb = serviceBeanDaoImpl.getServiceBeanByOsName(serviceTimeBean.getOsName());
@@ -44,6 +64,9 @@ public class ServiceTimeDaoImpl extends BaseDao implements IServiceTimeDao  {
 			 int logoutDay = logoutT.getDate();
 			 int logoutMonth = logoutT.getMonth()+1;
 			 int logoutYear = logoutT.getYear();
+			 if(loginDay==logoutDay) {
+				 
+			 }
 			 
 	};
 	}

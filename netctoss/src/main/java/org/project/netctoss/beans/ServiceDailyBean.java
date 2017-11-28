@@ -4,8 +4,11 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -21,7 +24,7 @@ public class ServiceDailyBean {
 	private Long id;
 
 	@Column(name = "date", length = 10)
-	private String day;
+	private Date day;
 
 	//在线时长
 	@Column(name = "online_time", length = 10)
@@ -39,6 +42,11 @@ public class ServiceDailyBean {
 	@Transient
 	private ServiceBean service;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_servicemonthly_id")
+	//这些天的月份
+	private ServiceMonthlyBean serviceMonthly;
+	
 	public ServiceDailyBean() {
 		
 	}
@@ -51,13 +59,14 @@ public class ServiceDailyBean {
 		this.id = id;
 	}
 
-	public String getDay() {
+	public Date getDay() {
 		return day;
 	}
 
-	public void setDay(String day) {
+	public void setDay(Date day) {
 		this.day = day;
 	}
+
 
 	public Long getOnlineTime() {
 		return onlineTime;
@@ -81,6 +90,22 @@ public class ServiceDailyBean {
 
 	public void setService(ServiceBean service) {
 		this.service = service;
+	}
+
+	public Long getSumTime() {
+		return sumTime;
+	}
+
+	public void setSumTime(Long sumTime) {
+		this.sumTime = sumTime;
+	}
+
+	public ServiceMonthlyBean getServiceMonthly() {
+		return serviceMonthly;
+	}
+
+	public void setServiceMonthly(ServiceMonthlyBean serviceMonthly) {
+		this.serviceMonthly = serviceMonthly;
 	}
 
 	@Override

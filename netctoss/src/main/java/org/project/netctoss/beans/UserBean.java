@@ -1,27 +1,117 @@
 package org.project.netctoss.beans;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
-public class UserBean {
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "t_user")
+public class UserBean implements Serializable{
+	@Id
+	@Column(name = "id")
+	@GenericGenerator(name = "hibernate.identity", strategy = "identity")
+	@GeneratedValue(generator = "hibernate.identity")
 	private Long userId;
+	
+	@Column(name = "user_name", length = 20)
 	private String userName;
+	
+	@Column(name = "login_name", length = 20)
 	private String loginName;
-	private String status;
-	private String createDate;
-	private String pauseDate;
-	private String closeDate;
-	private String gender;
+	
+	@Column(name = "password", length = 32)
+	private String passWord;
+	
+	@Column(name = "status")
+	private int status;
+	
+	@Column(name = "create_date")
+	private Date createDate;
+	
+	@Column(name = "pause_date")
+	private Date pauseDate;
+	
+	@Column(name = "close_dete")
+	private Date closeDate;
+	
+	@Column(name = "gender")
+	private int gender;
+	
+	@Column(name = "idcard", length = 18)
 	private String idcard;
+	
+	@Column(name = "tel", length = 11)
 	private String tel;
+	
+	@Column(name = "tel", length = 50)
 	private String address;
+	
+	@Column(name = "postcode", length = 10)
 	private String postcode;
+	
+	@Column(name = "qq", length = 11)
 	private String qq;
-	private Set<PermissionBean> permissions;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_permission_id")
+	private PermissionBean permission;
+	
+
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="user")
 	private Set<ServiceBean> services;
+	
+	@Column(name = "balance", length = 11)
 	private String balance;
 	
 	
 	
+	
+	public String getPassWord() {
+		return passWord;
+	}
+	public void setPassWord(String passWord) {
+		this.passWord = passWord;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	public Date getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+	public Date getPauseDate() {
+		return pauseDate;
+	}
+	public void setPauseDate(Date pauseDate) {
+		this.pauseDate = pauseDate;
+	}
+	public Date getCloseDate() {
+		return closeDate;
+	}
+	public void setCloseDate(Date closeDate) {
+		this.closeDate = closeDate;
+	}
+	public Long getUserId() {
+		return userId;
+	}
 	public Set<ServiceBean> getServices() {
 		return services;
 	}
@@ -44,36 +134,17 @@ public class UserBean {
 	public void setLoginName(String loginName) {
 		this.loginName = loginName;
 	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public String getCreateDate() {
-		return createDate;
-	}
-	public void setCreateDate(String createDate) {
-		this.createDate = createDate;
-	}
-	public String getPauseDate() {
-		return pauseDate;
-	}
-	public void setPauseDate(String pauseDate) {
-		this.pauseDate = pauseDate;
-	}
-	public String getCloseDate() {
-		return closeDate;
-	}
-	public void setCloseDate(String closeDate) {
-		this.closeDate = closeDate;
-	}
-	public String getGender() {
+	
+	
+	public int getGender() {
 		return gender;
 	}
-	public void setGender(String gender) {
+	public void setGender(int gender) {
 		this.gender = gender;
 	}
+
+
+	
 	public String getIdcard() {
 		return idcard;
 	}
@@ -104,11 +175,12 @@ public class UserBean {
 	public void setQq(String qq) {
 		this.qq = qq;
 	}
-	public Set<PermissionBean> getPermissions() {
-		return permissions;
+	
+	public PermissionBean getPermission() {
+		return permission;
 	}
-	public void setPermissions(Set<PermissionBean> permissions) {
-		this.permissions = permissions;
+	public void setPermission(PermissionBean permission) {
+		this.permission = permission;
 	}
 	public String getBalance() {
 		return balance;
@@ -116,13 +188,14 @@ public class UserBean {
 	public void setBalance(String balance) {
 		this.balance = balance;
 	}
+	
 	@Override
 	public String toString() {
-		return "UserBean [userId=" + userId + ", userName=" + userName + ", loginName=" + loginName + ", status="
-				+ status + ", createDate=" + createDate + ", pauseDate=" + pauseDate + ", closeDate=" + closeDate
-				+ ", gender=" + gender + ", idcard=" + idcard + ", tel=" + tel + ", address=" + address + ", postcode="
-				+ postcode + ", qq=" + qq + ", permissions=" + permissions + ", services=" + services + ", balance="
-				+ balance + "]";
+		return "UserBean [userId=" + userId + ", userName=" + userName + ", loginName=" + loginName + ", passWord="
+				+ passWord + ", status=" + status + ", createDate=" + createDate + ", pauseDate=" + pauseDate
+				+ ", closeDate=" + closeDate + ", gender=" + gender + ", idcard=" + idcard + ", tel=" + tel
+				+ ", address=" + address + ", postcode=" + postcode + ", qq=" + qq + ", permission=" + permission
+				+ ", services=" + services + ", balance=" + balance + "]";
 	}
 	
 }

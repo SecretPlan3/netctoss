@@ -27,7 +27,6 @@
     <!-- 引入外部的mysql.properties -->
     <context:property-placeholder location="classpath:mysql.properties" ignore-unresolvable="true" ignore-resource-not-found="true"/>
 
-
    <!-- 配置C3P0数据源连接池,来自于：c3p0.jar -->
      <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
      	<!-- JDBC连接数据库，最基本的4个条件 -->

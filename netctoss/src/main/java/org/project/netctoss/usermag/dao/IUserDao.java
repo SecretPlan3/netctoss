@@ -3,7 +3,7 @@ package org.project.netctoss.usermag.dao;
 import org.project.netctoss.beans.UserBean;
 import org.project.netctoss.pojos.PagerBean;
 
-public interface UserDao {
+public interface IUserDao {
 	public UserBean findUserById(Long id);
 	
 	public void deleteUserById(UserBean user);

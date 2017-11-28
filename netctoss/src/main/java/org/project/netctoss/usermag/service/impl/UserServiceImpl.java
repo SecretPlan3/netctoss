@@ -1,17 +1,17 @@
-package org.project.netctoss.usermag.service.serviceImpl;
+package org.project.netctoss.usermag.service.impl;
 
 import javax.annotation.Resource;
 
 import org.project.netctoss.beans.UserBean;
 import org.project.netctoss.pojos.PagerBean;
-import org.project.netctoss.usermag.dao.UserDao;
-import org.project.netctoss.usermag.service.UserService;
+import org.project.netctoss.usermag.dao.IUserDao;
+import org.project.netctoss.usermag.service.IUserService;
 import org.project.netctoss.utils.BaseDao;
 import org.springframework.stereotype.Service;
 @Service
-public class UserServiceImpl extends BaseDao implements UserService {
+public class UserServiceImpl extends BaseDao implements IUserService {
 	@Resource
-	private UserDao UserDaoImpl;
+	private IUserDao UserDaoImpl;
 	
 	public UserBean findUserById(Long id) {
 		// TODO Auto-generated method stub

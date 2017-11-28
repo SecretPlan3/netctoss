@@ -1,15 +1,15 @@
-package org.project.netctoss.usermag.dao.daoImpl;
+package org.project.netctoss.usermag.dao.impl;
 
 import java.util.List;
 
 import org.hibernate.Query;
 import org.project.netctoss.beans.UserBean;
 import org.project.netctoss.pojos.PagerBean;
-import org.project.netctoss.usermag.dao.UserDao;
+import org.project.netctoss.usermag.dao.IUserDao;
 import org.project.netctoss.utils.BaseDao;
 import org.springframework.stereotype.Repository;
 @Repository
-public class UserDaoImpl extends BaseDao implements UserDao {
+public class UserDaoImpl extends BaseDao implements IUserDao {
 
 	
 

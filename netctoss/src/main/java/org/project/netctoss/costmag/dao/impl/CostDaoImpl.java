@@ -50,7 +50,7 @@ public class CostDaoImpl extends BaseDao implements ICostDao {
 		Query query = getSession().createQuery(hql.toString());
 		query.setProperties(pager.getParams());
 		int totalRows = (int) query.uniqueResult();
-		pager.setRows(Integer.valueOf(String.valueOf(totalRows)));
+		pager.setTotalRows(Integer.valueOf(String.valueOf(totalRows)));
 		
 		hql = new StringBuilder("from CostBean as c where 1 = 1");
 		if(pager.getParams().get("type") != null) {

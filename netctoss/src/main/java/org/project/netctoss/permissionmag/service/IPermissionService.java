@@ -18,7 +18,7 @@ public interface IPermissionService {
 	 * 根据id删除一个权限
 	 * @param id
 	 */
-	public void deletePermissionById(Long id);
+	public void deletePermissionById(PermissionBean permissionBean);
 	
 	
 	/**

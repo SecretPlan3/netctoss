@@ -1,12 +1,36 @@
 package org.project.netctoss.beans;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class RoleBean {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="t_role")
+public class RoleBean implements Serializable{
+	@Id
+	@GenericGenerator(name="hibernate.identity",strategy="identity")
+	@GeneratedValue(generator="hibernate.identity")
 	private Long id;
+	
+	@Column(name="name",length=20)
 	private String name;
+	
+	@ManyToMany(fetch=FetchType.LAZY,mappedBy="roles")
 	private List<PermissionBean> pers;
+	
+	@ManyToMany(fetch=FetchType.LAZY,mappedBy="theRole")
+	private List<ManagerBean> managers;
+	
+	@Column(name="type",length=11)
 	private String type;
 
 	public RoleBean(){
@@ -43,6 +67,16 @@ public class RoleBean {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	
+	
+	public List<ManagerBean> getManagers() {
+		return managers;
+	}
+
+	public void setManagers(List<ManagerBean> managers) {
+		this.managers = managers;
 	}
 
 	@Override

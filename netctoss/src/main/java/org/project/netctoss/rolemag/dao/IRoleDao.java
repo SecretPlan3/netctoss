@@ -16,7 +16,7 @@ public interface IRoleDao {
 	 * 根据id删除一个角色
 	 * @param id
 	 */
-	public void deleteRoleById(Long id);
+	public void deleteRoleById(RoleBean roleBean);
 	
 	
 	/**

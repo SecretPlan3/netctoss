@@ -7,7 +7,8 @@ import org.project.netctoss.beans.ManagerBean;
 import org.project.netctoss.managermag.dao.IManagerDao;
 import org.project.netctoss.pojos.PagerBean;
 import org.project.netctoss.utils.BaseDao;
-
+import org.springframework.stereotype.Repository;
+@Repository
 public class ManagerDaoImpl extends BaseDao implements IManagerDao {
 
 	public void addOrUpdateManeger(ManagerBean managerbean) {

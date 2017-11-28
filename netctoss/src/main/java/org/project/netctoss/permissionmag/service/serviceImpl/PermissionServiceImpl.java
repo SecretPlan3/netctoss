@@ -18,9 +18,9 @@ public class PermissionServiceImpl implements IPermissionService {
 		permissionDaoImpl.addOrUpdatePermission(permissionBean);
 	}
 
-	public void deletePermissionById(Long id) {
+	public void deletePermissionById(PermissionBean permissionBean) {
 		// TODO Auto-generated method stub
-		permissionDaoImpl.deletePermissionById(id);
+		permissionDaoImpl.deletePermissionById(permissionBean);
 	}
 
 	public PermissionBean selectPermissionById(Long id) {

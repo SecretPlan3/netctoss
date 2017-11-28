@@ -1,12 +1,43 @@
 package org.project.netctoss.beans;
-public class ManagerBean {
 
-	private String email;
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name="t_manager")
+public class ManagerBean implements Serializable{
+	
+	@Id
+	@GenericGenerator(name="hibernate.identity",strategy="identity")
+	@GeneratedValue(generator="hibernate.identity")
 	private Long id;
+	
+	@Column(name="email",length=50)
+	private String email;
+	@Column(name="login_name",length=20)
 	private String loginName;
+	@Column(name="mag_name",length=20)
 	private String magName;
+	@Column(name="password",length=32)
 	private String password;
+	@Column(name="tel",length=11)
 	private String tel;
+	
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinTable(name = "t_manager_role", joinColumns = @JoinColumn(name = "fk_manager_id"), 
+	inverseJoinColumns = @JoinColumn(name = "fk_role_id"))
 	private RoleBean theRole;
 
 	public ManagerBean(){

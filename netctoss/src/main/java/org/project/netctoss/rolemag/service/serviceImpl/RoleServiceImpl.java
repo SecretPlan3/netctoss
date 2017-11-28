@@ -18,9 +18,9 @@ public class RoleServiceImpl implements IRoleService {
 		roleDaoImpl.addOrUpdateRole(roleBean);
 	}
 
-	public void deleteRoleById(Long id) {
+	public void deleteRoleById(RoleBean roleBean) {
 		// TODO Auto-generated method stub
-		roleDaoImpl.deleteRoleById(id);
+		roleDaoImpl.deleteRoleById(roleBean);
 	}
 
 	public RoleBean selectRoleById(Long id) {

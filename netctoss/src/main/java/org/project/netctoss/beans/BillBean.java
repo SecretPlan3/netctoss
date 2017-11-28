@@ -47,7 +47,7 @@ public class BillBean implements Serializable {
 	@Column(name = "pay_status")
 	// 支付状态，0代表未支付，1代表已支付
 	private Integer payStatus;
- 
+  
 	@Column(name = "pay_method")
 	// 支付方式
 	private String payMothod;

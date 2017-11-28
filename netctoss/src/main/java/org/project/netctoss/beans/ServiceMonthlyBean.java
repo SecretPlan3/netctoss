@@ -2,20 +2,49 @@ package org.project.netctoss.beans;
 
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "t_servicemonthly")
 public class ServiceMonthlyBean {
 
+	@Id
+	@Column(name = "id")
+	@GenericGenerator(name = "hibernate.identity", strategy = "identity")
+	@GeneratedValue(generator = "hibernate.identity")
 	private Long id;
 
+	@Column(name = "month", length = 10)
 	private String month;
 
+	@Column(name = "online_time")
 	private Long onlineTime;
 
+	@Column(name = "cost")
 	// 这个月的花费
 	private Double cost;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_serviceyearly_id")
+	private ServiceYearlyBean serviceYearly;
 
+	@Transient
 	// 某业务账号
 	private ServiceBean service;
 
+	@Transient
 	// 这个月的所有天
 	private Set<ServiceDailyBean> serviceDaily;
 

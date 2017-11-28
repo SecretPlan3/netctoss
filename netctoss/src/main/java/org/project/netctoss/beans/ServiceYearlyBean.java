@@ -26,9 +26,12 @@ public class ServiceYearlyBean {
 	
 	@Column(name = "year", length = 10)
 	private String year;
-	
+	 
 	@Column(name = "online_time")
 	private Long onlineTime;
+	
+	@Column(name = "cost")
+	private Double cost;
 	
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_service_id")

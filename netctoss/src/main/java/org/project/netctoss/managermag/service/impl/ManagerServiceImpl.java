@@ -1,4 +1,4 @@
-package org.project.netctoss.managermag.service.serviceImpl;
+package org.project.netctoss.managermag.service.impl;
 
 import javax.annotation.Resource;
 

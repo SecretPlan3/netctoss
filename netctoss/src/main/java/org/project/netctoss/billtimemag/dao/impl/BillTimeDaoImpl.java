@@ -40,7 +40,7 @@ public class BillTimeDaoImpl  extends BaseDao implements IBillTimeDao{
 	@Override
 	public PagerBean findAllServicessBillTimeByCondition(PagerBean pb) {
 		// TODO Auto-generated method stub
-		StringBuilder hql = new StringBuilder( "from ServiceBillBean as s   left join fetch s.service as ser    left join fetch s.serviceYear as y    left join fetch y.serviceMonthly as m     left join fetch m.serviceDaily as d  where 1=1");//select new map(p.age as age,p.playerName as playerName,p.gender as gender) 
+		StringBuilder hql = new StringBuilder( "from ServiceBean as s     left join fetch s.serviceYear as y    left join fetch y.serviceMonthly as m     left join fetch m.serviceDaily as d  where 1=1");//select new map(p.age as age,p.playerName as playerName,p.gender as gender) 
 		if (pb.getParams().get("year") != null  ) {
 			hql.append(	" and y.year =:year ");
 		}

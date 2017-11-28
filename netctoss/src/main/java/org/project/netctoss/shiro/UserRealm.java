@@ -19,7 +19,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.project.netctoss.beans.UserBean;
-import org.project.netctoss.usermag.service.UserService;
+import org.project.netctoss.usermag.service.IUserService;
 import org.springframework.stereotype.Service;
 
 
@@ -29,7 +29,7 @@ import org.springframework.stereotype.Service;
 public class UserRealm extends AuthorizingRealm{
 
    @Resource
-   private UserService userServiceImpl;
+   private IUserService userServiceImpl;
    
     
    
@@ -44,7 +44,7 @@ public class UserRealm extends AuthorizingRealm{
 	            if( user != null && user.getRoler() != null ){  
 	                SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();  
 	                info.addRole(user.getRoler().getType());  //加角色信息,根据角色类型来区分登录到什么页面
-//	                info.addStringPermissions(user.getRoler().getPermissionsName());//加权限信息  
+	                info.addStringPermissions(user.getRoler().getPermissionsName());//加权限信息  
 	               
 	                return info;//info对象可以被shiro识别  
 	            }  
@@ -63,6 +63,7 @@ public class UserRealm extends AuthorizingRealm{
         if( userName != null && !"".equals(userName) ){  
         	System.out.println(String.valueOf(userPwd)+"-----666666---------");
             UserBean user = userServiceImpl.findUserByLoginNameAndPassword(userName,String.valueOf(userPwd));  //我们自己写的登陆验证方法，匹配好账号密码
+            System.out.println("查到的user是：" + user);
             
             //用框架获取session对象（相当于HTTPSession，jsp中可以从session隐式对象获取）
             Subject currentUser = SecurityUtils.getSubject();
@@ -73,7 +74,7 @@ public class UserRealm extends AuthorizingRealm{
             	System.out.println("登录+++++++++++++"+user);
                 return new SimpleAuthenticationInfo(user.getLoginName(),user.getPassWord(), getName()); //登陆成功将含有账号密码的 这个对象返回 
             }else {
-            	
+            	System.out.println("登陆失败-----------");
             	 return null;
             }
           }else {

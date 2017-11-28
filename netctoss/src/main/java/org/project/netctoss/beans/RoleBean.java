@@ -1,7 +1,9 @@
 package org.project.netctoss.beans;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -77,6 +79,14 @@ public class RoleBean implements Serializable{
 
 	public void setManagers(List<ManagerBean> managers) {
 		this.managers = managers;
+	}
+	   public Set<String> getPermissionsName() {
+	        Set<String> list = new HashSet<>();
+	        List<PermissionBean> perlist = this.getPers();
+	        for (PermissionBean per : perlist) {
+	            list.add(per.getName());
+	        }
+	        return list;
 	}
 
 	@Override

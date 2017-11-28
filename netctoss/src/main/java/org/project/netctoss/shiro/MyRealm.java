@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
 public class MyRealm extends AuthorizingRealm{
 
 //   @Resource
-//    private UserService userServiceImpl;
+//    private IUserService userServiceImpl;
    
     
    

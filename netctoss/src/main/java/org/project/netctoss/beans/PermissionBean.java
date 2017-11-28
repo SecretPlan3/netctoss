@@ -31,7 +31,7 @@ public class PermissionBean implements Serializable{
 	private String name;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "t_role_permission", joinColumns = @JoinColumn(name = "fk_permisson"), 
+	@JoinTable(name = "t_role_permission", joinColumns = @JoinColumn(name = "fk_permission"), 
 	inverseJoinColumns = @JoinColumn(name = "fk_role_id"))
 	private List<RoleBean> roles;
 

@@ -1,4 +1,4 @@
-package org.project.netctoss.rolemag.service.serviceImpl;
+package org.project.netctoss.rolemag.service.impl;
 
 import javax.annotation.Resource;
 

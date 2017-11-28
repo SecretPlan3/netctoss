@@ -28,7 +28,7 @@ public class TestManager {
 		
 		RoleBean rb = new RoleBean();
 		rb.setName("新角色");
-//		manager.setTheRole(rb);
+//		manager.setTheRole(rb); 
 		
 		managerserviceImpl.addOrUpdateManeger(manager);
 	}

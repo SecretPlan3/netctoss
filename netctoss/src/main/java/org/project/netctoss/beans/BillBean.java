@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OptimisticLockType;
@@ -21,7 +22,7 @@ import org.hibernate.annotations.OptimisticLocking;
 @Entity
 @Table(name = "t_userMonthlyCost")
 public class BillBean implements Serializable {
-
+ 
 	private static final long serialVersionUID = -924609537236557091L;
   
 	@Id
@@ -46,7 +47,7 @@ public class BillBean implements Serializable {
 	@Column(name = "pay_status")
 	// 支付状态，0代表未支付，1代表已支付
 	private Integer payStatus;
-
+  
 	@Column(name = "pay_method")
 	// 支付方式
 	private String payMothod;
@@ -60,6 +61,7 @@ public class BillBean implements Serializable {
 	// 账务账号
 	private UserBean user;
 
+	@Transient
 	// 业务账单集合
 	private Set<ServiceBillBean> serviceBill;
 

@@ -49,5 +49,5 @@ public class ServiceTimeBean {
 				return "ServiceTimeBean [loginTime=" + loginTime + ", logoutTime=" + logoutTime + ", osName=" + osName
 						+ ", unxiHost=" + unxiHost + ", onlineTime=" + onlineTime + "]";
 			}
-			
+			 
 }

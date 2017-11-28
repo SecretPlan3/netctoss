@@ -2,8 +2,21 @@ package org.project.netctoss.beans;
 
 import java.util.Date;
 
-public class ServiceDailyBean {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "t_userDailyCost")
+public class ServiceDailyBean {
+	@Id
+	@Column(name = "id")
+	@GenericGenerator(name = "hibernate.identity", strategy = "identity")
+	@GeneratedValue(generator = "hibernate.identity")
 	private Long id;
 
 	private String day;
@@ -11,12 +24,6 @@ public class ServiceDailyBean {
 	//在线时长
 	private Long onlineTime;
 
-	//登录时间
-	private Date loginTime;
-	
-	//登出时间
-	private Date logoutTime;
-	
 	// 这个段时间的花费
 	private Double cost;
 
@@ -51,22 +58,6 @@ public class ServiceDailyBean {
 		this.onlineTime = onlineTime;
 	}
 
-	public Date getLoginTime() {
-		return loginTime;
-	}
-
-	public void setLoginTime(Date loginTime) {
-		this.loginTime = loginTime;
-	}
-
-	public Date getLogoutTime() {
-		return logoutTime;
-	}
-
-	public void setLogoutTime(Date logoutTime) {
-		this.logoutTime = logoutTime;
-	}
-
 	public Double getCost() {
 		return cost;
 	}
@@ -85,12 +76,9 @@ public class ServiceDailyBean {
 
 	@Override
 	public String toString() {
-		return "ServiceDailyBean [id=" + id + ", day=" + day + ", onlineTime=" + onlineTime + ", loginTime=" + loginTime
-				+ ", logoutTime=" + logoutTime + ", cost=" + cost + "]";
+		return "ServiceDailyBean [id=" + id + ", day=" + day + ", onlineTime=" + onlineTime + ", cost=" + cost
+				+ ", service=" + service + "]";
 	}
-	
-	
-	
-	
+
 
 }

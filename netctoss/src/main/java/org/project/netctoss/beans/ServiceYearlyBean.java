@@ -2,17 +2,40 @@ package org.project.netctoss.beans;
 
 import java.util.Set;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "t_serviceYearly")
 public class ServiceYearlyBean {
 	
+	@Id
+	@Column(name = "id")
+	@GenericGenerator(name = "hibernate.identity", strategy = "identity")
+	@GeneratedValue(generator = "hibernate.identity")
 	private Long id;
 	
+	@Column(name = "year", length = 10)
 	private String year;
 	
+	@Column(name = "online_time")
 	private Long onlineTime;
 	
-	//某业务账号
-	private ServiceBean service;
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_service_id")
+	//这一年中的所有业务账号
+	private Set<ServiceBean> serviceList;
 	
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="serviceYearly")
 	//这一年中的所有月
 	private Set<ServiceMonthlyBean> serviceMonthly;
 
@@ -47,12 +70,13 @@ public class ServiceYearlyBean {
 		this.onlineTime = onlineTime;
 	}
 
-	public ServiceBean getService() {
-		return service;
+
+	public Set<ServiceBean> getServiceList() {
+		return serviceList;
 	}
 
-	public void setService(ServiceBean service) {
-		this.service = service;
+	public void setServiceList(Set<ServiceBean> serviceList) {
+		this.serviceList = serviceList;
 	}
 
 	public Set<ServiceMonthlyBean> getServiceMonthly() {

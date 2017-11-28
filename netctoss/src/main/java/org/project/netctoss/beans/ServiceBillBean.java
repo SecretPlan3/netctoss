@@ -8,8 +8,7 @@ public class ServiceBillBean {
 	// 该业务账号的年Bean
 	private ServiceYearlyBean serviceYear;
 
-	
-	
+
 	public ServiceBillBean() {
 
 	}

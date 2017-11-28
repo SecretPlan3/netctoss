@@ -16,7 +16,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class BillDaoImpl extends BaseDao implements IBillDao {
-//
+
 	@Override
 	public PagerBean findAllUserBillByCondition(PagerBean page) {
 		// 得到数据总数

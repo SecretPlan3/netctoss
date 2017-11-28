@@ -4,8 +4,11 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -39,6 +42,11 @@ public class ServiceDailyBean {
 	@Transient
 	private ServiceBean service;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_servicemonthly_id")
+	//这些天的月份
+	private ServiceMonthlyBean serviceMonthly;
+	
 	public ServiceDailyBean() {
 		
 	}

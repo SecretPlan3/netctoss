@@ -45,7 +45,6 @@ public class ServiceMonthlyBean {
 	private ServiceBean service;
 
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="serviceMonthly")
-	@JoinColumn(name = "fk_serviceyearly_id")
 	// 这个月的所有天
 	private Set<ServiceDailyBean> serviceDaily;
 

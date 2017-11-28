@@ -78,9 +78,17 @@ public class UserBean implements Serializable{
 	@Column(name = "balance", length = 11)
 	private String balance;
 	
+	@OneToOne(fetch=FetchType.LAZY,mappedBy="user")
+	private BillBean bill;
 	
 	
 	
+	public BillBean getBill() {
+		return bill;
+	}
+	public void setBill(BillBean bill) {
+		this.bill = bill;
+	}
 	public String getPassWord() {
 		return passWord;
 	}
@@ -192,7 +200,7 @@ public class UserBean implements Serializable{
 				+ passWord + ", status=" + status + ", createDate=" + createDate + ", pauseDate=" + pauseDate
 				+ ", closeDate=" + closeDate + ", gender=" + gender + ", idcard=" + idcard + ", tel=" + tel
 				+ ", address=" + address + ", postcode=" + postcode + ", qq=" + qq + ", roler=" + roler + ", services="
-				+ services + ", balance=" + balance + "]";
+				+ services + ", balance=" + balance + ", bill=" + bill + "]";
 	}
 	public RoleBean getRoler() {
 		return roler;

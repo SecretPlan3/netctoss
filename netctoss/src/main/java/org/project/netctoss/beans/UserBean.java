@@ -50,6 +50,7 @@ public class UserBean implements Serializable{
 	@Column(name = "gender")
 	private int gender;
 	
+	
 	@Column(name = "idcard", length = 18)
 	private String idcard;
 	

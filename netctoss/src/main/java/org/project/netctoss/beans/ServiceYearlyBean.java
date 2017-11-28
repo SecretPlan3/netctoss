@@ -17,7 +17,7 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "t_serviceYearly")
 public class ServiceYearlyBean {
-	
+	 
 	@Id
 	@Column(name = "id")
 	@GenericGenerator(name = "hibernate.identity", strategy = "identity")

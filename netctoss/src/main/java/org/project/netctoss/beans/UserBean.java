@@ -194,14 +194,7 @@ public class UserBean implements Serializable{
 		this.balance = balance;
 	}
 	
-	@Override
-	public String toString() {
-		return "UserBean [userId=" + userId + ", userName=" + userName + ", loginName=" + loginName + ", passWord="
-				+ passWord + ", status=" + status + ", createDate=" + createDate + ", pauseDate=" + pauseDate
-				+ ", closeDate=" + closeDate + ", gender=" + gender + ", idcard=" + idcard + ", tel=" + tel
-				+ ", address=" + address + ", postcode=" + postcode + ", qq=" + qq + ", roler=" + roler + ", services="
-				+ services + ", balance=" + balance + ", bill=" + bill + "]";
-	}
+
 	public RoleBean getRoler() {
 		return roler;
 	}

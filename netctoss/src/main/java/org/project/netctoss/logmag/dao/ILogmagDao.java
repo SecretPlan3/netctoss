@@ -11,11 +11,11 @@ public interface ILogmagDao {
 	 * @param pagerBean
 	 * @return
 	 */
-	public PagerBean findManagerLog(PagerBean pagerBean);
+	public PagerBean findManagerLog(PagerBean pager);
 	/**
 	 * 查询管理员在线操作信息
 	 * @param pagerBean
 	 * @return
 	 */
-	public PagerBean findManagerOperationLog(PagerBean pagerBean);
+	public PagerBean findManagerOperationLog(PagerBean pager);
 }

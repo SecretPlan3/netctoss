@@ -16,7 +16,7 @@ public class UserServiceImpl extends BaseDao implements UserService {
 	}
 
 	public void deleteUserById(UserBean user) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
 		UserDaoImpl.deleteUserById(user);
 	}
 

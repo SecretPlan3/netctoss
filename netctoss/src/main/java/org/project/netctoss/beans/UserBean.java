@@ -54,6 +54,7 @@ public class UserBean implements Serializable{
 	private String idcard;
 	
 	@Column(name = "tel", length = 11)
+	 
 	private String tel;
 	
 	@Column(name = "address", length = 50)

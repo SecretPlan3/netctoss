@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.hibernate.Query;
 import org.project.netctoss.beans.BillBean;
+import org.project.netctoss.beans.ServiceDetailCostBean;
 import org.project.netctoss.beans.ServiceMonthlyBean;
 import org.project.netctoss.beans.UserBean;
 import org.project.netctoss.billmag.dao.IBillDao;
@@ -20,7 +21,7 @@ public class BillDaoImpl extends BaseDao implements IBillDao {
 	public PagerBean findAllUserBillByCondition(PagerBean page) {
 		// 得到数据总数
 		StringBuilder hql = new StringBuilder(
-				"SELECT COUNT(b.id) FROM BillBean AS b JOIN FETCH b.user AS u WHERE b.year = :year AND b.month = :month");
+				"SELECT COUNT(b.id) FROM BillBean AS b JOIN FETCH b.user AS u WHERE b.year = :year AND b.month = :month ORDER BY b.id");
 		UserBean user = (UserBean) page.getParams().get("user");
 		if (user.getUserName() != "") {
 			hql.append(" AND u.userName LIKE CONCAT(:user.userName,'%') ");
@@ -68,11 +69,12 @@ public class BillDaoImpl extends BaseDao implements IBillDao {
 		page.setPage(1);
 		page.setRows(5);
 
-		String hql = "SELECT COUNT(s.id) FROM ServiceMonthlyBean AS m JOIN y.ServiceYearlyBean AS y JOIN y.ServiceBean AS s JOIN s.CostBean AS c WHERE y.year = :year AND m.month = :month AND s.user = :userID";
+		String hql = "SELECT COUNT(s.id) FROM ServiceMonthlyBean AS m JOIN m.ServiceYearlyBean AS y JOIN y.ServiceBean AS s JOIN s.CostBean AS c WHERE y.year = :year AND m.month = :month AND s.user = :userID";
 		Query query = getSession().createQuery(hql.toString());
+		query.setProperties(page.getParams());
 		page.setTotalRows(Integer.valueOf(query.uniqueResult() + ""));
 
-		hql = "SELECT COUNT(s.id) FROM ServiceMonthlyBean AS m JOIN y.ServiceYearlyBean AS y JOIN y.ServiceBean AS s JOIN s.CostBean AS c WHERE y.year = :year AND m.month = :month AND s.user = :userID";
+		hql = "FROM ServiceMonthlyBean AS m JOIN m.ServiceYearlyBean AS y JOIN y.ServiceBean AS s JOIN s.CostBean AS c WHERE y.year = :year AND m.month = :month AND s.user = :userID ORDER BY s.id";
 		query = getSession().createQuery(hql.toString());
 		query.setProperties(page.getParams());
 		query.setFirstResult(page.getIndex());
@@ -82,29 +84,32 @@ public class BillDaoImpl extends BaseDao implements IBillDao {
 
 		return page;
 	}
-
+ 
 	@Override
 	public PagerBean findAllServiceTimeBillByCondition(PagerBean page) {
 		// 模拟参数
 		Map<String, Object> params = new HashMap<>();
-		params.put("osName", "aaa");
-		params.put("theDate", "2017-04");
+		params.put("osName", "ttt");
+		params.put("loginTime", "2017-10-01");
+		params.put("logOutTime", "2017-10-32");
 		page.setParams(params);
 		page.setPage(1);
 		page.setRows(5);
 		 
-		String hql = "SELECT COUNT(s.id) FROM ";
+		String hql = "SELECT COUNT(s.id) FROM ServiceDetailCostBean AS sdc JOIN sdc.ServiceTimeBean AS st JOIN sdc.CostBean AS c WHERE st.loginTime > :loginTime AND st.logoutTime < :logoutTime AND st.osName = :osName ORDER BY st.loginTime ";
 		Query query = getSession().createQuery(hql.toString());
+		query.setProperties(page.getParams());
 		page.setTotalRows(Integer.valueOf(query.uniqueResult() + ""));
 		
-		hql = "";
+		hql = "FROM ServiceDetailCostBean AS sdc JOIN sdc.ServiceTimeBean AS st JOIN sdc.CostBean AS c WHERE st.loginTime > :loginTime AND st.logoutTime < :logoutTime AND st.osName = :osName ORDER BY st.loginTime";
 		query = getSession().createQuery(hql.toString());
 		query.setProperties(page.getParams());
 		query.setFirstResult(page.getIndex());
 		query.setMaxResults(page.getRows());
-		
+		List<ServiceDetailCostBean> ServiceDetailCostList = query.list();
+		page.setDatas(ServiceDetailCostList);
 
-		return null;
+		return page;
 	}
 
 }

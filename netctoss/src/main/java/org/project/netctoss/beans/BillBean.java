@@ -1,5 +1,5 @@
 package org.project.netctoss.beans;
-
+ 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;

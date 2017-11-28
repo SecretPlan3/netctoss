@@ -13,7 +13,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 	
 
 	@Override
-	public UserBean findUserById(Long id) {  
+	public UserBean findUserById(Long id) {   
 		
 		// TODO Auto-generated method stub
 		return (UserBean)getSession().get(UserBean.class, id);

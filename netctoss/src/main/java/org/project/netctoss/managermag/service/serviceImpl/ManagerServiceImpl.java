@@ -36,4 +36,16 @@ public class ManagerServiceImpl implements IManagerService {
 		return managerImpl.findAllManagersByPager(pager);
 	}
 
+	@Override
+	public ManagerBean findManagerByLoginName(String loginName) {
+		// TODO Auto-generated method stub
+		return managerImpl.findManagerByLoginName(loginName);
+	}
+
+	@Override
+	public ManagerBean findManagerByLoginNameAndPassword(String loginName, String password) {
+		// TODO Auto-generated method stub
+		return managerImpl.findManagerByLoginNameAndPassword(loginName, password);
+	}
+
 }

@@ -22,7 +22,7 @@
 	</context-param> -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
-		<filter-class>com.easy.filter.EncodingFilter</filter-class>
+		<filter-class>org.project.netctoss.filter.EncodingFilter</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
@@ -42,7 +42,7 @@
 	<!-- 配置其他的过滤器，例如：状态过滤，字符过滤，文本信息过滤…… -->
 	<filter>
 		<filter-name>urlHandleFilter</filter-name>
-		<filter-class>com.easy.filter.URLHandleFilter</filter-class>
+		<filter-class>org.project.netctoss.filter.URLHandleFilter</filter-class>
 	</filter>
 	
 	<!-- 配置一个shiro的过滤器 -->

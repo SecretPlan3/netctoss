@@ -1,0 +1,18 @@
+.admin-index-col{
+    width: 100%;
+    height:80px;
+    background-color: #00e359;
+    text-align: center;
+    line-height: 80px;
+}
+.admin-context{
+    width: 100%;
+    background-color: #03a9f3;
+    height:500px;/*暫定500px,后期根据内容填充*/
+}
+.time{
+    color: white;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-left: 50px;
+}

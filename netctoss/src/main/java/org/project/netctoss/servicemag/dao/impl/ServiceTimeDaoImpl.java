@@ -2,7 +2,6 @@ package org.project.netctoss.servicemag.dao.impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -15,31 +14,31 @@ import org.project.netctoss.beans.ServiceDailyBean;
 import org.project.netctoss.beans.ServiceMonthlyBean;
 import org.project.netctoss.beans.ServiceTimeBean;
 import org.project.netctoss.servicemag.dao.IServiceBeanDao;
+import org.project.netctoss.servicemag.dao.IServiceDailyDao;
+import org.project.netctoss.servicemag.dao.IServiceMonthlyDao;
 import org.project.netctoss.servicemag.dao.IServiceTimeDao;
-import org.project.netctoss.utils.BaseDao;
-import java.util.Set;
-
-import org.hibernate.Query;
-import org.project.netctoss.beans.ServiceBean;
-import org.project.netctoss.beans.UserBean;
-import org.project.netctoss.pojos.PagerBean;
-import org.project.netctoss.servicemag.dao.IServiceBeanDao;
 import org.project.netctoss.utils.BaseDao;
 import org.springframework.stereotype.Repository;
 @Repository
 public class ServiceTimeDaoImpl extends BaseDao implements IServiceTimeDao  {
 	@Resource			
 	IServiceBeanDao serviceBeanDaoImpl;
+	@Resource
+	IServiceDailyDao serviceDailyDaoImpl;
+	@Resource
+	IServiceMonthlyDao serviceMonthlyImpl;
     /**
      * 将unix服务器传来的ServiceTime表解析后转化为ServiceDailyBean存入数据库
      */
 	@Override
 	public void saveAsDailyService() {
 		// TODO Auto-generated method stub
+		//获取当前时间
 		Date nowTime = new Date();
 		int nowDay = nowTime.getDate();
 		int nowMonth = nowTime.getMonth()+1;
 		int nowYear = nowTime.getYear();
+		//拼接起始查询时间
 		String beginTime=nowYear+"-"+nowMonth+"-"+"01 00:00:00";
 		Date beginDate =null;
 		try {
@@ -48,24 +47,48 @@ public class ServiceTimeDaoImpl extends BaseDao implements IServiceTimeDao  {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//查询当月ServiceTime结果集
 		String hql ="From ServiceTimeBean as s where s.loginTime between ? and ? ";
 		Query query = getSession().createQuery(hql);
 		query.setDate(0, beginDate);
 		query.setDate(0, nowTime);
 		List<ServiceTimeBean> allSeriviceTime = query.list();
+		//循环转存为ServiceDailyBean
 		for (ServiceTimeBean serviceTimeBean : allSeriviceTime) {
-			 ServiceBean sb = serviceBeanDaoImpl.getServiceBeanByOsName(serviceTimeBean.getOsName());
+			//获取对应的业务账号
+			ServiceBean sb = serviceBeanDaoImpl.getServiceBeanByOsName(serviceTimeBean.getOsName());
 			 Date loginT = serviceTimeBean.getLoginTime();
 			 int loginDay = loginT.getDate();
 			 int loginMonth = loginT.getMonth()+1;
 			 int loginYear = loginT.getYear();
+			 //获取对应的月对象
+			 ServiceMonthlyBean sm = serviceMonthlyImpl.getServiceMonthlyBeanByMonth(loginYear+"-"+loginMonth+"");
+			//将日期截取为数据库所需要存入的时间
+			 String saveDate =loginYear+"-"+loginMonth+"-"+loginDay;
+			 Date  dateToSave = null;
+			 try {
+				dateToSave = new SimpleDateFormat("yyyy-MM-dd").parse(saveDate);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			 
 			 Date logoutT =serviceTimeBean.getLogoutTime();
 			 int logoutDay = logoutT.getDate();
 			 int logoutMonth = logoutT.getMonth()+1;
 			 int logoutYear = logoutT.getYear();
+			 //unix服务器自动截取月份，所以这里不做月份的判断
 			 if(loginDay==logoutDay) {
-				 
+				 if(serviceDailyDaoImpl.getServiceDailyBeanByLoginDate(dateToSave)==null) {
+					ServiceDailyBean sd =  new ServiceDailyBean();
+					sd.setDay(dateToSave);
+					sd.setOnlineTime(logoutT.getTime()-loginT.getTime());
+					sd.setService(sb);
+					sd.setServiceMonthly(sm);
+					
+				 }else {
+					 
+				 }
 			 }
 			 
 	};

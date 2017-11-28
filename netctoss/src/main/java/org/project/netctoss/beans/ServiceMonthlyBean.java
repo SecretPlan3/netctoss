@@ -40,12 +40,19 @@ public class ServiceMonthlyBean {
 	@JoinColumn(name = "fk_serviceyearly_id")
 	private ServiceYearlyBean serviceYearly;
 
+	public ServiceYearlyBean getServiceYearly() {
+		return serviceYearly;
+	}
+
+	public void setServiceYearly(ServiceYearlyBean serviceYearly) {
+		this.serviceYearly = serviceYearly;
+	}
+
 	@Transient
 	// 某业务账号
 	private ServiceBean service;
 
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="serviceMonthly")
-	@JoinColumn(name = "fk_serviceyearly_id")
 	// 这个月的所有天
 	private Set<ServiceDailyBean> serviceDaily;
 

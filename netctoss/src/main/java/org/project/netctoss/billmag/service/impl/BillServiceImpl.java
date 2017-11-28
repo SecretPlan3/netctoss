@@ -16,19 +16,19 @@ public class BillServiceImpl implements IBillService {
 	@Override
 	public PagerBean findAllUserBillByCondition(PagerBean page) {
 		// TODO Auto-generated method stub
-		return null;
+		return billDaoImpl.findAllUserBillByCondition(page);
 	}
  
 	@Override
 	public PagerBean findAllServiceBillByCondition(PagerBean page) {
 		// TODO Auto-generated method stub
-		return null;
+		return billDaoImpl.findAllServiceBillByCondition(page);
 	}
 
 	@Override
 	public PagerBean findAllServiceTimeBillByCondition(PagerBean page) {
 		// TODO Auto-generated method stub
-		return null;
+		return billDaoImpl.findAllServiceTimeBillByCondition(page);
 	}
 
 }

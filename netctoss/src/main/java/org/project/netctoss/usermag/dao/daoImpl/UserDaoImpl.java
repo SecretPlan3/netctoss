@@ -10,7 +10,7 @@ import org.project.netctoss.utils.BaseDao;
 
 public class UserDaoImpl extends BaseDao implements UserDao {
 
-	private static final PagerBean pager = null;
+	
 
 	@Override
 	public UserBean findUserById(Long id) {  

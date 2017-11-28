@@ -55,7 +55,7 @@ public class BillBean implements Serializable {
 	@Column(name = "pay_time")
 	// 支付时间
 	private Date payTime;
-
+ 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_user_id")
 	// 账务账号

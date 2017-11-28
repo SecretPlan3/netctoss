@@ -27,6 +27,21 @@ public interface IManagerDao {
 	 */
 	public ManagerBean selectManegerById(Long id);
 	
+	/**
+	 * 根据登录名查询管理员
+	 * @param loginName
+	 * @return
+	 */
+	public ManagerBean findManagerByLoginName(String loginName);
+	
+	/**
+	 * 根据登录名和密码查询管理员
+	 * @param loginName
+	 * @param password
+	 * @return
+	 */
+	public ManagerBean findManagerByLoginNameAndPassword(String loginName,String password);
+	
 	
 	/**
 	 * 分页+模糊查询

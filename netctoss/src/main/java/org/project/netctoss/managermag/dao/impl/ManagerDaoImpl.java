@@ -46,4 +46,23 @@ public class ManagerDaoImpl extends BaseDao implements IManagerDao {
 		return pager;
 	}
 
+	@Override
+	public ManagerBean findManagerByLoginName(String loginName) {
+		// TODO Auto-generated method stub
+		String hql = "From ManagerBean as m where m.loginName = ?";
+		Query query = getSession().createQuery(hql);
+		query.setString(0, loginName);
+		return (ManagerBean) query.uniqueResult();
+	}
+
+	@Override
+	public ManagerBean findManagerByLoginNameAndPassword(String loginName, String password) {
+		// TODO Auto-generated method stub
+		String hql = "From ManagerBean as m where m.loginName = ? and m.password = ?";
+		Query query = getSession().createQuery(hql);
+		query.setString(0, loginName);
+		query.setString(1, password);
+		return (ManagerBean) query.uniqueResult();
+	}
+
 }

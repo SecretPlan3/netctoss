@@ -40,13 +40,22 @@ public class ServiceBeanDaoImpl extends BaseDao  implements IServiceBeanDao  {
 	public Set<ServiceBean> getServiceBeansByUserBean(UserBean ub) {
 		// TODO Auto-generated method stub
 		
-		String hql ="From ServiceBean as s left join fetch s.user as u where u.id=:id";
+		String hql ="From ServiceBean as s left join fetch s.user as u where u.id=?";
 //		if(ub.getLoginName() != null || "".equals(ub.getLoginName())==false) {
 //			hql = hql+" and u.loginName =:loginName";
 //		}
 		Query query = getSession().createQuery(hql);
-		
+		query.setLong(0, ub.getUserId());
 		return (Set<ServiceBean>) query.list();
+	}
+
+	@Override
+	public ServiceBean getServiceBeanByOsName(String osName) {
+		// TODO Auto-generated method stub
+		String hql = "From ServiceBean as s where s.osName =?";
+		Query query = getSession().createQuery(hql);
+		query.setString(0, osName);
+		return (ServiceBean) query.uniqueResult();
 	}
 
 //	@Override

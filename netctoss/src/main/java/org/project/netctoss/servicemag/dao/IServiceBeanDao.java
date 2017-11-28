@@ -13,4 +13,5 @@ public interface IServiceBeanDao {
   public ServiceBean getServiceBeanByID(Long ID);
   public Set<ServiceBean> getServiceBeansByUserBean(UserBean ub);
 //  public PagerBean getServiceBeansByPage(PagerBean page);
+  public ServiceBean getServiceBeanByOsName(String osName);
 }

@@ -1,10 +1,8 @@
-package org.project.netctoss.billtimemag.service;
+package org.project.netctoss.billtimemag.dao;
 
 import org.project.netctoss.pojos.PagerBean;
 
-
-public interface IBillTimeService {
-	
+public interface IBillTimeDao {
 	
 	/**
 	 * 按条件分页查询 所有的 账务账号  总览

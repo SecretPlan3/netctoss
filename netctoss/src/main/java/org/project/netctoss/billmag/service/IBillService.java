@@ -11,7 +11,7 @@ public interface IBillService {
 	 */
 	public PagerBean findAllUserBillByCondition(PagerBean page);
 	
-	/**
+	/** 
 	 * 找到某账务账号的所有业务账号账单，按年月查询
 	 * @param page
 	 * @return

@@ -4,7 +4,7 @@ import org.project.netctoss.pojos.PagerBean;
 
 public interface IBillDao {
 
-	
+	 
 	/**
 	 * 账单查询
 	 * 找到所有账务账单，按年月查询，参数：年份；月份；账务账号；用户名；身份证

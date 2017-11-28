@@ -18,7 +18,7 @@ public class BillServiceImpl implements IBillService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+ 
 	@Override
 	public PagerBean findAllServiceBillByCondition(PagerBean page) {
 		// TODO Auto-generated method stub

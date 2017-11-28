@@ -44,8 +44,10 @@ public class ServiceDailyDaoImpl extends BaseDao implements IServiceDailyDao {
 	@Override
 	public ServiceDailyBean getServiceDailyBeanByLoginDate(Date loginDate) {
 		// TODO Auto-generated method stub
-		String hql ="From ServiceDailyBean as s where s.";
-		return null;
+		String hql ="From ServiceDailyBean as s where s.day  = ?";
+		Query query =  getSession().createQuery(hql);
+		query.setDate(0, loginDate);
+		return (ServiceDailyBean) query.uniqueResult();
 	}
 
 }

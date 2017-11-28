@@ -7,11 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "t_userDailyCost")
+@Table(name = "t_userDaily")
 public class ServiceDailyBean {
 	@Id
 	@Column(name = "id")
@@ -19,15 +20,23 @@ public class ServiceDailyBean {
 	@GeneratedValue(generator = "hibernate.identity")
 	private Long id;
 
+	@Column(name = "date", length = 10)
 	private String day;
 
 	//在线时长
+	@Column(name = "online_time", length = 10)
 	private Long onlineTime;
+	
+	//累计时长
+	@Column(name = "sumtime", length = 10)
+	private Long sumTime;
 
 	// 这个段时间的花费
+	@Transient
 	private Double cost;
 
 	// 某业务账号
+	@Transient
 	private ServiceBean service;
 
 	public ServiceDailyBean() {

@@ -12,7 +12,7 @@ public class BillTimeDaoImpl  extends BaseDao implements IBillTimeDao{
 	@Override
 	public PagerBean findAllUsersBillTimeByCondition(PagerBean pb) {
 		// TODO Auto-generated method stub
-		StringBuilder hql = new StringBuilder( "from BillBean as b   left join fetch b.user as u   left join fetch b.serviceBill as sb    where 1=1");
+		StringBuilder hql = new StringBuilder( "from BillBean as b   left join fetch b.user as u    where 1=1");
 		if (pb.getParams().get("userName") != null  ) {
 			hql.append(	" and u.userName like CONCAT(:userName,'%') ");
 		}

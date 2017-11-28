@@ -49,6 +49,9 @@ public class ServiceBean {
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="service")
 	private Set<ServiceDetailCostBean>  serviceDetailCostSet;
 	
+	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="service")
+	private ServiceYearlyBean serviceYear;
+	
 	public String getUnixHost() {
 		return unixHost;
 	}
@@ -102,6 +105,25 @@ public class ServiceBean {
 	}
 	public void setCost(CostBean cost) {
 		this.cost = cost;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public Set<ServiceDetailCostBean> getServiceDetailCostSet() {
+		return serviceDetailCostSet;
+	}
+	public void setServiceDetailCostSet(Set<ServiceDetailCostBean> serviceDetailCostSet) {
+		this.serviceDetailCostSet = serviceDetailCostSet;
+	}
+	public ServiceYearlyBean getServiceYear() {
+		return serviceYear;
+	}
+	public void setServiceYear(ServiceYearlyBean serviceYear) {
+		this.serviceYear = serviceYear;
 	}
 	@Override
 	public String toString() {

@@ -1,5 +1,5 @@
 package org.project.netctoss.beans;
-
+ 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -22,7 +22,7 @@ import org.hibernate.annotations.OptimisticLocking;
 @Entity
 @Table(name = "t_userMonthlyCost")
 public class BillBean implements Serializable {
- 
+  
 	private static final long serialVersionUID = -924609537236557091L;
   
 	@Id

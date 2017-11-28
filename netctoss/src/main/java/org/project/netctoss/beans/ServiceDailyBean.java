@@ -21,7 +21,7 @@ public class ServiceDailyBean {
 	private Long id;
 
 	@Column(name = "date", length = 10)
-	private String day;
+	private Date day;
 
 	//在线时长
 	@Column(name = "online_time", length = 10)
@@ -51,12 +51,20 @@ public class ServiceDailyBean {
 		this.id = id;
 	}
 
-	public String getDay() {
+	public Date getDay() {
 		return day;
 	}
 
-	public void setDay(String day) {
+	public void setDay(Date day) {
 		this.day = day;
+	}
+
+	public Long getSumTime() {
+		return sumTime;
+	}
+
+	public void setSumTime(Long sumTime) {
+		this.sumTime = sumTime;
 	}
 
 	public Long getOnlineTime() {

@@ -1,6 +1,7 @@
 package org.project.netctoss.beans;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -38,7 +39,7 @@ public class ManagerBean implements Serializable{
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "t_manager_role", joinColumns = @JoinColumn(name = "fk_manager_id"), 
 	inverseJoinColumns = @JoinColumn(name = "fk_role_id"))
-	private RoleBean theRole;
+	private Set<RoleBean> theRole;
 
 	public ManagerBean(){
 
@@ -92,11 +93,12 @@ public class ManagerBean implements Serializable{
 		this.tel = tel;
 	}
 
-	public RoleBean getTheRole() {
+
+	public Set<RoleBean> getTheRole() {
 		return theRole;
 	}
 
-	public void setTheRole(RoleBean theRole) {
+	public void setTheRole(Set<RoleBean> theRole) {
 		this.theRole = theRole;
 	}
 

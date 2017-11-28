@@ -65,9 +65,6 @@ public class BillBean implements Serializable {
 	// 业务账单集合
 	private Set<ServiceBillBean> serviceBill;
 
-	
-	
-	
 	public BillBean() {
 
 	}

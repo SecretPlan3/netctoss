@@ -2,49 +2,47 @@ package org.project.netctoss.usermag.service.serviceImpl;
 
 import org.project.netctoss.beans.UserBean;
 import org.project.netctoss.pojos.PagerBean;
+import org.project.netctoss.usermag.dao.UserDao;
 import org.project.netctoss.usermag.service.UserService;
 import org.project.netctoss.utils.BaseDao;
 
 public class UserServiceImpl extends BaseDao implements UserService {
-
+	
+	private UserDao UserDaoImpl;
+	
 	public UserBean findUserById(Long id) {
 		// TODO Auto-generated method stub
-		return (UserBean)getSession().get(UserBean.class, id);
+		return UserDaoImpl.findUserById(id);
 	}
 
 	public void deleteUserById(UserBean user) {
 		// TODO Auto-generated method stub
-		getSession().delete(user);
+		UserDaoImpl.deleteUserById(user);
 	}
 
 	public void addUser(UserBean user) {
 		// TODO Auto-generated method stub
-		 getSession().save(user);
+		UserDaoImpl.addUser(user);
 	}
 
 	public void updateUser(UserBean user) {
 		// TODO Auto-generated method stub
-		getSession().save(user);
+		UserDaoImpl.updateUser(user);
 	}
 	
 	public PagerBean findUserByPager(PagerBean pager) {
 		// TODO Auto-generated method stub
-		return null;
+		return UserDaoImpl.findUserByPager(pager);
 	}
 
-	public Long deleteUserById(Long id) {
+	public UserBean findUserByLoginNameAndPassword(String loginName,String passWord) {
 		// TODO Auto-generated method stub
-		return null;
+		return UserDaoImpl.findUserByLoginNameAndPassword(loginName,passWord);
 	}
-
-	public UserBean findUserByLoginNameAndPassword(UserBean user) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	public UserBean findUserByLoginName(String LoginName) {
 		// TODO Auto-generated method stub
-		return null;
+		return UserDaoImpl.findUserByLoginName(LoginName);
 	}
 	
 }

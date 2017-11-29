@@ -27,10 +27,10 @@ public class RoleBean implements Serializable{
 	private String name;
 	
 	@ManyToMany(fetch=FetchType.LAZY,mappedBy="roles")
-	private List<PermissionBean> pers;
+	private Set<PermissionBean> pers;
 	
 	@ManyToMany(fetch=FetchType.LAZY,mappedBy="theRole")
-	private List<ManagerBean> managers;
+	private Set<ManagerBean> managers;
 	
 	@Column(name="type",length=11)
 	private String type;
@@ -55,13 +55,7 @@ public class RoleBean implements Serializable{
 		this.name = name;
 	}
 
-	public List<PermissionBean> getPers() {
-		return pers;
-	}
 
-	public void setPers(List<PermissionBean> pers) {
-		this.pers = pers;
-	}
 
 	public String getType() {
 		return type;
@@ -73,20 +67,30 @@ public class RoleBean implements Serializable{
 
 	
 	
-	public List<ManagerBean> getManagers() {
+
+	   public Set<PermissionBean> getPers() {
+		return pers;
+	}
+
+	public void setPers(Set<PermissionBean> pers) {
+		this.pers = pers;
+	}
+
+	public Set<ManagerBean> getManagers() {
 		return managers;
 	}
 
-	public void setManagers(List<ManagerBean> managers) {
+	public void setManagers(Set<ManagerBean> managers) {
 		this.managers = managers;
 	}
-	   public Set<String> getPermissionsName() {
-	        Set<String> list = new HashSet<>();
-	        List<PermissionBean> perlist = this.getPers();
+
+	public Set<String> getPermissionsName() {
+	        Set<String> set = new HashSet<>();
+	        Set<PermissionBean> perlist = this.getPers();
 	        for (PermissionBean per : perlist) {
-	            list.add(per.getName());
+	            set.add(per.getName());
 	        }
-	        return list;
+	        return set;
 	}
 
 	@Override

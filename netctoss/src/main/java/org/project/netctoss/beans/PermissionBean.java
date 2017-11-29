@@ -2,6 +2,7 @@ package org.project.netctoss.beans;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -33,7 +34,7 @@ public class PermissionBean implements Serializable{
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "t_role_permission", joinColumns = @JoinColumn(name = "fk_permission"), 
 	inverseJoinColumns = @JoinColumn(name = "fk_role_id"))
-	private List<RoleBean> roles;
+	private Set<RoleBean> roles;
 
 	public PermissionBean(){
 
@@ -63,11 +64,13 @@ public class PermissionBean implements Serializable{
 		this.name = name;
 	}
 
-	public List<RoleBean> getRoles() {
+
+
+	public Set<RoleBean> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<RoleBean> roles) {
+	public void setRoles(Set<RoleBean> roles) {
 		this.roles = roles;
 	}
 

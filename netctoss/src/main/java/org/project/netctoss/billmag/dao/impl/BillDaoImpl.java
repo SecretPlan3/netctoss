@@ -24,13 +24,13 @@ public class BillDaoImpl extends BaseDao implements IBillDao {
 		// 得到数据总数
 		StringBuilder hql = new StringBuilder(
 				"SELECT COUNT(b.id) FROM BillBean AS b JOIN b.user AS u WHERE b.year = :year AND b.month = :month ");
-		if (page.getParams().get("userName").equals("")) {
+		if (!page.getParams().get("userName").equals("")) {
 			hql.append(" AND u.userName LIKE CONCAT(:userName,'%') ");
 		}
-		if (page.getParams().get("loginName").equals("")) {
+		if (!page.getParams().get("loginName").equals("")) {
 			hql.append(" AND u.loginName LIKE CONCAT(:loginName,'%') ");
 		}
-		if (page.getParams().get("idcard").equals("")) {
+		if (!page.getParams().get("idcard").equals("")) {
 			hql.append(" AND u.idcard LIKE CONCAT(:idcard,'%') ");
 		}
 		Query query = getSession().createQuery(hql.toString());
@@ -40,13 +40,13 @@ public class BillDaoImpl extends BaseDao implements IBillDao {
 		
 		StringBuilder hql2 = new StringBuilder(
 				"FROM BillBean AS b JOIN FETCH b.user AS u WHERE b.year = :year AND b.month = :month ");
-		if (page.getParams().get("userName").equals("")) {
+		if (!page.getParams().get("userName").equals("")) {
 			hql.append(" AND u.userName LIKE CONCAT(:userName,'%') ");
 		}
-		if (page.getParams().get("loginName").equals("")) {
+		if (!page.getParams().get("loginName").equals("")) {
 			hql.append(" AND u.loginName LIKE CONCAT(:loginName,'%') ");
 		}
-		if (page.getParams().get("idcard").equals("")) {
+		if (!page.getParams().get("idcard").equals("")) {
 			hql.append(" AND u.idcard LIKE CONCAT(:idcard,'%') ");
 		}
 		hql2.append(" ORDER BY b.id");

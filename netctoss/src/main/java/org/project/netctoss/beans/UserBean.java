@@ -201,5 +201,10 @@ public class UserBean implements Serializable{
 	public void setRoler(RoleBean roler) {
 		this.roler = roler;
 	}
+	@Override
+	public String toString() {
+		return "UserBean [userId=" + userId + ", userName=" + userName + ", loginName=" + loginName + ", passWord="
+				+ passWord + "]";
+	}
 	
 }

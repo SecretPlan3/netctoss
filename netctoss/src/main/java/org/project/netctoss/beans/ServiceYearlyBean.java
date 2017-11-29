@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -34,9 +35,9 @@ public class ServiceYearlyBean {
 	@Transient
 	private Double cost;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_service_id")
-	//这一年中的所有业务账号
+	//这一年中的对应业务账号
 	private ServiceBean service;
 		
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="serviceYearly")

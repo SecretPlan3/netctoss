@@ -139,7 +139,7 @@ if (developMode) {
 
         var pathSegs = pathname.slice(pathname.indexOf('doc')).split('/');
         var pathLevelArr = new Array(pathSegs.length - 1);
-        script.src = pathLevelArr.join('../') + 'asset/js/esl/esl.js';
+        script.src = pathLevelArr.join('../') + 'loginUser/js/esl/esl.js';
         if (script.readyState) {
             script.onreadystatechange = fireLoad;
         }

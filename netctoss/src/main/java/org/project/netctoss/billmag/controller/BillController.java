@@ -21,6 +21,6 @@ public class BillController {
 		System.out.println(pb);
 		pb = billServiceImpl.findAllUserBillByCondition(pb);
 		return pb;
-	}
+	} 
 	
 }

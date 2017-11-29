@@ -30,7 +30,8 @@ public class ServiceDetailCostBean {
 	@JoinColumn(name = "fk_service_time_id")
 	private ServiceTimeBean serviceTime;
 	
-	@Transient
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_cost_id")
 	private CostBean costbean;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

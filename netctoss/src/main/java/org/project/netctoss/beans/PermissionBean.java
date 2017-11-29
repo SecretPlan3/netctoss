@@ -17,6 +17,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="t_permission")
 public class PermissionBean implements Serializable{
@@ -34,6 +36,7 @@ public class PermissionBean implements Serializable{
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "t_role_permission", joinColumns = @JoinColumn(name = "fk_permission"), 
 	inverseJoinColumns = @JoinColumn(name = "fk_role_id"))
+	@JsonIgnore	//忽略jackson使用延迟加载
 	private Set<RoleBean> roles;
 
 	public PermissionBean(){

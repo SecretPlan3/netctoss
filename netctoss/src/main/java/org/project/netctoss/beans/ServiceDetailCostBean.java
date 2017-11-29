@@ -13,6 +13,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "t_serviceDetailCost")
 public class ServiceDetailCostBean {
@@ -28,14 +30,17 @@ public class ServiceDetailCostBean {
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_service_time_id")
+	@JsonIgnore	//忽略jackson使用延迟加载
 	private ServiceTimeBean serviceTime;
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_cost_id")
+	@JsonIgnore	//忽略jackson使用延迟加载
 	private CostBean costbean;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_service_id")
+	@JsonIgnore	//忽略jackson使用延迟加载
 	private ServiceBean service;
 	
 	

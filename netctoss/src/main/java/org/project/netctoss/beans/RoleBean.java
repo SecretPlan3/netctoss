@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="t_role")
 public class RoleBean implements Serializable{
@@ -27,9 +29,11 @@ public class RoleBean implements Serializable{
 	private String name;
 	
 	@ManyToMany(fetch=FetchType.LAZY,mappedBy="roles")
+	@JsonIgnore	//忽略jackson使用延迟加载
 	private Set<PermissionBean> pers;
 	
 	@ManyToMany(fetch=FetchType.LAZY,mappedBy="theRole")
+	@JsonIgnore	//忽略jackson使用延迟加载
 	private Set<ManagerBean> managers;
 	
 	@Column(name="type",length=11)

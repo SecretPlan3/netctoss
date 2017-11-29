@@ -19,6 +19,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OptimisticLockType;
 import org.hibernate.annotations.OptimisticLocking;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "t_userMonthlyCost")
 public class BillBean implements Serializable {
@@ -58,6 +60,7 @@ public class BillBean implements Serializable {
  
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_user_id")
+	@JsonIgnore	//忽略jackson使用延迟加载
 	// 账务账号
 	private UserBean user;
 

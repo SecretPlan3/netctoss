@@ -16,6 +16,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "t_servicemonthly")
 public class ServiceMonthlyBean {
@@ -38,6 +40,7 @@ public class ServiceMonthlyBean {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_serviceyearly_id")
+	@JsonIgnore	//忽略jackson使用延迟加载
 	private ServiceYearlyBean serviceYearly;
 
 	public ServiceYearlyBean getServiceYearly() {

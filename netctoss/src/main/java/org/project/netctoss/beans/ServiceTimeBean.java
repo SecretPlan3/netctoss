@@ -12,6 +12,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "t_service_time")
 public class ServiceTimeBean {
@@ -36,6 +38,7 @@ public class ServiceTimeBean {
 	private Long onlineTime;
 	//业务账号详细花费!
 	@OneToOne(fetch=FetchType.LAZY,mappedBy="serviceTime")
+	@JsonIgnore	//忽略jackson使用延迟加载
 	private ServiceDetailCostBean serviceDetailCost;
 
 	public Date getLoginTime() {

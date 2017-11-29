@@ -6,7 +6,8 @@ import org.project.netctoss.beans.CostBean;
 import org.project.netctoss.costmag.dao.ICostDao;
 import org.project.netctoss.costmag.service.ICostService;
 import org.project.netctoss.pojos.PagerBean;
-
+import org.springframework.stereotype.Service;
+@Service
 public class CostServiceImpl implements ICostService {
 	@Resource
 	private ICostDao costDaoImpl;

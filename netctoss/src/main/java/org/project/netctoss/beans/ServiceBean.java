@@ -49,8 +49,9 @@ public class ServiceBean {
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="service")
 	private Set<ServiceDetailCostBean>  serviceDetailCostSet;
 	
-	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="service")
-	private ServiceYearlyBean serviceYear;
+	//一个业务账号有多个年
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="service")
+	private Set<ServiceYearlyBean> serviceYear;
 	
 	public String getUnixHost() {
 		return unixHost;
@@ -120,10 +121,11 @@ public class ServiceBean {
 	public void setServiceDetailCostSet(Set<ServiceDetailCostBean> serviceDetailCostSet) {
 		this.serviceDetailCostSet = serviceDetailCostSet;
 	}
-	public ServiceYearlyBean getServiceYear() {
+
+	public Set<ServiceYearlyBean> getServiceYear() {
 		return serviceYear;
 	}
-	public void setServiceYear(ServiceYearlyBean serviceYear) {
+	public void setServiceYear(Set<ServiceYearlyBean> serviceYear) {
 		this.serviceYear = serviceYear;
 	}
 	@Override

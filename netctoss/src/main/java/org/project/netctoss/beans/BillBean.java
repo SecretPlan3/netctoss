@@ -134,7 +134,7 @@ public class BillBean implements Serializable {
 	@Override
 	public String toString() {
 		return "BillBean [id=" + id + ", year=" + year + ", month=" + month + ", cost=" + cost + ", payStatus="
-				+ payStatus + ", payMothod=" + payMothod + ", payTime=" + payTime + "]";
+				+ payStatus + ", payMothod=" + payMothod + ", payTime=" + payTime + "]" + user;
 	}
 
 }

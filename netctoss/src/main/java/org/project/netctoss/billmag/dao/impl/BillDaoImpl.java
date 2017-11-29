@@ -1,5 +1,6 @@
 package org.project.netctoss.billmag.dao.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import org.project.netctoss.beans.UserBean;
 import org.project.netctoss.billmag.dao.IBillDao;
 import org.project.netctoss.pojos.PagerBean;
 import org.project.netctoss.utils.BaseDao;
+import org.project.netctoss.utils.DateUtils;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -21,33 +23,35 @@ public class BillDaoImpl extends BaseDao implements IBillDao {
 	public PagerBean findAllUserBillByCondition(PagerBean page) {
 		// 得到数据总数
 		StringBuilder hql = new StringBuilder(
-				"SELECT COUNT(b.id) FROM BillBean AS b JOIN FETCH b.user AS u WHERE b.year = :year AND b.month = :month ORDER BY b.id");
+				"SELECT COUNT(b.id) FROM BillBean AS b JOIN b.user AS u WHERE b.year = :year AND b.month = :month ");
 		UserBean user = (UserBean) page.getParams().get("user");
-		if (user.getUserName() != "") {
+		if (user.getUserName() != null && !user.getUserName().equals("")) {
 			hql.append(" AND u.userName LIKE CONCAT(:user.userName,'%') ");
 		}
-		if (user.getLoginName() != "") {
+		if (user.getLoginName() != null && !user.getLoginName().equals("")) {
 			hql.append(" AND u.loginName LIKE CONCAT(:user.loginName,'%') ");
 		}
-		if (user.getIdcard() != "") {
+		if (user.getIdcard() != null && !user.getIdcard().equals("")) {
 			hql.append(" AND u.idcard LIKE CONCAT(:user.idcard,'%') ");
 		}
-
 		Query query = getSession().createQuery(hql.toString());
 		query.setProperties(page.getParams());
 		page.setTotalRows(Integer.valueOf(query.uniqueResult() + ""));
 
-		hql.delete(0, 19);
-		if (user.getUserName() != "") {
-			hql.append(" AND u.userName LIKE CONCAT(:user.userName,'%') ");
+		
+		StringBuilder hql2 = new StringBuilder(
+				"FROM BillBean AS b JOIN FETCH b.user AS u WHERE b.year = :year AND b.month = :month ");
+		if (user.getUserName() != null && !user.getUserName().equals("")) {
+			hql2.append(" AND u.userName LIKE CONCAT(:user.userName,'%') ");
 		}
-		if (user.getLoginName() != "") {
-			hql.append(" AND u.loginName LIKE CONCAT(:user.loginName,'%') ");
+		if (user.getLoginName() != null && !user.getLoginName().equals("")) {
+			hql2.append(" AND u.loginName LIKE CONCAT(:user.loginName,'%') ");
 		}
-		if (user.getIdcard() != "") {
-			hql.append(" AND u.idcard LIKE CONCAT(:user.idcard,'%') ");
+		if (user.getIdcard() != null && !user.getIdcard().equals("")) {
+			hql2.append(" AND u.idcard LIKE CONCAT(:user.idcard,'%') ");
 		}
-		query = getSession().createQuery(hql.toString());
+		hql2.append(" ORDER BY b.id");
+		query = getSession().createQuery(hql2.toString());
 		query.setFirstResult(page.getIndex());
 		query.setMaxResults(page.getRows());
 		// 设置Map类型的参数
@@ -60,49 +64,32 @@ public class BillDaoImpl extends BaseDao implements IBillDao {
 
 	@Override
 	public PagerBean findAllServiceBillByCondition(PagerBean page) {
-		// 模拟参数
-		Map<String, Object> params = new HashMap<>();
-		params.put("userID", 1);
-		params.put("year", 2017);
-		params.put("month", 4);
-		page.setParams(params);
-		page.setPage(1);
-		page.setRows(5);
 
-		String hql = "SELECT COUNT(s.id) FROM ServiceMonthlyBean AS m JOIN m.ServiceYearlyBean AS y JOIN y.ServiceBean AS s JOIN s.CostBean AS c WHERE y.year = :year AND m.month = :month AND s.user = :userID";
+		String hql = "SELECT COUNT(s.id) FROM ServiceMonthlyBean AS m JOIN m.serviceYearly AS y JOIN y.service AS s JOIN s.cost AS c JOIN s.user AS u WHERE y.year = :year AND m.month = :month AND u.userId = :userID ORDER BY s.id ";
 		Query query = getSession().createQuery(hql.toString());
 		query.setProperties(page.getParams());
 		page.setTotalRows(Integer.valueOf(query.uniqueResult() + ""));
 
-		hql = "FROM ServiceMonthlyBean AS m JOIN m.ServiceYearlyBean AS y JOIN y.ServiceBean AS s JOIN s.CostBean AS c WHERE y.year = :year AND m.month = :month AND s.user = :userID ORDER BY s.id";
+		hql = "FROM ServiceMonthlyBean AS m JOIN FETCH m.serviceYearly AS y JOIN FETCH y.service AS s JOIN FETCH s.cost AS c JOIN FETCH s.user AS u WHERE y.year = :year AND m.month = :month AND u.userId = :userID ORDER BY s.id ";
 		query = getSession().createQuery(hql.toString());
 		query.setProperties(page.getParams());
 		query.setFirstResult(page.getIndex());
 		query.setMaxResults(page.getRows());
 		List<ServiceMonthlyBean> allMonthly = query.list();
 		page.setDatas(allMonthly);
-
 		return page;
 	}
  
 	@Override
 	public PagerBean findAllServiceTimeBillByCondition(PagerBean page) {
-		// 模拟参数
-		Map<String, Object> params = new HashMap<>();
-		params.put("osName", "ttt");
-		params.put("loginTime", "2017-10-01");
-		params.put("logOutTime", "2017-10-32");
-		page.setParams(params);
-		page.setPage(1);
-		page.setRows(5);
 		 
-		String hql = "SELECT COUNT(s.id) FROM ServiceDetailCostBean AS sdc JOIN sdc.ServiceTimeBean AS st JOIN sdc.CostBean AS c WHERE st.loginTime > :loginTime AND st.logoutTime < :logoutTime AND st.osName = :osName ORDER BY st.loginTime ";
-		Query query = getSession().createQuery(hql.toString());
+		String hql = "SELECT COUNT(sdc.id) FROM ServiceDetailCostBean AS sdc JOIN sdc.serviceTime AS st JOIN sdc.costbean AS c WHERE st.loginTime > :loginTime AND st.logoutTime < :logoutTime AND st.osName = :osName ORDER BY st.loginTime";
+		Query query = getSession().createQuery(hql);
 		query.setProperties(page.getParams());
 		page.setTotalRows(Integer.valueOf(query.uniqueResult() + ""));
 		
-		hql = "FROM ServiceDetailCostBean AS sdc JOIN sdc.ServiceTimeBean AS st JOIN sdc.CostBean AS c WHERE st.loginTime > :loginTime AND st.logoutTime < :logoutTime AND st.osName = :osName ORDER BY st.loginTime";
-		query = getSession().createQuery(hql.toString());
+		hql = "FROM ServiceDetailCostBean AS sdc JOIN FETCH sdc.serviceTime AS st JOIN FETCH sdc.costbean AS c WHERE st.loginTime > :loginTime AND st.logoutTime < :logoutTime AND st.osName = :osName ORDER BY st.loginTime";
+		query = getSession().createQuery(hql);
 		query.setProperties(page.getParams());
 		query.setFirstResult(page.getIndex());
 		query.setMaxResults(page.getRows());

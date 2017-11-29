@@ -4,13 +4,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<base href="<%=basePath%>" >
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="<%=basePath%>js/jquery-3.2.1.min.js" charset="utf-8"></script>
-<script type="text/javascript" src="<%=basePath%>js/jquery.json-2.4.js"></script>
+<script type="text/javascript" src="<%=basePath%>static/js/jquery-3.2.1.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="<%=basePath%>static/js/jquery.json-2.4.js"></script>
 </head>
 <body>
 	欢迎来到账务查询！
+	<%=basePath %>
 <form action="<%=basePath %>billtime/findAll"  method="POST">
    账务账号编号：	<input type="text" id="id" name="id"/> 
    身份证号：	<input type="text" id="idcard" name="idcard"/> 
@@ -18,7 +20,7 @@
    账号：		<input type="text" id="loginname" name="loginname"/> 
     <input type="submit"  value="查询"/><br/>
 </form>
-<table id = "table0">
+<table id = "table0" border="1px">
 <thead>
 	<tr>
 		<th>账务账单编号</th>
@@ -35,9 +37,7 @@
 </body>
 <script type="text/javascript">
 	$(function(){
-		
-		
-		
+		showData();	
 	});
 	//定义全局变量
 	var page = 0;
@@ -49,12 +49,23 @@
 	
 	function showData(){
 		var url = "billtime/findAll";
+		var pageBean = {
+				page:page,
+				rows:rows,
+				"params":{
+					id:id,
+					idcard:idcard,
+					username:username,
+					loginname:loginname
+				}
+			}
+		
 		$.ajax({
 			type : "POST",
 			url : url,
 			async : true,
 			data : {
-				page:page,rows:rows
+				pageBean:pageBean
 			},
 			success : function(msg) {
 				alert("成功返回");

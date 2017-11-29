@@ -17,15 +17,13 @@ public class BillTimeController {
 	private IBillTimeService billTimeServiceImpl;
 	
 	@RequestMapping(value="/findAll")
-	public ModelAndView findBillTeme(PagerBean pb) {
+	public PagerBean findBillTeme(PagerBean pb) {
 		ModelAndView mv= new ModelAndView();
-		//
-		
+		//查询所有用户账号
+		System.out.println("进入了findAllController");
 		pb = billTimeServiceImpl.findAllUsersBillTimeByCondition(pb);
-		mv.addObject("pb", pb);
-		mv.setViewName("jsp/billtime/billtimemain");
-		return mv;
-		
+		System.out.println(pb);
+		return pb;
 	}
 	
 }

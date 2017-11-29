@@ -2355,7 +2355,7 @@
             this.viewport.appendChild(this.element);
             this.container.appendChild(this.viewport);
 
-            // if we don't have to wait for an image to load, show the message right away
+            // if we don't have to wait for an img to load, show the message right away
             if (!this.img) {
               this._delayedShow();
             }
@@ -8758,7 +8758,7 @@
             var src;
             var title;
 
-            // get image URI from link's href attribute
+            // get img URI from link's href attribute
             if (item.nodeName === 'A') {
               src = item.href; // to absolute path
               title = item.title || '';
@@ -8789,7 +8789,7 @@
         };
 
         PureView.prototype.loadImage = function($slide, callback) {
-          var appendedFlag = 'image-appended';
+          var appendedFlag = 'img-appended';
 
           if (!$slide.data(appendedFlag)) {
             var $img = $('<img>', {
@@ -8803,7 +8803,7 @@
             var $pinchWrapper = $slide.find(this.options.selector.pinchZoom);
             $pinchWrapper.data('amui.pinchzoom', new PinchZoom(
               $pinchWrapper[0], {}));
-            $slide.data('image-appended', true);
+            $slide.data('img-appended', true);
           }
 
           callback && callback.call(this);
@@ -8850,7 +8850,7 @@
             this.transitioning = 0;
           }
 
-          // TODO: pre-load next image
+          // TODO: pre-load next img
         };
 
         PureView.prototype.nextSlide = function() {
@@ -9665,7 +9665,7 @@
 
           qq: {
             title: 'QQ 好友',
-            url: 'http://connect.qq.com/widget/shareqq/index.html',
+            url: 'http://connect.qq.com/widget/shareqq/login.html',
             icon: 'qq'
           },
           // url:,
@@ -9731,7 +9731,7 @@
           },
           // http://www.douban.com/service/sharebutton
           // 450 * 330
-          // http://www.douban.com/share/service?bm=1&image=&href=xxx&updated=&name=
+          // http://www.douban.com/share/service?bm=1&img=&href=xxx&updated=&name=
           // href 链接
           // name 标题
 

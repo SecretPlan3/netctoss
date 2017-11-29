@@ -43,6 +43,21 @@ public class ServiceMonthlyBean {
 	@JsonIgnore	//忽略jackson使用延迟加载
 	private ServiceYearlyBean serviceYearly;
 
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="serviceMonthly")
+	@JsonIgnore	//忽略jackson使用延迟加载
+	// 某业务账号
+	private Set<ServiceBean> service;
+
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="serviceMonthly")
+	@JsonIgnore	//忽略jackson使用延迟加载
+	// 这个月的所有天
+	private Set<ServiceDailyBean> serviceDaily;
+
+	
+	public ServiceMonthlyBean() {
+
+	}
+	
 	public ServiceYearlyBean getServiceYearly() {
 		return serviceYearly;
 	}
@@ -50,20 +65,7 @@ public class ServiceMonthlyBean {
 	public void setServiceYearly(ServiceYearlyBean serviceYearly) {
 		this.serviceYearly = serviceYearly;
 	}
-
-	@Transient
-	// 某业务账号
-	private ServiceBean service;
-
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="serviceMonthly")
-	// 这个月的所有天
-	private Set<ServiceDailyBean> serviceDaily;
-
 	
-	
-	public ServiceMonthlyBean() {
-
-	}
 
 	public Long getId() {
 		return id;
@@ -97,11 +99,11 @@ public class ServiceMonthlyBean {
 		this.cost = cost;
 	}
 
-	public ServiceBean getService() {
+	public Set<ServiceBean> getService() {
 		return service;
 	}
 
-	public void setService(ServiceBean service) {
+	public void setService(Set<ServiceBean> service) {
 		this.service = service;
 	}
 

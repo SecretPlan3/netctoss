@@ -37,6 +37,7 @@ public class ManagerLogBean {
 	private ManagerBean managerOperation;//操作者
 	
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@JsonIgnore	//忽略jackson使用延迟加载
 	private List<ManagerOperationLogBean> operationLog;//在这时间段内该管理员所有的操作
 	public long getId() {
 		return id;

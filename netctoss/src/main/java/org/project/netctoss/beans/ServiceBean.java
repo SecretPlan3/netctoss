@@ -16,6 +16,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name="t_service")
 public class ServiceBean {
@@ -41,16 +43,20 @@ public class ServiceBean {
 	  private Date closeDate;
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="fk_user_id")
+	@JsonIgnore	//忽略jackson使用延迟加载
 	  private UserBean user;
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="fk_cost_id")
+	@JsonIgnore	//忽略jackson使用延迟加载
 	private CostBean cost;
 	
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="service")
+	@JsonIgnore	//忽略jackson使用延迟加载
 	private Set<ServiceDetailCostBean>  serviceDetailCostSet;
 	
 	//一个业务账号有多个年
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="service")
+	@JsonIgnore	//忽略jackson使用延迟加载
 	private Set<ServiceYearlyBean> serviceYear;
 	
 	public String getUnixHost() {

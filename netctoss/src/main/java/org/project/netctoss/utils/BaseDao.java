@@ -12,7 +12,18 @@ public class BaseDao {
 	@Resource
 	private SessionFactory sf;
 	
+	private static ThreadLocal<Session> thread = new ThreadLocal<Session>();
+	
+//	public Session getSession() {
+//		return sf.getCurrentSession();
+//	}
+	
 	public Session getSession() {
-		return sf.getCurrentSession();
+		Session session = thread.get();
+		if(session == null) {
+			session = sf.openSession();
+			thread.set(session);
+		}
+		return session;
 	}
 }

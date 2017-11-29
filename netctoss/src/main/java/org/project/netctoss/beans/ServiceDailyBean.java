@@ -14,6 +14,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "t_serviceDaily")
 public class ServiceDailyBean {
@@ -40,10 +42,12 @@ public class ServiceDailyBean {
 
 	// 某业务账号
 	@Transient
+	@JsonIgnore	//忽略jackson使用延迟加载
 	private ServiceBean service;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_servicemonthly_id")
+	@JsonIgnore	//忽略jackson使用延迟加载
 	//这些天的月份
 	private ServiceMonthlyBean serviceMonthly;
 	

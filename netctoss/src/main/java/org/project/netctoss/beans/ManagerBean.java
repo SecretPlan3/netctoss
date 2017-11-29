@@ -16,6 +16,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="t_manager")
 public class ManagerBean implements Serializable{
@@ -39,6 +41,7 @@ public class ManagerBean implements Serializable{
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "t_manager_role", joinColumns = @JoinColumn(name = "fk_manager_id"), 
 	inverseJoinColumns = @JoinColumn(name = "fk_role_id"))
+	@JsonIgnore	//忽略jackson使用延迟加载
 	private Set<RoleBean> theRole;
 
 	public ManagerBean(){

@@ -17,6 +17,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "t_user")
 public class UserBean implements Serializable{
@@ -68,16 +70,20 @@ public class UserBean implements Serializable{
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_role_id")
+	@JsonIgnore	//忽略jackson使用延迟加载
 	private RoleBean roler;
 	
 
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="user")
+	@JsonIgnore	//忽略jackson使用延迟加载
 	private Set<ServiceBean> services;
 	
 	@Column(name = "balance", length = 11)
+	@JsonIgnore	//忽略jackson使用延迟加载
 	private String balance;
 	
 	@OneToOne(fetch=FetchType.LAZY,mappedBy="user")
+	@JsonIgnore	//忽略jackson使用延迟加载
 	private BillBean bill;
 	
 	

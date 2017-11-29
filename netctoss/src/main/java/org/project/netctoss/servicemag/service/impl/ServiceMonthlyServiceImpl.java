@@ -4,10 +4,11 @@ import javax.annotation.Resource;
 
 import org.project.netctoss.beans.ServiceMonthlyBean;
 import org.project.netctoss.servicemag.dao.IServiceMonthlyDao;
+import org.project.netctoss.servicemag.service.IServiceMonthlyService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ServiceMonthlyServiceImpl implements IServiceMonthlyDao {
+public class ServiceMonthlyServiceImpl implements IServiceMonthlyService {
 	@Resource
 	IServiceMonthlyDao serviceMonthlyDaoImpl;
 
@@ -36,9 +37,9 @@ public class ServiceMonthlyServiceImpl implements IServiceMonthlyDao {
 	}
 
 	@Override
-	public ServiceMonthlyBean getServiceMonthlyBeanByMonth(String month) {
+	public ServiceMonthlyBean getServiceMonthlyBeanByMonthAndService(String month,String osName) {
 		// TODO Auto-generated method stub
-		return serviceMonthlyDaoImpl.getServiceMonthlyBeanByMonth(month);
+		return serviceMonthlyDaoImpl.getServiceMonthlyBeanByMonthAndService(month,osName);
 	}
 
 }

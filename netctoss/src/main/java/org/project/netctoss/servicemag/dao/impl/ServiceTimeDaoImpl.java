@@ -62,7 +62,7 @@ public class ServiceTimeDaoImpl extends BaseDao implements IServiceTimeDao {
 			int loginMonth = loginT.getMonth() + 1;
 			int loginYear = loginT.getYear();
 			// 获取对应的月对象
-			ServiceMonthlyBean sm = serviceMonthlyImpl.getServiceMonthlyBeanByMonth(loginYear + "-" + loginMonth);
+			ServiceMonthlyBean sm = serviceMonthlyImpl.getServiceMonthlyBeanByMonthAndService(loginYear + "-" + loginMonth,serviceTimeBean.getOsName());
 			// 将日期截取为数据库所需要存入的时间
 			String saveDate = loginYear + "-" + loginMonth + "-" + loginDay;
 			Date dateToSave = null;

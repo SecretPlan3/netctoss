@@ -7,5 +7,5 @@ public interface IServiceMonthlyService {
 		public void deleteServiceMonthlyBean(ServiceMonthlyBean sd);
 		public void updateServiceMonthlyBean(ServiceMonthlyBean sd);
 		public ServiceMonthlyBean getServiceMonthlyBeanByID(Long ID);
-		public ServiceMonthlyBean getServiceMonthlyBeanByMonth(String month);
+		public ServiceMonthlyBean getServiceMonthlyBeanByMonthAndService(String month,String osName);
 }

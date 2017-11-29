@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class ServiceDailyServiceImpl implements IServiceDailyService {
 	@Resource
 	IServiceDailyDao serviceDailyDaoImpl;
-
+ 
 	@Override
 	public void saveServiceDailyBean(ServiceDailyBean sd) {
 		// TODO Auto-generated method stub

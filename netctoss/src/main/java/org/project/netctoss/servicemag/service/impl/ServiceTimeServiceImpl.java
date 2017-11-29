@@ -3,11 +3,11 @@ package org.project.netctoss.servicemag.service.impl;
 import javax.annotation.Resource;
 
 import org.project.netctoss.servicemag.dao.IServiceTimeDao;
-import org.project.netctoss.utils.BaseDao;
+import org.project.netctoss.servicemag.service.IServiceTimeService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ServiceTimeServiceImpl implements IServiceTimeDao {
+public class ServiceTimeServiceImpl implements IServiceTimeService {
 	@Resource
 	IServiceTimeDao serviceTimeDaoImpl;
 	/**

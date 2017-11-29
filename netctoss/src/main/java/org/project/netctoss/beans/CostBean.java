@@ -29,7 +29,7 @@ public class CostBean {
 	private int type;//资费类型；分为三种：包月套餐/自助类型/计时套餐
 	
 	@Column(name="basic_time")
-	private Date basicTime;//基本时长
+	private Integer basicTime;//基本时长
 	
 	@Column(name="basic_cost")
 	private Double basicCost;//基本费用
@@ -70,10 +70,11 @@ public class CostBean {
 	public void setType(int type) {
 		this.type = type;
 	}
-	public Date getBasicTime() {
+
+	public Integer getBasicTime() {
 		return basicTime;
 	}
-	public void setBasicTime(Date basicTime) {
+	public void setBasicTime(Integer basicTime) {
 		this.basicTime = basicTime;
 	}
 	public Double getBasicCost() {

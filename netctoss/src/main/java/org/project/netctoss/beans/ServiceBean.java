@@ -22,7 +22,7 @@ public class ServiceBean {
 	@Id
 	@GenericGenerator(name="hibernate.identity",strategy="identity")
 	@GeneratedValue(generator="hibernate.identity")
-	  private String id;
+	  private Long id;
 	
 	@Column(name="unix_host",length=15)
 	  private String unixHost;
@@ -107,10 +107,11 @@ public class ServiceBean {
 		this.cost = cost;
 	}
 	
-	public String getId() {
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public Set<ServiceDetailCostBean> getServiceDetailCostSet() {

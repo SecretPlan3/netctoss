@@ -1,4 +1,4 @@
-package org.project.netctoss.permissionmag.service.serviceImpl;
+package org.project.netctoss.permissionmag.service.impl;
 
 import javax.annotation.Resource;
 

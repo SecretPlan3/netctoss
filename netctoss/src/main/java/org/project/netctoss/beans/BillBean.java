@@ -19,7 +19,9 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OptimisticLockType;
 import org.hibernate.annotations.OptimisticLocking;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "t_userMonthlyCost")
@@ -52,15 +54,16 @@ public class BillBean implements Serializable {
   
 	@Column(name = "pay_method")
 	// 支付方式
-	private String payMothod;
+	private String payMethod;
  
 	@Column(name = "pay_time")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")	//将时间格式转换成自定义格式,timezone设置时区
 	// 支付时间
 	private Date payTime;
  
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_user_id")
-	@JsonIgnore	//忽略jackson使用延迟加载
+//	@JsonIgnore	忽略jackson使用延迟加载,UserBean中bill加了，这里不再需要加
 	// 账务账号
 	private UserBean user;
 
@@ -109,12 +112,12 @@ public class BillBean implements Serializable {
 		this.payStatus = payStatus;
 	}
 
-	public String getPayMothod() {
-		return payMothod;
+	public String getPayMethod() {
+		return payMethod;
 	}
 
-	public void setPayMothod(String payMothod) {
-		this.payMothod = payMothod;
+	public void setPayMethod(String payMethod) {
+		this.payMethod = payMethod;
 	}
 
 	public Date getPayTime() {
@@ -137,7 +140,7 @@ public class BillBean implements Serializable {
 	@Override
 	public String toString() {
 		return "BillBean [id=" + id + ", year=" + year + ", month=" + month + ", cost=" + cost + ", payStatus="
-				+ payStatus + ", payMothod=" + payMothod + ", payTime=" + payTime + "]" + user;
+				+ payStatus + ", payMothod=" + payMethod + ", payTime=" + payTime + "]" + user;
 	}
 
 }

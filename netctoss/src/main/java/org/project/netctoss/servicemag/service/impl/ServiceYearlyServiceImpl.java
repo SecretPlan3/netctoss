@@ -8,7 +8,7 @@ import org.project.netctoss.servicemag.service.IServiceYearlyService;
 import org.springframework.stereotype.Service;
 @Service
 public class ServiceYearlyServiceImpl implements IServiceYearlyService {
-@Resource
+@Resource 
  IServiceYearlyDao serviceYearlyDao;
 	@Override
 	public void saveServiceYearlyBean(ServiceYearlyBean sd) {

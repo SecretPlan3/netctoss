@@ -7,9 +7,11 @@ import javax.annotation.Resource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.project.netctoss.beans.UserBean;
 import org.project.netctoss.billtimemag.service.IBillTimeService;
 import org.project.netctoss.managermag.service.IManagerService;
 import org.project.netctoss.pojos.PagerBean;
+import org.project.netctoss.usermag.service.IUserService;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -20,8 +22,26 @@ public class TestBillTime {
 	@Resource
 	private IBillTimeService billTimeserviceImpl;
 	
+	@Resource
+	private IUserService userServiceImpl;
+	
+	
+	
+	public void testUserName() {
+		UserBean user = userServiceImpl.findUserByLoginName("123");
+		System.out.println("user+++++++++++++++++++" + user);
+	
+	}
 	
 	@Test
+	public void testUserPwd() {
+		UserBean user = userServiceImpl.findUserByLoginNameAndPassword("123", "202cb962ac59075b964b07152d234b70");
+		System.out.println("user+++++++++++++++++++" + user);
+	
+	}
+	
+
+	
 	public void testFindAllServicessBillTimeByCondition() {
 		
 		System.out.println("hello+++++++++++++++++++");

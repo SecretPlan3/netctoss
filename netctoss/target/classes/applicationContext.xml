@@ -89,7 +89,7 @@
      </bean>
    <!-- 配置 Annotation 驱动，扫描@Transactional注解的类定义事务 -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
-    
+     
    	<!-- 采用springAOP来管理事务 -->
      <tx:advice id="txAdvice" transaction-manager="txManager">
         <tx:attributes>
@@ -115,7 +115,8 @@
         </tx:attributes>
     </tx:advice>
 	
-	<aop:config> 
+	
+	<aop:config> 												  
         <aop:pointcut id="serviceMethods" expression="execution(* org.project.netctoss.*mag.service.impl.*Impl.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
     </aop:config>
@@ -123,39 +124,30 @@
 	<!-- 如果我们自己还要定义切面，需要开启切面的动态代理支持 -->
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>  
 	
-	<!-- 配置shiro的权限管理器 -->
+<!-- 	
+	配置shiro的权限管理器
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
       <property name="realm" ref="myRealm"/>
-        <!-- 使用下面配置的缓存管理器 -->
+        使用下面配置的缓存管理器
         <property name="cacheManager" ref="cacheManager"/>
    </bean>
 	
-	<!-- 配置shiro权限（在其中自定义 权限与资源的对应关系）过滤器 -->
+	配置shiro权限（在其中自定义 权限与资源的对应关系）过滤器
 	 <bean id="myRealm" class="org.project.netctoss.shiro.UserRealm"/>
 	 <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-         <!-- 调用我们配置的权限管理器 -->
+         调用我们配置的权限管理器
          <property name="securityManager" ref="securityManager"/>
-         <!-- 配置我们的登录请求地址 -->
+         配置我们的登录请求地址
         <property name="loginUrl" value="/login.jsp"/>
-        <!-- 配置我们在登录页登录成功后的跳转地址，如果你访问的是非/login地址，则跳到登陆的地址 -->
+        配置我们在登录页登录成功后的跳转地址，如果你访问的是非/login地址，则跳到登陆的地址
        <property name="successUrl" value="/jsp/user.jsp"/>
-         <!-- 如果您请求的资源不再您的权限范围，则跳转到/403请求地址 -->
+         如果您请求的资源不再您的权限范围，则跳转到/403请求地址
          <property name="unauthorizedUrl" value="/403.jsp"/>
-         <!-- 权限过滤配置 --> 
+         权限过滤配置 
        <property name="filterChainDefinitions">
-       		<!-- 配置各种资源（视图名）对应的可访问权限（以shiro认可的方式： 将我们的 角色（用roles[此处为数据库中的角色名]）(或权限（用pxx[xx]）) 匹配上去） -->
+       		配置各种资源（视图名）对应的可访问权限（以shiro认可的方式： 将我们的 角色（用roles[此处为数据库中的角色名]）(或权限（用pxx[xx]）) 匹配上去）
             <value>
-                /static/** = anon
-                /css/** = anon
-               	/js/** = anon
-               	/login.jsp = anon
-               	/user/login = anon
-               	/jsp/** = anon
-           		/jsp/manger01.jsp= roles[superadmin]
-           		/manger01 = roles[superadmin]
-           		/jsp/manger02.jsp= roles[admin]
-           		/manger02 = roles[admin]
-                /** = authc
+                /** = anon
             </value>
       </property>
       
@@ -163,5 +155,5 @@
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
     <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>
 
-
+ -->
 </beans>        

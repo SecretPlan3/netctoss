@@ -8,6 +8,6 @@ import org.project.netctoss.beans.ServiceTimeBean;
      
 public interface IServiceTimeDao {
 		public void saveAsDailyService();
-		public void saveAsMonthlyService(Set<ServiceDailyBean> allDailyService );
-		public void saveAsYearlyService(Set<ServiceMonthlyBean> allMonthlyService);
+		public void saveAsMonthlyService();
+		public void saveAsYearlyService();
 }

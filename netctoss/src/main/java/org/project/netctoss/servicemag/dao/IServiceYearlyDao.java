@@ -7,4 +7,5 @@ public interface IServiceYearlyDao {
 		public void deleteServiceYearlyBean(ServiceYearlyBean sd);
 		public void updateServiceYearlyBean(ServiceYearlyBean sd);
 		public ServiceYearlyBean getServiceYearlyBeanByID(Long ID);
+		public ServiceYearlyBean getServiceYearlyBeanByYear(String year);
 }

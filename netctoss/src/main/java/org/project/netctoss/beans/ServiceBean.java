@@ -53,11 +53,6 @@ public class ServiceBean {
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="service")
 	@JsonIgnore	//忽略jackson使用延迟加载
 	private Set<ServiceDetailCostBean>  serviceDetailCostSet;
-	 
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	@JoinColumn(name = "fk_servicemonthly_id")
-	@JsonIgnore	//忽略jackson使用延迟加载
-	private ServiceMonthlyBean serviceMonthly;
 	
 	//一个业务账号有多个年
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="service")

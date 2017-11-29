@@ -42,7 +42,7 @@ public class ServiceMonthlyDaoImpl extends BaseDao implements IServiceMonthlyDao
 	@Override
 	public ServiceMonthlyBean getServiceMonthlyBeanByMonthAndService(String month,String osName) {
 		// TODO Auto-generated method stub
-		String hql ="From ServiceMonthlyBean as s where s.month = ? and s.service.osName=?";
+		String hql ="From ServiceMonthlyBean as s where s.month = ? and s.serviceYearly.service.osName=?";
 		Query query = getSession().createQuery(hql);
 		query.setString(0, month);
 		query.setString(2, osName);

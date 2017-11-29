@@ -1,4 +1,4 @@
-package org.project.netctoss.servicemag.dao.impl;
+package org.project.netctoss.servicemag.service;
 
 import org.project.netctoss.beans.ServiceYearlyBean;
 import org.project.netctoss.servicemag.dao.IServiceYearlyDao;
@@ -13,7 +13,7 @@ import org.project.netctoss.servicemag.dao.IServiceBeanDao;
 import org.project.netctoss.utils.BaseDao;
 import org.springframework.stereotype.Repository;
 @Repository
-public class ServiceYearlyDaoImpl extends BaseDao implements IServiceYearlyDao {
+public class ServiceYearlyServiceImpl extends BaseDao implements IServiceYearlyDao {
 
 	@Override
 	public void saveServiceYearlyBean(ServiceYearlyBean sd) {

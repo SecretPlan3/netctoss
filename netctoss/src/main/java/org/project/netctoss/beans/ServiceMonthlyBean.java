@@ -48,7 +48,6 @@ public class ServiceMonthlyBean {
 	private ServiceBean service;
 
 	@OneToMany(fetch = FetchType.LAZY,mappedBy="serviceMonthly")
-	@JsonIgnore	//忽略jackson使用延迟加载
 	// 这个月的所有天
 	private Set<ServiceDailyBean> serviceDaily;
 

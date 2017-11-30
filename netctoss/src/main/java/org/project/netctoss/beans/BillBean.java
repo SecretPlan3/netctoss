@@ -19,12 +19,15 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OptimisticLockType;
 import org.hibernate.annotations.OptimisticLocking;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "t_userMonthlyCost")
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
 public class BillBean implements Serializable {
   
 	private static final long serialVersionUID = -924609537236557091L;
@@ -63,7 +66,6 @@ public class BillBean implements Serializable {
  
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_user_id")
-//	@JsonIgnore	忽略jackson使用延迟加载,UserBean中bill加了，这里不再需要加
 	// 账务账号
 	private UserBean user;
 

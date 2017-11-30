@@ -41,10 +41,11 @@ public class ServiceBean {
 	  private Date pauseDate;
 	@Column(name="close_date")
 	  private Date closeDate;
+	
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="fk_user_id")
-	@JsonIgnore	//忽略jackson使用延迟加载
 	  private UserBean user;
+	
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="fk_cost_id")
 	@JsonIgnore	//忽略jackson使用延迟加载

@@ -30,7 +30,6 @@ public class ServiceDetailCostBean {
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_service_time_id")
-	@JsonIgnore	//忽略jackson使用延迟加载
 	private ServiceTimeBean serviceTime;
 	
 	@OneToOne(fetch = FetchType.LAZY)
@@ -102,7 +101,8 @@ public class ServiceDetailCostBean {
 
 	@Override
 	public String toString() {
-		return "ServiceDailyCostBean [id=" + id + ", Cost=" + cost + "]";
+		return "ServiceDetailCostBean [id=" + id + ", cost=" + cost + ", serviceTime=" + serviceTime + ", costbean="
+				+ costbean + ", service=" + service + "]";
 	}
 	
 	

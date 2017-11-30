@@ -29,7 +29,6 @@ public class RoleBean implements Serializable{
 	private String name;
 	
 	@ManyToMany(fetch=FetchType.LAZY,mappedBy="roles")
-	@JsonIgnore	//忽略jackson使用延迟加载
 	private Set<PermissionBean> pers;
 	
 	@ManyToMany(fetch=FetchType.LAZY,mappedBy="theRole")

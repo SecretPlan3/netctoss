@@ -34,7 +34,7 @@ public class CostDaoImpl extends BaseDao implements ICostDao {
 
 	public PagerBean findAllCostsByPager(PagerBean pager) {
 		// TODO Auto-generated method stub
-		StringBuilder hql = new StringBuilder("select count(c.id)from CostBean as c where 1 = 1");
+		StringBuilder hql = new StringBuilder("select count(c.id) from CostBean as c where 1 = 1");
 		if(pager.getParams().get("type") != null) {
 			//根据套餐类型查询该套餐类型所有套餐，前台传入的type类型应该为int类型
 			hql.append(" and c.type = :type");
@@ -49,7 +49,7 @@ public class CostDaoImpl extends BaseDao implements ICostDao {
 		}
 		Query query = getSession().createQuery(hql.toString());
 		query.setProperties(pager.getParams());
-		int totalRows = (int) query.uniqueResult();
+		long totalRows = (Long) query.uniqueResult();
 		pager.setTotalRows(Integer.valueOf(String.valueOf(totalRows)));
 		
 		hql = new StringBuilder("from CostBean as c where 1 = 1");

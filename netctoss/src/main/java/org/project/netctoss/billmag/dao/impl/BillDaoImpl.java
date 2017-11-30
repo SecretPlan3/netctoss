@@ -57,19 +57,19 @@ public class BillDaoImpl extends BaseDao implements IBillDao {
 		query.setProperties(page.getParams());
 		List<BillBean> allUser = query.list();
 		page.setDatas(allUser);
-		System.err.println(hql2.toString());
+		
 		return page;
 	}
 
 	@Override
 	public PagerBean findAllServiceBillByCondition(PagerBean page) {
 
-		String hql = "SELECT COUNT(s.id) FROM ServiceMonthlyBean AS m JOIN m.serviceYearly AS y JOIN y.service AS s JOIN s.cost AS c JOIN s.user AS u WHERE y.year = :year AND m.month = :month AND u.userId = :userID ORDER BY s.id ";
+		String hql = "SELECT COUNT(s.id) from ServiceBean as s join fetch s.serviceYear as y join fetch y.serviceMonthly as m join fetch s.cost as c join fetch s.user as u WHERE y.year = :year AND m.month = :month AND u.userId = :userID ";
 		Query query = getSession().createQuery(hql.toString());
 		query.setProperties(page.getParams());
 		page.setTotalRows(Integer.valueOf(query.uniqueResult() + ""));
 
-		hql = "FROM ServiceMonthlyBean AS m JOIN FETCH m.serviceYearly AS y JOIN FETCH y.service AS s JOIN FETCH s.cost AS c JOIN FETCH s.user AS u WHERE y.year = :year AND m.month = :month AND u.userId = :userID ORDER BY s.id ";
+		hql = "from ServiceBean as s join fetch s.serviceYear as y join fetch y.serviceMonthly as m join fetch s.cost as c join fetch s.user as u WHERE y.year = :year AND m.month = :month AND u.userId = :userID ORDER BY s.id ";
 		query = getSession().createQuery(hql.toString());
 		query.setProperties(page.getParams());
 		query.setFirstResult(page.getIndex());

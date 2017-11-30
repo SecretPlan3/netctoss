@@ -47,7 +47,7 @@ function showTable(msg){
 	var td = "";
 	var th = "<tr id='tableHead'><th>账单编号</th><th>账务账号</th><th>用户姓名</th><th width='150'>身份证号</th><th>总费用/元</th><th>支付状态</th><th>支付方式</th><th>支付时间</th></tr>";
 	for(var i=0;i<msg.datas.length;i++){
-		td += "<tr index='"+msg.datas[i].id+"'><td>"+msg.datas[i].id+"</td><td>"+msg.datas[i].user.userName+"</td><td>"+msg.datas[i].user.loginName+"</td><td>"+ msg.datas[i].user.idcard+"</td><td>"+msg.datas[i].cost+"</td><td>"+msg.datas[i].payStatus+"</td><td>"+msg.datas[i].payMethod+"</td><td>"+msg.datas[i].payTime+"</td></tr>"
+		td += "<tr index='"+msg.datas[i].id+"'><td>"+msg.datas[i].id+"</td><td>"+msg.datas[i].user.loginName+"</td><td>"+msg.datas[i].user.userName+"</td><td>"+ msg.datas[i].user.idcard+"</td><td>"+msg.datas[i].cost+"</td><td>"+msg.datas[i].payStatus+"</td><td>"+msg.datas[i].payMethod+"</td><td>"+msg.datas[i].payTime+"</td></tr>"
 	}
 	$("#table01").html(th + td);
 	//添加页数和条数信息

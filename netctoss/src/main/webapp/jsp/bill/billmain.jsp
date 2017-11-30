@@ -29,14 +29,10 @@
 				<select id="month" name="month">
 					<option value="1">1</option>
 					<option value="2">2</option>
-					<option value="3">3</option>
-					<option value="4">4</option>
-					<option value="5">5</option>
-					<option value="6">6</option>
 					<option value="10">10</option>
 				</select>
 			</td>
-			<td>账号：</td>
+			<td>账务账号：</td>
 			<td><input id="loginName" type="text" name="loginName" /></td>
 			<td>用户姓名：</td>
 			<td><input id="userName" type="text" name="userName" /></td>

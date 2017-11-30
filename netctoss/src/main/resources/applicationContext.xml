@@ -17,6 +17,7 @@
         http://www.springframework.org/schema/cache 
         http://www.springframework.org/schema/cache/spring-cache.xsd
         ">
+        
     <!-- 开启spring容器的自动扫描功能 -->
     <!-- 让容器在扫描的时候，剔除WEB层的组件 -->
 	 <context:component-scan base-package="org.project.netctoss">
@@ -115,7 +116,6 @@
         </tx:attributes>
     </tx:advice>
 	
-	
 	<aop:config> 												  
         <aop:pointcut id="serviceMethods" expression="execution(* org.project.netctoss.*mag.service.impl.*Impl.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
@@ -156,4 +156,5 @@
     <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>
 
  -->
+ 
 </beans>        

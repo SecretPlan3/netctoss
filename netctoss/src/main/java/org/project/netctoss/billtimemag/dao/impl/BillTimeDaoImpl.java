@@ -21,10 +21,10 @@ public class BillTimeDaoImpl  extends BaseDao implements IBillTimeDao{
 			hql.append("and u.id = :id ");
 		}
 		if (pb.getParams().get("idcard") != null ) {
-			hql.append(	"and u.idcard = :idcard ");
+			hql.append(	"and u.idcard like CONCAT(:idcard ,'%')");
 		}
 		if (pb.getParams().get("loginName") != null ) {
-			hql.append(	"and u.loginName = :loginName ");
+			hql.append(	"and u.loginName like CONCAT(:loginName ,'%') ");
 		}
 		Query query = getSession().createQuery(hql.toString());// 这行代码，除了创建一个Query接口实例以外，例外一个作用就是预编译上面的HQL语句
 		query.setProperties(pb.getParams());// 要求map键值对中的键，一定要跟我们这里参数别名，保持一致
@@ -33,6 +33,24 @@ public class BillTimeDaoImpl  extends BaseDao implements IBillTimeDao{
 		
 		List<?> list = query.list();
 		pb.setDatas(list);
+
+		// 得到数据总数
+		StringBuilder hql2 = new StringBuilder( "select count(*) from BillBean as b   left join  b.user as u    where 1=1");
+		if (pb.getParams().get("userName") != null  ) {
+			hql.append(	" and u.userName like CONCAT(:userName,'%') ");
+		}
+		if (pb.getParams().get("id") != null ) {
+			hql.append("and u.id = :id ");
+		}
+		if (pb.getParams().get("idcard") != null ) {
+			hql.append(	"and u.idcard like CONCAT(:idcard ,'%')");
+		}
+		if (pb.getParams().get("loginName") != null ) {
+			hql.append(	"and u.loginName like CONCAT(:loginName ,'%') ");
+		}
+		query = getSession().createQuery(hql2.toString());
+		query.setProperties(pb.getParams());
+		pb.setTotalRows(Integer.valueOf(query.uniqueResult() + ""));
 		
 		return pb;
 	}
@@ -57,6 +75,22 @@ public class BillTimeDaoImpl  extends BaseDao implements IBillTimeDao{
 		
 		List<?> list = query.list();
 		pb.setDatas(list);
+		
+		
+		// 得到数据总数
+		StringBuilder hql2 = new StringBuilder( "select count(*) from ServiceBean as s     left join  s.serviceYear as y    left join  y.serviceMonthly as m     left join  m.serviceDaily as d  where 1=1");//select new map(p.age as age,p.playerName as playerName,p.gender as gender) 
+		if (pb.getParams().get("year") != null  ) {
+			hql2.append(	" and y.year =:year ");
+		}
+		if (pb.getParams().get("month") != null ) {
+			hql2.append("and m.month = :month ");
+		}
+		if (pb.getParams().get("id") != null ) {
+			hql2.append("and s.id = :id ");
+		}
+		query = getSession().createQuery(hql2.toString());
+		query.setProperties(pb.getParams());
+		pb.setTotalRows(Integer.valueOf(query.uniqueResult() + ""));
 		
 		return pb;
 	}

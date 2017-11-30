@@ -40,7 +40,7 @@
 		showData();	
 	});
 	//定义全局变量
-	var page = 0;
+	var page = 1;
 	var rows = 5;
 	var id = 0;
 	var idcard = "";
@@ -49,27 +49,28 @@
 	
 	function showData(){
 		var url = "billtime/findAll";
-		var pageBean = {
-				page:page,
-				rows:rows,
-				"params":{
-					id:id,
-					idcard:idcard,
-					username:username,
-					loginname:loginname
-				}
-			}
-		
 		$.ajax({
 			type : "POST",
 			url : url,
 			async : true,
 			data : {
-				pageBean:pageBean
+				page:page,
+				rows:rows,
+				params:{
+					idcard:idcard,
+					username:username,
+					loginname:loginname
+				}
 			},
 			success : function(msg) {
 				alert("成功返回");
-				alert(msg.datas);
+				var s = "";
+				var datas = msg.datas;
+				console.info(msg);
+				for ( var obj in datas) {
+					s += "<tr> <td>"+obj.id+"</td> <td>"+obj.loginName+"</td><td>"+obj.userName+"</td><td>"+obj.idcard+"</td><td></td> </tr>"
+				}
+				$("#table0 tbody").html(s);
 			}
 		});
 	}

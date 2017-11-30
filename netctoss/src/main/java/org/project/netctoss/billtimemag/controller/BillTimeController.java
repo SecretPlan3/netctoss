@@ -7,10 +7,12 @@ import org.project.netctoss.billtimemag.service.impl.BillTimeServiceImpl;
 import org.project.netctoss.pojos.PagerBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value="/billtime")
+@ResponseBody
 public class BillTimeController {
 	
 	@Resource

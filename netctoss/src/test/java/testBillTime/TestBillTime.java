@@ -1,5 +1,6 @@
 package testBillTime;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +47,7 @@ public class TestBillTime {
 	
 	}
 	
-	@Test
+
 	public void testFindAllServicessBillTimeByCondition() {
 		
 		System.out.println("hello+++++++++++++++++++");
@@ -82,11 +83,12 @@ public class TestBillTime {
 	
 	}
 
+	@Test
 	public void testFindAllUsersBillTimeByCondition() {
 		
 		System.out.println("hello+++++++++++++++++++");
 		Map<String, String> params = new HashMap<>();
-		PagerBean page = new PagerBean(1, 3, params);
+		PagerBean page = new PagerBean(1, 5, params);
 		
 		
 		page = billTimeserviceImpl.findAllUsersBillTimeByCondition(page);

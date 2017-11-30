@@ -1,5 +1,9 @@
 package org.project.netctoss.servicemag.service.impl;
 
+
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.project.netctoss.servicemag.dao.IServiceTimeDao;
@@ -27,9 +31,10 @@ public class ServiceTimeServiceImpl implements IServiceTimeService {
 	}
 
 	@Override
-	public void saveAsYearlyService() {
+	public List<Map<String, String>> findAllOsName(String beginTime) {
 		// TODO Auto-generated method stub
-		 serviceTimeDaoImpl.saveAsYearlyService();
+		return serviceTimeDaoImpl.findAllOsName(beginTime);
 	}
 
+	
 }

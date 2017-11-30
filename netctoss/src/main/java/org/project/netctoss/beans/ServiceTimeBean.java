@@ -36,6 +36,9 @@ public class ServiceTimeBean {
 	// 在线时长
 	@Column(name="online_time")
 	private Long onlineTime;
+	//本月总使用时长
+	@Column(name="sumtime")
+	private Long sumTime;
 	//业务账号详细花费!
 	@OneToOne(fetch=FetchType.LAZY,mappedBy="serviceTime")
 	@JsonIgnore	//忽略jackson使用延迟加载

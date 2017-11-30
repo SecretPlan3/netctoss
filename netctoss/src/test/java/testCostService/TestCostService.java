@@ -14,7 +14,7 @@ import org.project.netctoss.pojos.PagerBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.sun.jmx.snmp.daemon.CommunicatorServerMBean;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:applicationContext.xml" })

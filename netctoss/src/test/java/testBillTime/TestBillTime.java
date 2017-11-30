@@ -33,57 +33,60 @@ public class TestBillTime {
 	private IUserService userServiceImpl;
 	
 	
-	
+	//测试用户名
 	public void testUserName() {
 		UserBean user = userServiceImpl.findUserByLoginName("123");
 		System.out.println("user+++++++++++++++++++" + user);
 	
 	}
 	
-	
+	//测试用户密码验证
 	public void testUserPwd() {
 		UserBean user = userServiceImpl.findUserByLoginNameAndPassword("123", "202cb962ac59075b964b07152d234b70");
 		System.out.println("user+++++++++++++++++++" + user);
 	
 	}
 	
-
+	@Test
+	//查用户id下的 各个业务使用时长详情 （按年 月 日  都支持延迟加载）
 	public void testFindAllServicessBillTimeByCondition() {
 		
 		System.out.println("hello+++++++++++++++++++");
 		Map<String, String> params = new HashMap<>();
 		params.put("year", "2016");
-//		params.put("month", "1");
+		params.put("month", "1");
+		params.put("userId", "1");
 		PagerBean page = new PagerBean(1, 3, params);
 		
-		page = billTimeserviceImpl.findAllServicessBillTimeByCondition(page);
+		page = billTimeserviceImpl.findAllServicesBillTimeByCondition(page);
 		List<?> list = page.getDatas();
 		for (int i = 0; i < list.size(); i++) {
 			ServiceBean sb =  (ServiceBean) list.get(i);
-			System.out.println("业务bean" + sb) ;
+			System.out.println("业务bean " + sb) ;
+			System.out.println("用户bean " + sb.getUser()) ;
+			
 			
 			Set<ServiceYearlyBean> ys = sb.getServiceYear();
 			for (ServiceYearlyBean y : ys) {
-				System.out.println("\t年bean" + y) ;
+				System.out.println("\t年bean " + y) ;
 				
 				Set<ServiceMonthlyBean> ms = y.getServiceMonthly();
 				for (ServiceMonthlyBean m : ms) {
-					System.out.println("\t \t 月bean" + m) ;
+					System.out.println("\t \t 月bean " + m) ;
 					
-//					Set<ServiceDailyBean> ds = m.getServiceDaily();
-//					for (ServiceDailyBean d : ds) {
-//						System.out.println("\t \t  \t 日bean" + d) ;
-//						
-//					}
+					Set<ServiceDailyBean> ds = m.getServiceDaily();
+					for (ServiceDailyBean d : ds) {
+						System.out.println("\t \t \t 日bean " + d) ;
+						
+					}
 				}
 			}
-
 		}
 //		System.out.println("page+++++++++++++++++++" + page);
 	
 	}
 
-	@Test
+	//查所有用户
 	public void testFindAllUsersBillTimeByCondition() {
 		
 		System.out.println("hello+++++++++++++++++++");

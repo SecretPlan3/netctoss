@@ -41,21 +41,22 @@
        <div class="search">
            <ul class="am-nav am-nav-pills am-topbar-nav ">
                <li class="soso"> 
-               		<p> <button class="am-btn am-btn-xs am-btn-default am-xiao">  账务账号编号：</button></p>
+               		<p><button class="am-btn am-btn-xs am-btn-default am-xiao">账务账号编号：</button></p>
                    	<p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="账务账号编号" id="id" name="id"/></p></li>
-               <li class="soso"><p><button class="am-btn am-btn-xs am-btn-default am-xiao">     身份证号：</button></p>
+               <li class="soso">
+               		<p><button class="am-btn am-btn-xs am-btn-default am-xiao">身份证号：</button></p>
                    <p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="身份证号" id="idcard" name="idcard"/></p></li>
                <li class="soso">
-               		<p><button class="am-btn am-btn-xs am-btn-default am-xiao">   用户姓名：</button></p>
-                   	<p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="   用户姓名"  id="userName" name="userName"/></p> </li>
+               		<p><button class="am-btn am-btn-xs am-btn-default am-xiao">用户姓名：</button></p>
+                   	<p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="用户姓名"  id="userName" name="userName"/></p> </li>
                <li class="soso">
-               		<p> <button class="am-btn am-btn-xs am-btn-default am-xiao">  账号：</button> </p>
+               		<p> <button class="am-btn am-btn-xs am-btn-default am-xiao">账号：</button> </p>
                		<p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="账号" id="loginName" name="loginName"//> </p></li>
                <li class="soso">
                		<p><button type="button" onclick = "search()" class="am-btn am-btn-xs am-btn-default am-xiao"><i class="am-icon-search"></i></button></p></li>
             </ul>
        </div>
-        <!--模糊查询表单数据-->
+        <!--/模糊查询-->
         
 </form>
 
@@ -68,8 +69,11 @@
             当前位置： 首页 &gt;
            </dl>
        </div>
-       
-<form class="am-form am-g">
+ <!-- /表格描述部分 -->  
+ 
+  
+	<form class="am-form am-g">
+ 			<!-- 主表格 -->  
            <table id = "table0" class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover" width="100%">
                <thead>
                <tr class="am-success">
@@ -84,6 +88,9 @@
                </thead>
                <tbody></tbody>
            </table>
+            <!-- 主表格 -->  
+           
+          <!-- 功能按钮组div-->
   		<div class="am-btn-group am-btn-group-xs am-fl">
                <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 删除</button>
                <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 上架</button>
@@ -93,6 +100,7 @@
                <button type="button" class="am-btn am-btn-default"><span class="am-icon-archive"></span> 移动</button>
                <button type="button" class="am-btn am-btn-default"><span class="am-icon-trash-o"></span> 删除</button>
            </div>
+           <!-- 翻页按钮组 ul-->
            <ul class="am-pagination " style="text-align: right">
                <li  onclick ="first()"><a href="javascript:void(0)">«</a></li>
                <li  onclick ="pre()" ><a href="javascript:void(0)"> < </a></li>
@@ -104,13 +112,10 @@
                <li onclick ="end()"><a href="javascript:void(0)" >»</a></li>
            </ul>
            <hr>
-</form>
-
- <button type="button" onclick ="search()">搜索</button>
-           
+	</form>        
 </body>
-<script type="text/javascript">
 
+<script type="text/javascript">
 	//定义全局变量
 	
 	//pagerBean相关的属性
@@ -118,12 +123,6 @@
 	var rows = 5;
 	var totalRows = 0;
 	var totalPage = 0;
-	
-	//查询条件相关的属性
-	var id = "";
-	var idcard = "";
-	var username = "";
-	var loginname = "";
 	
 	//查询条件
 	var params = {};
@@ -148,7 +147,7 @@
 			},
 			success : function(msg) {
 				//alert("成功返回");
-				//处理返回数据
+				//处理返回数据，给全局变量赋值等
 				page = msg.page;
 				rows = msg.rows;
 				totalRows = msg.totalRows;
@@ -170,18 +169,21 @@
 						if(i != 0){//第一行不绑定
 							$(this).on("click",function(){
 								var value = $(this).attr("value");
-								$("#chosenId").attr("value",value);//给隐藏的表单元素 赋值 当前行对应的ID
-								alert($("#chosenId").attr("value"));
+								$("#chosenId").attr("value",value);//给隐藏的表单元素 赋值 当前行对应的id
+								//alert($("#chosenId").attr("value"));
+								window.location.href="jsp/billtime/billtimeDetailMonthly.jsp" + "?id="+ value ;
+								
 							})  
 						}
 						
 					})
-					//***************************************************************
+			//***************************************************************
 				
 			}
 		});
 	}
 	
+	//查询函数 ---查询按钮点击事件
 	function search(){
 		/*param 中d的条件数据的形式为键值对存放的json对象,如：*/
 		params = {
@@ -192,8 +194,8 @@
 		showData();	//调用显示数据函数，ajax刷新页面
 	}
 
-	//翻页按钮 绑定监听事件
-	
+	//翻页按钮 绑定的监听事件 ++++++++++++++++++++++++++
+	//跳转
 	 function jump(){
 		var input = $("#page").val();
 		var inputPage = parseInt(input);
@@ -211,35 +213,36 @@
 		}
 		 $("#page").val("");
 	}
-	
+	//首页
 	function first(){
 		if(page != 1){
 			page = 1;
 			showData();
 		}
 	}
-	
+	//上一页
 	function pre(){
 		if(page > 1){
 			page = page-1;
 			showData();
 		}
 	}
-	
+	//下一页
 	function next(){
 		if(page < totalPage){
 			page = page+1;
 			showData();
 		}
 	};
-	
+	//尾页
 	function end(){
 		if(page != totalPage){
 			page = totalPage;
 			showData();
 		}
 	}
-
+	// /翻页按钮 绑定的监听事件 ----------------------------------
+	
 </script>
 
 </html>

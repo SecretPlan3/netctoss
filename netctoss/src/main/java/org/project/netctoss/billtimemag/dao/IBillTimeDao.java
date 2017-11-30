@@ -15,7 +15,7 @@ public interface IBillTimeDao {
 	 * 按条件分页查询 一个账务账号下 所有的 业务账号 时长 总览
 	 * @return PagerBean
 	 */
-	public PagerBean findAllServicessBillTimeByCondition(PagerBean page);
+	public PagerBean findAllServicesBillTimeByCondition(PagerBean page);
 	
 
 }

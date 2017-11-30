@@ -21,10 +21,10 @@ public class BillTimeController {
 	@RequestMapping(value="/findAll")
 	public PagerBean findBillTeme(PagerBean pb) {
 		//查询所有用户账号
-		System.out.println("进入了findAllController");
-		System.out.println("查询前"+pb);
+//		System.out.println("进入了findAllController");
+//		System.out.println("查询前"+pb);
 		pb = billTimeServiceImpl.findAllUsersBillTimeByCondition(pb);
-		System.out.println("查询后"+pb);
+//		System.out.println("查询后"+pb);
 		return pb;
 	}
 	

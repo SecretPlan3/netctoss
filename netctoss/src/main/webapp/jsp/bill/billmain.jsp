@@ -37,9 +37,17 @@
 </head>
 <body>
 <div>
-<div class="header">
-		<h1>账单查询系统</h1>
-</div>
+	<!-- 网站地图 -->
+	<div class="listbiaoti am-cf "  ><!-- style="display:inline" -->
+		<ul class="am-icon-flag on">账单查询</ul>
+		<dl class="am-icon-home" style="float: right;">当前位置： 首页 &gt;&nbsp;<a href="<%=basePath%>jsp/bill/billmain.jsp">账单查询</a></dl>
+	</div>
+	
+	<!-- 页面标题 -->
+	<div class="header">
+			<h1>账单查询系统</h1>
+	</div>
+
 	<!--模糊查询-->
 	<div class="search">
 		<ul class="am-nav am-nav-pills am-topbar-nav ">
@@ -99,11 +107,6 @@
 				</p>
 			</li>
 		</ul>
-		<!-- 网站地图 -->
-		<div class="listbiaoti am-cf "  style="display:inline">
-			<ul class="am-icon-flag on">账单查询</ul>
-			<dl class="am-icon-home" style="float: right;">当前位置： 首页 &gt;&nbsp;<a href="#">账单查询</a></dl>
-		</div>
 	</div>
 	
 	<!--表单数据-->
@@ -139,6 +142,7 @@
 				<span class="am-icon-trash-o"></span> 删除
 			</button>
 		</div>
+		<!-- 翻页 -->
 		<ul class="am-pagination " style="text-align: right">
 			<li class="am-disabled"><a href="#">«</a></li>
 			<li class="am-active"><a href="#"><</a></li>
@@ -152,15 +156,6 @@
 	</form>
 	</div>  
 	
-	<!-- 日历插件 -->
-	<div>
-		<div class="am-form-group">
-			<label class="am-u-sm-3 am-form-label">这是一个日历插件自己可以自行选择使用 </label>
-			<div class="am-u-sm-9">
-				<input type="text" class="am-form-field tpl-form-no-bg" placeholder="选择年月" data-am-datepicker="{format:'yyyy-mm',viewMode:0,minViewMode:1}" readonly>
-			</div>
-		</div>
-	</div>
 	
 </body>
 </html>

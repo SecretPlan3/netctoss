@@ -1,12 +1,14 @@
 package testBill;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.project.netctoss.beans.ServiceYearlyBean;
 import org.project.netctoss.billmag.controller.BillController;
 import org.project.netctoss.pojos.PagerBean;
 import org.springframework.test.context.ContextConfiguration;
@@ -21,7 +23,7 @@ public class TestBillController {
 	@Resource
 	private BillController billController;
 
-	@Test
+	
 	public void testUserBill() {
 		PagerBean page = new PagerBean();
 		page.setPage(1);
@@ -35,7 +37,14 @@ public class TestBillController {
 		page.setParams(params);
 		
 		page = billController.findUserBill(page);
-		System.out.println(page);
+		System.err.println(page);
 		
+	}
+	
+	@Test
+	public void testFindYear() {
+		PagerBean page = new PagerBean();
+		PagerBean eee = billController.findAllYear(page);
+		System.err.println(eee);
 	}
 }

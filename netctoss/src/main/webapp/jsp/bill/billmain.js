@@ -3,6 +3,8 @@ var rows = 5;
 
 
 $(function(){
+	//初始化年份
+	findAllYear();
 	//初始化表格数据
 	showUserBill();
 	//点击模糊查询按钮
@@ -20,6 +22,7 @@ $(function(){
 	//点击模糊查询身份证按钮
 	$("#idCardBtn").click(function(){
 		$("#idCard").val("");
+		getDate();
 	});
 	
 	
@@ -51,7 +54,19 @@ function showUserBill(){
 		}
 	});
 }
-
+//请求后台得到年
+function findAllYear(){
+	var page = {};
+	$.ajax({
+		type: "GET",
+		url: "bill/findAllYear",
+		async: false,
+		data: page,
+		success: function(msg){
+			console.info(msg);
+		}
+	});
+}
 
 //将数据显示在表格
 function showTable(msg){
@@ -79,5 +94,20 @@ function showTable(msg){
 		ss+="<a href='javascript:showUserBill("+j+","+rows+")'>"+j+"</a>&nbsp;&nbsp;"
 	}
 	$("#p02").html(ss);
+}
+
+//生成年和月
+function getDate(){
+	var nowDate = new Date();
+	var nowYear = nowDate.getFullYear(); 
+	var nowMonth = nowDate.getMonth() + 1;
 
 }
+
+
+
+
+
+
+
+

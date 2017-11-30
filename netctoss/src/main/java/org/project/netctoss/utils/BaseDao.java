@@ -14,16 +14,16 @@ public class BaseDao {
 	
 	private static ThreadLocal<Session> thread = new ThreadLocal<Session>();
 	
-//	public Session getSession() {
-//		return sf.getCurrentSession();
-//	}
-	
 	public Session getSession() {
-		Session session = thread.get();
-		if(session == null) {
-			session = sf.openSession();
-			thread.set(session);
-		}
-		return session;
+		return sf.getCurrentSession();
 	}
+	
+//	public Session getSession() {
+//		Session session = thread.get();
+//		if(session == null) {
+//			session = sf.openSession();
+//			thread.set(session);
+//		}
+//		return session;
+//	}
 }

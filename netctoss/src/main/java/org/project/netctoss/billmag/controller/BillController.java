@@ -21,7 +21,7 @@ public class BillController {
 	public PagerBean findUserBill(PagerBean page) {
 		System.err.println(page);
 		page = billServiceImpl.findAllUserBillByCondition(page);
-		System.err.println(page.getDatas());
+		System.err.println(page);
 		return page;
 	} 
 	

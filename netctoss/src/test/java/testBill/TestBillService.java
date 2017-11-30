@@ -32,11 +32,12 @@ public class TestBillService {
 		PagerBean page = new PagerBean();
 		page.setPage(1);
 		page.setRows(5);
-		UserBean user = new UserBean();
 		Map<String,Object> params = new HashMap<>();
 		params.put("year", "2017");
 		params.put("month", "10");
-		params.put("user", user);
+		params.put("userName", "");
+		params.put("loginName", "");
+		params.put("idcard", "");
 		page.setParams(params);
 		
 		page = billServiceImpl.findAllUserBillByCondition(page);

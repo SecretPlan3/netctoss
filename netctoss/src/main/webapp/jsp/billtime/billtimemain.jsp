@@ -14,14 +14,7 @@
     <!--引入自定义样式-->
     <link rel="stylesheet" href="<%=basePath%>static/css/custom.css">
     <%-- <script src="<%=basePath%>static/js/jquery.min.js"></script> --%>
-    <script src="<%=basePath%>static/js/app.js"></script>
 
-    <!--日历插件-->
-    <script src="<%=basePath%>static/js/amazeui.min.js"></script>
-    <script src="<%=basePath%>static/js/amazeui.datatables.min.js"></script>
-    <script src="<%=basePath%>static/js/dataTables.responsive.min.js"></script>
-    <script src="<%=basePath%>static/js/app.js"></script>
-    
     <!-- jquery 和 json 的js -->
     <script src="<%=basePath%>static/js/jquery-3.2.1.min.js" charset="utf-8"></script>
 	<script  src="<%=basePath%>static/js/jquery.json-2.4.js"></script>
@@ -42,88 +35,45 @@
 <body>
   		<div class="header">
             <h1>欢迎来到账务查询！</h1>
-       </div>
-       
+       </div>      
 	 <!--模糊查询-->
-	<form id = "form0" action="<%=basePath %>billtime/findAll"  method="POST">
-   
+	<form id = "form0" method="POST">
        <div class="search">
            <ul class="am-nav am-nav-pills am-topbar-nav ">
+               <li class="soso"> 
+               		<p> <button class="am-btn am-btn-xs am-btn-default am-xiao">  账务账号编号：</button></p>
+                   	<p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="账务账号编号" id="id" name="id"/></p></li>
+               <li class="soso"><p><button class="am-btn am-btn-xs am-btn-default am-xiao">     身份证号：</button></p>
+                   <p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="身份证号" id="idcard" name="idcard"/></p></li>
                <li class="soso">
-                   <p>
-                       <button class="am-btn am-btn-xs am-btn-default am-xiao">  账务账号编号：</button>
-                   </p>
-                   <p class="ycfg">
-                   		<input type="text" class="am-form-field am-input-sm" placeholder="账务账号编号" id="id" name="id"/>
-                   </p>
-               </li>
-            
+               		<p><button class="am-btn am-btn-xs am-btn-default am-xiao">   用户姓名：</button></p>
+                   	<p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="   用户姓名"  id="userName" name="userName"/></p> </li>
                <li class="soso">
-                   <p>
-                       <button class="am-btn am-btn-xs am-btn-default am-xiao">     身份证号：</button>
-                   </p>
-                   <p class="ycfg">
-                   		<input type="text" class="am-form-field am-input-sm" placeholder="身份证号" id="idcard" name="idcard"/>
-                   </p>
-               </li>
+               		<p> <button class="am-btn am-btn-xs am-btn-default am-xiao">  账号：</button> </p>
+               		<p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="账号" id="loginName" name="loginName"//> </p></li>
                <li class="soso">
-                   <p>
-                       <button class="am-btn am-btn-xs am-btn-default am-xiao">   用户姓名：</button>
-                   </p>
-                   <p class="ycfg">
-                   		<input type="text" class="am-form-field am-input-sm" placeholder="   用户姓名"  id="username" name="username"/>
-                   </p>
-               </li>
-       
-               <li class="soso">
-                   <p>
-                       <button class="am-btn am-btn-xs am-btn-default am-xiao">  账号：</button>
-                   </p>
-                   <p class="ycfg">
-                   		<input type="text" class="am-form-field am-input-sm" placeholder="账号" id="loginname" name="loginname"//>
-                   </p>
-               </li>
-            
-               <li class="soso">
-                   <p><button onclick = "search()" class="am-btn am-btn-xs am-btn-default am-xiao"><i class="am-icon-search"></i></button></p>
-               </li>
+               		<p><button type="button" onclick = "search()" class="am-btn am-btn-xs am-btn-default am-xiao"><i class="am-icon-search"></i></button></p></li>
             </ul>
        </div>
         <!--模糊查询表单数据-->
         
-<!--    账务账号编号：	<input type="text" id="id" name="id"/> 
-   身份证号：	<input type="text" id="idcard" name="idcard"/> 
-   用户姓名：	<input type="text" id="username" name="username"/> 
-   账号：		<input type="text" id="loginname" name="loginname"/>  
-    <input type="submit"  value="查询"/><br/> -->
 </form>
 
 <!-- 表格描述部分 -->
      <div class="listbiaoti am-cf ">
            <ul class="am-icon-flag on">
-           <li>  账务账单 </li>  
+             账务账单 
            </ul>
            <dl class="am-icon-home" style="float: right;">
-           <dd> 当前位置： 首页 &gt;</dd>
+            当前位置： 首页 &gt;
            </dl>
        </div>
        
-<!-- <table id = "table0" border="1px">
-<thead>
-	<tr>
-		<th>账务账单编号</th>
-		<th>账务账号</th>
-		<th>用户姓名</th>
-		<th>身份证</th>
-		<th>（拥有实验室数量）</th>
-	</tr>
-</thead>
-<tbody></tbody>
-</table> -->
 <form class="am-form am-g">
            <table id = "table0" class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover" width="100%">
                <thead>
                <tr class="am-success">
+               		<input type="hidden" id = "chosenId">
                    <th class="table-title">账务账单编号</th>
                    <th class="table-title">账务账号</th>
                    <th class="table-title">用户姓名</th>
@@ -144,17 +94,20 @@
                <button type="button" class="am-btn am-btn-default"><span class="am-icon-trash-o"></span> 删除</button>
            </div>
            <ul class="am-pagination " style="text-align: right">
-               <li class="am-disabled"><a href="javascript:first();">«</a></li>
-               <li class="am-active"><a href="javascript:pre()"><</a></li>
-               <li><a href="#">跳转</a></li>
-               <li>
-               	<input type="text" class="am-form-field am-input-sm" placeholder="转到" id="page" name="page"/>
+               <li  onclick ="first()"><a href="javascript:void(0)">«</a></li>
+               <li  onclick ="pre()" ><a href="javascript:void(0)"> < </a></li>
+               <li  onclick ="jump()"><a href="javascript:void(0)">跳转</a></li>
+               <li >
+               	<input type="text" class="am-input-sm" placeholder="转到" id="page" name="page"/>
                </li>
-               <li><a href="javascript:next()">></a></li>
-               <li><a href="javascript:end()">»</a></li>
+               <li onclick ="next()"><a href="javascript:void(0)" >></a></li>
+               <li onclick ="end()"><a href="javascript:void(0)" >»</a></li>
            </ul>
            <hr>
 </form>
+
+ <button type="button" onclick ="search()">搜索</button>
+           
 </body>
 <script type="text/javascript">
 
@@ -189,41 +142,59 @@
 			url : url,
 			async : true,
 			data : {
-				page:page,
-				rows:rows,
-				params:params
+				"page":page,
+				"rows":rows,
+				"params":params,
 			},
 			success : function(msg) {
-				alert("成功返回");
-				var s = "";
+				//alert("成功返回");
+				//处理返回数据
+				page = msg.page;
+				rows = msg.rows;
+				totalRows = msg.totalRows;
+				totalPage = msg.totalPage;
 				var datas = msg.datas;
-				for ( var obj in datas) {
-					s 
-					+= "<tr><td class='am-text-center'>"
-					+obj.id+"</td> <td>"
-					+obj.loginName+"</td><td>"
-					+obj.userName+"</td><td>"
-					+obj.idcard+"</td><td></td> </tr>"
+				
+				var s = "";
+				for (var i = 0; i < datas.length; i++) {
+					s+= "<tr value="+datas[i].userId+"><td class='am-text-center'>"
+					+datas[i].userId+"</td> <td>"
+					+datas[i].loginName+"</td><td>"
+					+datas[i].userName+"</td><td>"
+					+datas[i].idcard+"</td><td></td> </tr>"
 				}
 				$("#table0 tbody").html(s);
+				//给每行添加点击事件
+			 	//绑定事件******************************************************
+					$("tr").each(function(i,val){ 
+						if(i != 0){//第一行不绑定
+							$(this).on("click",function(){
+								var value = $(this).attr("value");
+								$("#chosenId").attr("value",value);//给隐藏的表单元素 赋值 当前行对应的ID
+								alert($("#chosenId").attr("value"));
+							})  
+						}
+						
+					})
+					//***************************************************************
+				
 			}
 		});
 	}
 	
 	function search(){
-		/*param中数据的形式为键值对存放的条件,如：
-		{
-			idcard:idcard,
-			username:username,
-			loginname:loginname
-		}; */
-		params = $("#form0").serialize();	//获取查询条件键值对
+		/*param 中d的条件数据的形式为键值对存放的json对象,如：*/
+		params = {
+			idcard:$("#idcard").val(),
+			userName:$("#userName").val(),
+			loginName:$("#loginName").val()
+		}; 
 		showData();	//调用显示数据函数，ajax刷新页面
 	}
-	
-	
+
 	//翻页按钮 绑定监听事件
-	function jump(){
+	
+	 function jump(){
 		var input = $("#page").val();
 		var inputPage = parseInt(input);
 		if(isNaN(inputPage)){
@@ -239,7 +210,6 @@
 			}
 		}
 		 $("#page").val("");
-		
 	}
 	
 	function first(){
@@ -268,9 +238,8 @@
 			page = totalPage;
 			showData();
 		}
-		
 	}
-	
+
 </script>
 
 </html>

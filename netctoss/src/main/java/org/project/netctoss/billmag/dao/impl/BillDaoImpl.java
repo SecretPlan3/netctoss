@@ -9,6 +9,8 @@ import org.hibernate.Query;
 import org.project.netctoss.beans.BillBean;
 import org.project.netctoss.beans.ServiceDetailCostBean;
 import org.project.netctoss.beans.ServiceMonthlyBean;
+import org.project.netctoss.beans.ServiceYearlyBean;
+import org.project.netctoss.beans.ServiceYearlyVO;
 import org.project.netctoss.beans.UserBean;
 import org.project.netctoss.billmag.dao.IBillDao;
 import org.project.netctoss.pojos.PagerBean;
@@ -95,6 +97,16 @@ public class BillDaoImpl extends BaseDao implements IBillDao {
 		List<ServiceDetailCostBean> ServiceDetailCostList = query.list();
 		page.setDatas(ServiceDetailCostList);
 
+		return page;
+	}
+
+	@Override
+	public PagerBean findAllYear() {
+		String hql = "FROM ServiceYearlyVO as y GROUP BY y.year ORDER BY y.year DESC";
+		Query query = getSession().createQuery(hql);
+		PagerBean page = new PagerBean();
+		List<ServiceYearlyVO> yearList = query.list();
+		page.setDatas(yearList);
 		return page;
 	}
 

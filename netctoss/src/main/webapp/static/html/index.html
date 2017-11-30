@@ -78,11 +78,7 @@
             </ul>
             <h3 class="am-icon-volume-up"><em></em> <a href="#">账单查询系统</a></h3>
             <ul>
-                <li>xxxx </li>
-                <li>xxxx</li>
-                <li>xxxx</li>
-                <li>xxxx</li>
-                <li>xxxx</li>
+                <li ><a href="javaScript:showbill()">账单查询</a></li>
             </ul>
             <h3 class="am-icon-gears"><em></em> <a href="#">账务查询系统</a></h3>
             <ul>
@@ -130,7 +126,7 @@
                 delayTime:300 , //效果时间
                 triggerTime:150, //鼠标延迟触发时间（默认150）
                 defaultPlay:true,//默认是否执行效果（默认true）
-                returnDefault:true //鼠标从.sideMen移走后返回默认状态（默认false）
+                returnDefault:false //鼠标从.sideMen移走后返回默认状态（默认false）
             });
         </script>
 
@@ -180,7 +176,11 @@
     function showuser(){
         $("#iframe1").attr("src","costmag.html");
     }
-
+    
+    //跳转IFrame到账单页面
+    function showbill(){
+		$("#iframe1").attr("src","../../jsp/bill/billmain.jsp");
+	};
 </script>
 
 </body>

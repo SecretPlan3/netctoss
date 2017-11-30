@@ -1,5 +1,6 @@
 package org.project.netctoss.servicemag.dao.impl;
 
+
 import org.project.netctoss.beans.ServiceYearlyBean;
 import org.project.netctoss.servicemag.dao.IServiceYearlyDao;
 import org.project.netctoss.utils.BaseDao;
@@ -40,11 +41,12 @@ public class ServiceYearlyDaoImpl extends BaseDao implements IServiceYearlyDao {
 	}
 
 	@Override
-	public ServiceYearlyBean getServiceYearlyBeanByYear(String year) {
+	public ServiceYearlyBean getServiceYearlyBeanByYearAndService(String year,String osName) {
 		// TODO Auto-generated method stub
-		String hql = "From ServiceYearlyBean as s where s.year=?";
+		String hql = "From ServiceYearlyBean as s where s.year=? and s.service.osName=?";
 		Query query = getSession().createQuery(hql);
 		query.setString(0, year);
+		query.setString(2, osName);
 		return (ServiceYearlyBean) query.uniqueResult();
 	}
 

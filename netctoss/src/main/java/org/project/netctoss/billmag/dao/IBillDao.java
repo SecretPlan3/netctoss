@@ -1,5 +1,8 @@
 package org.project.netctoss.billmag.dao;
 
+import java.util.List;
+
+import org.project.netctoss.beans.ServiceYearlyBean;
 import org.project.netctoss.pojos.PagerBean;
 
 public interface IBillDao {
@@ -31,4 +34,10 @@ public interface IBillDao {
 	 * @return
 	 */
 	public PagerBean findAllServiceTimeBillByCondition(PagerBean page);
+	
+	/**
+	 * 找到所有的业务账号账单的年
+	 * @return
+	 */
+	public PagerBean findAllYear();
 }

@@ -1,7 +1,10 @@
 package org.project.netctoss.billmag.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
+import org.project.netctoss.beans.ServiceYearlyBean;
 import org.project.netctoss.billmag.dao.IBillDao;
 import org.project.netctoss.billmag.service.IBillService;
 import org.project.netctoss.pojos.PagerBean;
@@ -29,6 +32,12 @@ public class BillServiceImpl implements IBillService {
 	public PagerBean findAllServiceTimeBillByCondition(PagerBean page) {
 		// TODO Auto-generated method stub
 		return billDaoImpl.findAllServiceTimeBillByCondition(page);
+	}
+
+	@Override
+	public PagerBean findAllYear() {
+		// TODO Auto-generated method stub
+		return billDaoImpl.findAllYear();
 	}
 
 }

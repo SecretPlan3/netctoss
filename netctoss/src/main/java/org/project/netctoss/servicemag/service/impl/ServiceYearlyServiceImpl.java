@@ -1,5 +1,6 @@
 package org.project.netctoss.servicemag.service.impl;
 
+
 import javax.annotation.Resource;
 
 import org.project.netctoss.beans.ServiceYearlyBean;
@@ -35,9 +36,9 @@ public class ServiceYearlyServiceImpl implements IServiceYearlyService {
 	}
 
 	@Override
-	public ServiceYearlyBean getServiceYearlyBeanByYear(String year) {
+	public ServiceYearlyBean getServiceYearlyBeanByYearAndService(String year,String osName) {
 		// TODO Auto-generated method stub
-		return serviceYearlyDao.getServiceYearlyBeanByYear(year);
+		return serviceYearlyDao.getServiceYearlyBeanByYearAndService(year,osName);
 	}
 
 }

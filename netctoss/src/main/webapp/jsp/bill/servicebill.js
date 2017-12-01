@@ -65,7 +65,7 @@ function showTable(msg){
 				"<td>"+msg.datas[i].id+
 				"</td><td id='osName'>"+msg.datas[i].osName+
 				"</td><td>"+msg.datas[i].unixHost+
-				"</td><td>"+msg.datas[i].serviceYear[0].serviceMonthly[0].onlineTime+
+				"</td><td>"+timeLongToString(msg.datas[i].serviceYear[0].serviceMonthly[0].onlineTime)+
 				"</td><td>"+msg.datas[i].serviceYear[0].serviceMonthly[0].cost+
 				"</td><td id='costName'>"+msg.datas[i].cost.name+
 				"</td></tr>"
@@ -126,6 +126,7 @@ function jumpShowServiceBill(arge,arge1){
 		async: true,
 		data: page,
 		success: function(msg){
+			console.info(msg);
 			showServiceTimeBillTable(msg,arge1);
 		}
 	});
@@ -145,10 +146,10 @@ function showServiceTimeBillTable(msg,arge1){
 			"</tr></thead><tbody>";
 	for(var i=0;i<msg.datas.length;i++){
 		td += "<tr index='"+msg.datas[i].id+"'>" +
-				"<td>"+msg.datas[i].id+
+				"</td><td >"+msg.datas[i].serviceTime.unxiHost+
 				"</td><td >"+msg.datas[i].serviceTime.loginTime+
 				"</td><td>"+msg.datas[i].serviceTime.logoutTime+
-				"</td><td>"+msg.datas[i].serviceTime.onlineTime+
+				"</td><td>"+timeLongToString(msg.datas[i].serviceTime.onlineTime)+
 				"</td><td>"+msg.datas[i].cost+
 				"</td><td>"+arge1+
 				"</td></tr>"
@@ -168,5 +169,18 @@ function showServiceTimeBillTable(msg,arge1){
 	}
 }
 
-
+//时间数据转换
+function timeLongToString(longTime){
+	//总秒数
+	var s =  longTime / 1000;
+	//小时数
+	var hs = parseInt(s/3600); 
+	//分钟数
+	var mins =  parseInt((s-hs*3600)/60); 
+	 //秒数 
+	var ss =  parseInt((s-hs*3600-mins*60));
+	 //最后的String格式的时间
+	var time = "" + hs + ":" + mins +  ":" + ss;
+	return time;
+}
 

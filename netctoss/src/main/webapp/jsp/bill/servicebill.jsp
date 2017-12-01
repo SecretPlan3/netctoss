@@ -117,7 +117,7 @@
                     <h4 class="modal-title" id="myModalLabel">业务账号账单详细信息</h4>
                 </div>
                 <div class="modal-body">
-                    <div id='table_div' class="tc001_body_content">
+                    <div id='table_div2' class="tc001_body_content">
                     	<table id="table02" class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover" width="100%">
 							<thead>
 								<!-- 动态数据 -->
@@ -127,10 +127,21 @@
 							</tbody>
 						</table>
                     </div>
+                    <!-- 翻页 -->
+					<ul class="am-pagination " style="text-align: right">
+						<li class="am-disabled"><a href="#">«</a></li>
+						<li class="am-active"><a href="#"><</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">></a></li>
+						<li><a href="#">»</a></li>
+					</ul>
                 </div>
                 <div class="tc001_footer_btn" style="align-content: center">
-                	<button type="submit" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                	<button type="submit" class="btn btn-primary" data-dismiss="modal" style="width:100px">关闭</button>
                 </div>
+                <hr>
             </div>
         </div>
     </div>

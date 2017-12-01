@@ -61,7 +61,6 @@ public class TestBillService {
 		System.err.println(page.getDatas());
 	}
 	
-	@Test
 	public void testFindServiceAllBill() {
 		PagerBean page = new PagerBean();
 		// 模拟参数
@@ -81,5 +80,11 @@ public class TestBillService {
 		for (ServiceDetailCostBean serviceDetailCostBean : sdc) {
 			System.err.println(serviceDetailCostBean.getCostbean());
 		}
+	}
+	
+	@Test
+	public void testOther() {
+		Date date = new Date();
+		System.out.println(date.getTime());
 	}
 }

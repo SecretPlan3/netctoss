@@ -92,8 +92,8 @@ function showTable(msg){
 				"</td><td id='userName'>"+msg.datas[i].user.userName+
 				"</td><td>"+msg.datas[i].user.idcard+
 				"</td><td>"+msg.datas[i].cost+
-				"</td><td>"+msg.datas[i].payStatus+
-				"</td><td>"+msg.datas[i].payMethod+
+				"</td><td>"+payStatusRing(msg.datas[i].payStatus)+
+				"</td><td>"+payTypeRing(msg.datas[i].payMethod)+
 				"</td><td>"+msg.datas[i].payTime+
 				"</td></tr>"
 		if(i = msg.datas.length - 1){
@@ -180,7 +180,25 @@ function jumpShowServiceBill(){
 	window.location.href="jsp/bill/servicebill.jsp?year="+year+"&month="+month+"&userID="+userID+"&loginName="+loginName+"&userName="+userName;
 }
 
+//支付状态数据转换
+function payStatusRing(args){
+	if(args == "0"){
+		return "<a href='#'>未支付</a>";
+	}else if(args == "1"){
+		return "已支付";
+	}
+}
 
+//支付方式数据转换
+function payTypeRing(args){
+	if(args == "1"){
+		return "柜台支付";
+	}else if(args == "2"){
+		return "在线支付";
+	}else if(args == "3"){
+		return "微信支付";
+	}
+}
 
 
 

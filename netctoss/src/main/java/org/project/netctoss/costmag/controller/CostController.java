@@ -8,6 +8,7 @@ import org.project.netctoss.pojos.PagerBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value="/cost")
@@ -20,13 +21,21 @@ public class CostController {
 	private String failed = "操作失败！";
 	
 	@RequestMapping(value="/selectCost")
-	public CostBean selectCosts(long id) {
+	public ModelAndView selectCosts(long id,String task) {
 		//通过资费套餐Id查询资费套餐
 		System.out.println("进入CostController的selectCost方法");
 		System.out.println("传入的ID为：" + id);
 		CostBean costBean = costServiceImpl.selectCosts(id);
 		System.out.println("查询后：" + costBean);
-		return costBean;
+		ModelAndView mv = null;
+		if(task.equals("see")) {
+			mv = new ModelAndView("jsp/cost/costInfo");
+		}else if (task.equals("update")){
+			mv = new ModelAndView("jsp/cost/costUpdateInfo");
+		}
+		
+		mv.addObject("costBean", costBean);
+		return mv;
 	}
 	
 	@RequestMapping(value="/deleteCosts")

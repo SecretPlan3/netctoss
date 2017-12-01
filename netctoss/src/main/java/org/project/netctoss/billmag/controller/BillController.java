@@ -34,6 +34,15 @@ public class BillController {
 		return page;
 	}
 	
+	@RequestMapping(value="/findServiceBill",method = { RequestMethod.GET },produces= {"application/json;charset=utf-8"})
+	public PagerBean findServiceBill(PagerBean page) {
+		
+		Long userID = Long.parseLong((String) page.getParams().get("userID"));
+		page.getParams().put("userID", userID);
+		page = billServiceImpl.findAllServiceBillByCondition(page);
+		System.err.println(page);
+		return page;
+	}
 	
 	
 }

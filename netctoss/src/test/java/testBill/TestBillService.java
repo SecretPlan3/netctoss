@@ -27,7 +27,7 @@ public class TestBillService {
 	@Resource
 	private IBillService billServiceImpl;
 	
-	@Test
+	
 	public void testFindAllBill() {
 		PagerBean page = new PagerBean();
 		page.setPage(1);
@@ -61,7 +61,7 @@ public class TestBillService {
 		System.err.println(page.getDatas());
 	}
 	
-	
+	@Test
 	public void testFindServiceAllBill() {
 		PagerBean page = new PagerBean();
 		// 模拟参数

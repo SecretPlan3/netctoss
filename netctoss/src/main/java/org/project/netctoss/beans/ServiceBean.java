@@ -48,7 +48,6 @@ public class ServiceBean {
 	
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="fk_cost_id")
-	@JsonIgnore	//忽略jackson使用延迟加载
 	private CostBean cost;
 	
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="service")

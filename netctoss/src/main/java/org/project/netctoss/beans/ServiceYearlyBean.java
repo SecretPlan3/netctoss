@@ -39,6 +39,7 @@ public class ServiceYearlyBean {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fk_service_id")
+	@JsonIgnore	//忽略jackson使用延迟加载
 	//这一年中的对应业务账号
 	private ServiceBean service;
 		

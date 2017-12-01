@@ -66,7 +66,7 @@ public class BillDaoImpl extends BaseDao implements IBillDao {
 	@Override
 	public PagerBean findAllServiceBillByCondition(PagerBean page) {
 
-		String hql = "SELECT COUNT(s.id) from ServiceBean as s join fetch s.serviceYear as y join fetch y.serviceMonthly as m join fetch s.cost as c join fetch s.user as u WHERE y.year = :year AND m.month = :month AND u.userId = :userID ";
+		String hql = "SELECT COUNT(s.id) from ServiceBean as s join s.serviceYear as y join y.serviceMonthly as m join s.cost as c join s.user as u WHERE y.year = :year AND m.month = :month AND u.userId = :userID ";
 		Query query = getSession().createQuery(hql.toString());
 		query.setProperties(page.getParams());
 		page.setTotalRows(Integer.valueOf(query.uniqueResult() + ""));

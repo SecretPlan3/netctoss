@@ -57,7 +57,6 @@ public class ServiceBean {
 	
 	//一个业务账号有多个年
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY,mappedBy="service")
-	@JsonIgnore	//忽略jackson使用延迟加载
 	private Set<ServiceYearlyBean> serviceYear;
 	
 	public String getUnixHost() {

@@ -20,9 +20,9 @@ public class BillTimeServiceImpl implements IBillTimeService{
 	}
 
 	@Override
-	public PagerBean findAllServicessBillTimeByCondition(PagerBean page) {
+	public PagerBean findAllServicesBillTimeByCondition(PagerBean page) {
 		// TODO Auto-generated method stub
-		return billTimeDaoImpl.findAllServicessBillTimeByCondition(page);
+		return billTimeDaoImpl.findAllServicesBillTimeByCondition(page);
 	}
 
 }

@@ -73,7 +73,7 @@
 
        <div class="listbiaoti am-cf ">
            <ul class="am-icon-flag on">
-              	 日志登陆信息
+              	 日志操作信息
            </ul>
            <dl class="am-icon-home" style="float: right;">
                	当前位置： 日志管理系统 &gt; <a href="#">主页</a>

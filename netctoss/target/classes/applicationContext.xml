@@ -16,7 +16,8 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/cache 
         http://www.springframework.org/schema/cache/spring-cache.xsd
-        "> 
+        ">
+        
     <!-- 开启spring容器的自动扫描功能 -->
     <!-- 让容器在扫描的时候，剔除WEB层的组件 -->
 	 <context:component-scan base-package="org.project.netctoss">

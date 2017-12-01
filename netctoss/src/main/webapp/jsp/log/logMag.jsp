@@ -148,13 +148,14 @@
 					"params":params,
 				},
 				success : function(msg) {
-					//alert("成功返回");
+					alert("成功返回");
 					//处理返回数据，给全局变量赋值等
 					page = msg.page;
 					rows = msg.rows;
 					totalRows = msg.totalRows;
 					totalPage = msg.totalPage;
 					var datas = msg.datas;
+					console.info(datas);
 					
 					var s = "";
 					for (var i = 0; i < datas.length; i++) {

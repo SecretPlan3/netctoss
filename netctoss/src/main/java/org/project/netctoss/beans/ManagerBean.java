@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -44,6 +45,15 @@ public class ManagerBean implements Serializable{
 	@JsonIgnore	//忽略jackson使用延迟加载
 	private Set<RoleBean> theRole;
 
+	@OneToMany(fetch = FetchType.LAZY,mappedBy="managerOperation")
+	@JsonIgnore	//忽略jackson使用延迟加载
+	private Set<ManagerLogBean> managerLogBean;
+//	
+	@OneToMany(fetch=FetchType.LAZY ,mappedBy="operationManager")
+	@JsonIgnore	//忽略jackson使用延迟加载
+	private Set<ManagerOperationLogBean> operationLog;//在这时间段内该管理员所有的操作
+	
+	
 	public ManagerBean(){
 
 	}
@@ -108,7 +118,7 @@ public class ManagerBean implements Serializable{
 	@Override
 	public String toString() {
 		return "ManagerBean [email=" + email + ", id=" + id + ", loginName=" + loginName + ", magName=" + magName
-				+ ", password=" + password + ", tel=" + tel + ", theRole=" + theRole + "]";
+				+ ", password=" + password + ", tel=" + tel  + "]";
 	}
 
 	

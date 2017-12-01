@@ -22,7 +22,9 @@ public class LogmagDaoImpl extends BaseDao implements ILogmagDao {
 		query.setProperties(pager.getParams());
 		long totalRows = (long) query.uniqueResult();
 		pager.setTotalRows(Integer.valueOf(String.valueOf(totalRows)));
-		hql = new StringBuilder("from ManagerLogBean as l left join l.managerOperation as m  where 1 = 1");
+		
+		
+		hql = new StringBuilder("from ManagerLogBean as l left join fetch l.managerOperation as m  where 1 = 1");
 		if(pager.getParams().get("managerId") != null) {
 			hql.append(" and m.id = :managerId");
 		}
@@ -56,7 +58,7 @@ public class LogmagDaoImpl extends BaseDao implements ILogmagDao {
 		long totalRows = (Long) query.uniqueResult();
 		pager.setTotalRows(Integer.valueOf(String.valueOf(totalRows)));
 		
-		hql = new StringBuilder("from ManagerOperationLogBean as l left join l.operationManager as m where 1 = 1");
+		hql = new StringBuilder("from ManagerOperationLogBean as l left join fetch l.operationManager as m where 1 = 1");
 		if(pager.getParams().get("managerId") != null) {
 			//根据管理员查询该管理操作信息
 			hql.append(" and m.id = :managerId");

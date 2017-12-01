@@ -29,8 +29,8 @@ public class ManagerOperationLogBean {
 	@Column(name="type")
 	private int type;//操作类型
 	
-	@JsonIgnore
-	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="fk_manager_id")
 	private ManagerBean operationManager;//操作管理人员
 	

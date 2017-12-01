@@ -14,7 +14,7 @@ $(function(){
 	//点击模糊查询按钮
 	$("#queryBtn").click(function(){
 		showUserBill();
-	});
+	}); 
 	//点击模糊查询账务账号按钮
 	$("#loginNameBtn").click(function(){
 		$("#loginName").val("");

@@ -34,7 +34,7 @@ function showUserBill(){
 			"params":{
 				"userID":getQueryString("userID"),
 				"year":getQueryString("year"),
-				"month":4,//////////////////////////////////////////////////
+				"month":getQueryString("month"),
 			}
 	}
 	$.ajax({
@@ -115,7 +115,7 @@ function jumpShowServiceBill(arge,arge1){
 			"page":page,
 			"rows":rows,
 			"params":{
-				"osName":"ttt",//////////////////////////////////////////////////////////
+				"osName":osName,
 				"loginTime":loginTime,
 				"logoutTime":logoutTime,
 			}

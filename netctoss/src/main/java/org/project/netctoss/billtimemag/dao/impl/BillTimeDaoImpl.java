@@ -60,15 +60,15 @@ public class BillTimeDaoImpl  extends BaseDao implements IBillTimeDao{
 	@Override
 	public PagerBean findAllServicesBillTimeByCondition(PagerBean pb) {
 		// TODO Auto-generated method stub
-		StringBuilder hql = new StringBuilder( "from ServiceBean as s   left join fetch s.user as u   left join fetch s.serviceYear as y    left join fetch y.serviceMonthly as m     left join fetch m.serviceDaily as d  where 1=1");//select new map(p.age as age,p.playerName as playerName,p.gender as gender) 
-		if (pb.getParams().get("year") != null  ) {
-			hql.append(	" and y.year =:year ");
+		StringBuilder hql = new StringBuilder( "from ServiceBean as s   left join fetch s.cost as c  left join fetch s.user as u   left join fetch s.serviceYear as y    left join fetch y.serviceMonthly as m     left join fetch m.serviceDaily as d  where 1=1");//select new map(p.age as age,p.playerName as playerName,p.gender as gender) 
+		if (pb.getParams().get("year") != null && ! pb.getParams().get("year").equals("") ) {
+			hql.append(	" and y.year = :year ");
 		}
-		if (pb.getParams().get("month") != null ) {
-			hql.append("and m.month = :month ");
+		if (pb.getParams().get("month") != null && ! pb.getParams().get("month").equals("")  ) {
+			hql.append(" and m.month = :month ");
 		}
 		if (pb.getParams().get("id") != null ) {
-			hql.append("and s.id = :id ");
+			hql.append(" and s.id = :id ");
 		}
 		if (pb.getParams().get("userId") != null  ) {
 			hql.append(	" and u.userId like CONCAT(:userId,'%') ");
@@ -87,7 +87,7 @@ public class BillTimeDaoImpl  extends BaseDao implements IBillTimeDao{
 		
 		
 		// 得到数据总数
-		StringBuilder hql2 = new StringBuilder( "select count(*) from ServiceBean as s      left join  s.serviceYear as y    left join  y.serviceMonthly as m     left join  m.serviceDaily as d  where 1=1");//select new map(p.age as age,p.playerName as playerName,p.gender as gender) 
+		StringBuilder hql2 = new StringBuilder( "select count(*) from ServiceBean as s    left join s.cost as c    left join  s.serviceYear as y    left join  y.serviceMonthly as m     left join  m.serviceDaily as d  where 1=1");//select new map(p.age as age,p.playerName as playerName,p.gender as gender) 
 		if (pb.getParams().get("year") != null  ) {
 			hql2.append(	" and y.year =:year ");
 		}
@@ -97,7 +97,12 @@ public class BillTimeDaoImpl  extends BaseDao implements IBillTimeDao{
 		if (pb.getParams().get("id") != null ) {
 			hql2.append("and s.id = :id ");
 		}
-
+		if (pb.getParams().get("userId") != null  ) {
+			hql.append(	" and u.userId like CONCAT(:userId,'%') ");
+		}
+		if (pb.getParams().get("userName") != null  ) {
+			hql.append(	" and u.userName like CONCAT(:userName,'%') ");
+		}
 		query = getSession().createQuery(hql2.toString());
 		query.setProperties(pb.getParams());
 		pb.setTotalRows(Integer.valueOf(query.uniqueResult() + ""));

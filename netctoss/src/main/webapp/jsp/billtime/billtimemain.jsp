@@ -84,8 +84,8 @@
                    <th class="table-title">账务账号</th>
                    <th class="table-title">用户姓名</th>
                    <th class="table-title">身份证</th>
-                   <th class="table-title">（拥有实验室数量）</th>
-                   <th class="table-set" width="125px">操作</th>
+                   <!-- <th class="table-title">（拥有实验室数量）</th>
+                   <th class="table-set" width="125px">操作</th> -->
                </tr>
                </thead>
                <tbody></tbody>
@@ -164,7 +164,7 @@
 					+datas[i].userId+"</td> <td>"
 					+datas[i].loginName+"</td><td>"
 					+datas[i].userName+"</td><td>"
-					+datas[i].idcard+"</td><td></td> </tr>"
+					+datas[i].idcard+"</td></tr>"
 				}
 				$("#table0 tbody").html(s);
 				//给每行添加点击事件
@@ -175,7 +175,7 @@
 								var value = $(this).attr("value");
 								$("#chosenId").attr("value",value);//给隐藏的表单元素 赋值 当前行对应的id
 								//alert($("#chosenId").attr("value"));
-								window.location.href="jsp/billtime/billtimeDetailMonthly.jsp" + "?id="+ value ;
+								window.location.href="billtime/monthly" + "?userId="+ value ;
 								
 							})  
 						}

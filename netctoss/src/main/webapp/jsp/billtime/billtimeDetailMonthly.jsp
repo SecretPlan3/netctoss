@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false"%>
     <%@ include file="../../header.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -43,7 +43,9 @@
   		<div class="header">
             <h1>开放实验室使用时长信息</h1>
        </div>
-             
+     <!-- 隐藏元素，存放信息 -->        
+    <input type="hidden" id ="userId">
+    
 	 <!--模糊查询-->
 	<form id = "form0" method="POST">
        <div class="search">
@@ -60,26 +62,21 @@
                        <button class="am-btn am-btn-xs am-btn-default am-xiao">年份</button>
                    </p>
                    <p>
-                       <select data-am-selected="{btnWidth: 110, btnSize: 'sm', btnStyle: 'default'}">
-                           <option value="1">2013</option>
-                           <option value="2">2014</option>
-                           <option value="3">2015</option>
-                           <option value="4">2016</option>
-                           <option value="5">2017</option>
+                       <select id = "year" data-am-selected="{btnWidth: 110, btnSize: 'sm', btnStyle: 'default'}">                   
+                           <option >2016</option>
+                           <option >2015</option>
+                           <option >2014</option>
+                           <option >2013</option>
                        </select>
                    </p>
                 </li>
               <li class="soso">
                    <p>
-                       <button class="am-btn am-btn-xs am-btn-default am-xiao">月份</button>
+                       <button  class="am-btn am-btn-xs am-btn-default am-xiao">月份</button>
                    </p>
                    <p>
-                       <select data-am-selected="{btnWidth: 110, btnSize: 'sm', btnStyle: 'default'}">
-                           <option value="1">1</option>
-                           <option value="2">2</option>
-                           <option value="3">3</option>
-                           <option value="4">4</option>
-                           <option value="5">5</option>
+                       <select id = "month" disabled="disabled" data-am-selected="{btnWidth: 110, btnSize: 'sm', btnStyle: 'default'}">
+                           <option value="">所有月份</option>
                        </select>
                    </p>
                 </li>
@@ -100,7 +97,7 @@
                		<input type="hidden" id = "chosenId">
                    <th class="table-title">服务器编号</th>
                    <th class="table-title">服务器信息</th>
-                   <th class="table-title">年总时长</th>
+                   <th class="table-title">全年总时长</th>
                    <th class="table-title">1月总时长</th>
                    <th class="table-title">2月总时长</th>
                    <th class="table-title">3月总时长</th>
@@ -113,23 +110,14 @@
                    <th class="table-title">10月总时长</th>
                    <th class="table-title">11月总时长</th>
                    <th class="table-title">12月总时长</th>
-                   <th class="table-set" width="125px">详细</th>
+                  <!--  <th class="table-set" width="125px">详细</th> -->
                </tr>
                </thead>
                <tbody></tbody>
            </table>
             <!-- 主表格 -->  
            
-          <!-- 功能按钮组div-->
-  		<div class="am-btn-group am-btn-group-xs am-fl">
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 删除</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 上架</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 下架</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 保存</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-archive"></span> 移动</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-trash-o"></span> 删除</button>
-           </div>
+
            <!-- 翻页按钮组 ul-->
            <ul class="am-pagination " style="text-align: right">
                <li  onclick ="first()"><a href="javascript:void(0)">«</a></li>
@@ -160,7 +148,12 @@
 
 	//页面加载完组件后，直接执行的内容
 	$(function(){
-		$("#userId").val("");
+		$("#userId").val("${userId}");
+		params = {
+				userId:$("#userId").val(),
+				year:$("#year").val(),
+				month: $("#month").val(),
+			}; 
 		showData();	
 	});
 	
@@ -249,9 +242,9 @@
 	function search(){
 		/*param 中d的条件数据的形式为键值对存放的json对象,如：*/
 		params = {
-			idcard:$("#idcard").val(),
-			userName:$("#userName").val(),
-			loginName:$("#loginName").val()
+			userId:$("#userId").val(),
+			year:$("#year").val(),
+			month: $("#month").val(),
 		}; 
 		showData();	//调用显示数据函数，ajax刷新页面
 	}

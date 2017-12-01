@@ -39,7 +39,8 @@
   		<div class="header">
             <h1>开放实验室日使用时长信息</h1>
        </div>
-             
+	<!-- 隐藏元素，存放信息 -->        
+    <input type="hidden" id ="serviceId">
  <!--模糊查询-->
 	<form id = "form0" method="POST">
        <div class="search">
@@ -56,12 +57,11 @@
                        <button class="am-btn am-btn-xs am-btn-default am-xiao">年份</button>
                    </p>
                    <p>
-                       <select data-am-selected="{btnWidth: 110, btnSize: 'sm', btnStyle: 'default'}">
-                           <option value="1">2013</option>
-                           <option value="2">2014</option>
-                           <option value="3">2015</option>
-                           <option value="4">2016</option>
-                           <option value="5">2017</option>
+                       <select id = "year" data-am-selected="{btnWidth: 110, btnSize: 'sm', btnStyle: 'default'}">                   
+                           <option >2016</option>
+                           <option >2015</option>
+                           <option >2014</option>
+                           <option >2013</option>
                        </select>
                    </p>
                 </li>
@@ -70,12 +70,19 @@
                        <button class="am-btn am-btn-xs am-btn-default am-xiao">月份</button>
                    </p>
                    <p>
-                       <select data-am-selected="{btnWidth: 110, btnSize: 'sm', btnStyle: 'default'}">
-                           <option value="1">1</option>
-                           <option value="2">2</option>
-                           <option value="3">3</option>
-                           <option value="4">4</option>
-                           <option value="5">5</option>
+                       <select id = "month" data-am-selected="{btnWidth: 110, btnSize: 'sm', btnStyle: 'default'}">
+                           <option>1</option>
+                           <option>2</option>
+                           <option>3</option>
+                           <option>4</option>
+                           <option>5</option>
+                           <option>6</option>
+                           <option>7</option>
+                           <option>8</option>
+                           <option>9</option>
+                           <option>10</option>
+                           <option>11</option>
+                           <option>12</option>
                        </select>
                    </p>
                 </li>
@@ -84,37 +91,19 @@
                		<p><button type="button" onclick = "search()" class="am-btn am-btn-xs am-btn-default am-xiao"><i class="am-icon-search"></i></button></p></li>
             </ul>
        </div>
-        <!--/模糊查询-->
-        
+        <!--/模糊查询-->     
 	</form>
 
 	<form class="am-form am-g">
  			<!-- 主表格 -->  
+ 			<input type="hidden" id = "chosenId">
            <table id = "table0" class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover" width="100%">
-               <thead>
-               <tr class="am-success">
-               		<input type="hidden" id = "chosenId">
-                   <th class="table-title">服务器编号</th>
-                   <th class="table-title">服务器信息</th>
-                   <th class="table-title">月总时长</th>
-
-                   <th class="table-set" width="125px">详细</th>
-               </tr>
-               </thead>
+               <thead></thead>
                <tbody></tbody>
            </table>
-            <!-- 主表格 -->  
+            <!-- /主表格 -->  
            
-          <!-- 功能按钮组div-->
-  		<div class="am-btn-group am-btn-group-xs am-fl">
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 删除</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 上架</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 下架</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 保存</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-archive"></span> 移动</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-trash-o"></span> 删除</button>
-           </div>
+          
            <!-- 翻页按钮组 ul-->
            <ul class="am-pagination " style="text-align: right">
                <li  onclick ="first()"><a href="javascript:void(0)">«</a></li>
@@ -145,13 +134,18 @@
 
 	//页面加载完组件后，直接执行的内容
 	$(function(){
-		$("#userId").val("");
+		$("#serviceId").val("${serviceId}");
+		params = {
+				serviceId:$("#serviceId").val(),
+				year:$("#year").val(),
+				month: $("#month").val(),
+			}; 
 		showData();	
 	});
 	
 	// 分页查询显示表格数据的方法
 	function showData(){
-		var url = "billtime/findMonthly";
+		var url = "billtime/findDaily";
 		$.ajax({
 			type : "POST",
 			url : url,
@@ -172,23 +166,45 @@
 				console.info(msg);
 				
 				var s = "";
+				
+				var totalDays = 0;
+				
+
+				
 				for (var i = 0; i < datas.length; i++) {
+					
 					s+= "<tr value="+datas[i].id+"><td class='am-text-center'>"
 					+datas[i].id+"</td>" + "<td class='am-text-center'>"
 					+datas[i].osName+"</td>";
 					var y = datas[i].serviceYear;
 					for ( var j = 0; j < y.length; j++ ) {
+						
 						s+="<td>"+timeLongToString(y[j].onlineTime); +"</td> ";
 						var mon = y[j].serviceMonthly;
 						var m =mon.sort(function(a,b){ return parseInt(a.month) - parseInt(b.month); }); //给数组排序 ，形参ab用来制定规则
 						console.info(m);
-
 						for ( var k = 0; k < m.length; k++) {
 							s+="<td>"+ timeLongToString(m[k].onlineTime); +"</td> ";
+							
+							var day = m[k].serviceDaily;
+							var d =day.sort(function(a,b){ return parseInt(a.day) - parseInt(b.day); }); //给数组排序 ，形参ab用来制定规则
+							console.info(d);
+							for ( var l = 0; l < d.length; l++) {
+								s+="<td>"+ timeLongToString(d[l].onlineTime); +"</td> ";
+								totalDays += 1;
+							}	
 						}
 					}
 					s+="</tr>";
 				}
+				//拼接表头+++++++++++
+				var head0 = "<tr><th>服务器编号</th><th>服务器信息</th><th>全年总时长</th><th>月总时长</th>";
+				for (var i = 0; i < totalDays; i++) {
+					head0 +=  "<th>"+ (i+1) +  "日时长" + "</th>"; 
+				}
+				s = head0 + "</tr>" + s; 
+				//+++++++++++++++++++
+				
 				$("#table0 tbody").html(s);
 				$("#loginName").val(datas[0].user.loginName);
 				$("#userName").val(datas[0].user.userName);
@@ -196,7 +212,7 @@
 				
 				//给每行添加点击事件
 			 	//绑定事件******************************************************
-					$("tr").each(function(i,val){ 
+					/* $("tr").each(function(i,val){ 
 						if(i != 0){//第一行不绑定
 							$(this).on("click",function(){
 								var value = $(this).attr("value");
@@ -206,7 +222,7 @@
 							})  
 						}
 						
-					})
+					}) */
 			//***************************************************************
 				
 			}
@@ -233,11 +249,11 @@
 	//查询函数 ---查询按钮点击事件
 	function search(){
 		/*param 中d的条件数据的形式为键值对存放的json对象,如：*/
-		params = {
-			idcard:$("#idcard").val(),
-			userName:$("#userName").val(),
-			loginName:$("#loginName").val()
-		}; 
+			params = {
+				serviceId:$("#serviceId").val(),
+				year:$("#year").val(),
+				month: $("#month").val(),
+			}; 
 		showData();	//调用显示数据函数，ajax刷新页面
 	}
 

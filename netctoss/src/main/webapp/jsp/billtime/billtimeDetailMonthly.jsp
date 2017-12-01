@@ -163,6 +163,10 @@
 				totalRows = msg.totalRows;
 				totalPage = msg.totalPage;
 				var datas = msg.datas;
+				console.info(datas);
+				console.info(datas[0]);
+				console.info(datas[0].id);
+				console.info(datas[0].serviceYear);
 				
 				var s = "";
 				for (var i = 0; i < datas.length; i++) {

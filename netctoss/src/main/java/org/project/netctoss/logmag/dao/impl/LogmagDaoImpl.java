@@ -14,13 +14,18 @@ public class LogmagDaoImpl extends BaseDao implements ILogmagDao {
 	public PagerBean findManagerLog(PagerBean pager) {
 		// TODO Auto-generated method stub
 		//根据管理查询登陆/退出系统时间
-		StringBuilder hql = new StringBuilder("select count(l.id) from ManagerLogBean as l left join l.managerOperation as m  where m.id = :managerId");
+		StringBuilder hql = new StringBuilder("select count(l.id) from ManagerLogBean as l left join l.managerOperation as m where 1 = 1");
+		if(pager.getParams().get("managerId") != null) {
+			hql.append(" and m.id = :managerId");
+		}
 		Query query = getSession().createQuery(hql.toString());
 		query.setProperties(pager.getParams());
 		long totalRows = (long) query.uniqueResult();
 		pager.setTotalRows(Integer.valueOf(String.valueOf(totalRows)));
-		
-		hql = new StringBuilder("from ManagerLogBean as l left join l.managerOperation as m  where m.id = :managerId");
+		hql = new StringBuilder("from ManagerLogBean as l left join l.managerOperation as m  where 1 = 1");
+		if(pager.getParams().get("managerId") != null) {
+			hql.append(" and m.id = :managerId");
+		}
 		query = getSession().createQuery(hql.toString());
 		query.setProperties(pager.getParams());
 		query.setFirstResult(pager.getIndex());

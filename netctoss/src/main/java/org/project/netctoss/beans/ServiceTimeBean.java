@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -23,9 +24,11 @@ public class ServiceTimeBean {
 	private Long id; 
 	// 登录时间
 	@Column(name="login_time")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")	//将时间格式转换成自定义格式,timezone设置时区
 	private Date loginTime;
 	// 登出时间
 	@Column(name="logout_time")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")	//将时间格式转换成自定义格式,timezone设置时区
 	private Date logoutTime;
 	// 对应业务账号名
 	@Column(name="os_username")

@@ -47,7 +47,7 @@
 	
 	<!-- 页面标题 -->
 	<div class="header">
-			<h1>账单查询系统</h1>
+			<h1>业务账号账单</h1>
 	</div>
 	<hr>
 	<div style="width:100%" >
@@ -109,7 +109,33 @@
 	</form>
 	</div>  
 	
-	
+	<!--业务账号详细账单弹框-开始-->
+    <div class="modal fade btn" id="myModal_001" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">业务账号账单详细信息</h4>
+                </div>
+                <div class="modal-body">
+                    <div id='table_div' class="tc001_body_content">
+                    	<table id="table02" class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover" width="100%">
+							<thead>
+								<!-- 动态数据 -->
+							</thead>
+							<tbody>
+								<!-- 动态数据 -->
+							</tbody>
+						</table>
+                    </div>
+                </div>
+                <div class="tc001_footer_btn" style="align-content: center">
+                	<button type="submit" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!--业务账号详细账单弹框-结束-->
+
 </body>
 </html>
 

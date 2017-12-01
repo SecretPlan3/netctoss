@@ -5,6 +5,8 @@ var month = getQueryString("month");
 var userID = getQueryString("userID");
 var loginName = getQueryString("loginName");
 var userName = getQueryString("userName");
+var loginTime = year + "-" +month + "-" + 01;
+var logoutTime = year + "-" +month + "-" + 32;
 
 $(function(){
 	$("#h4_loginName").html("账务账号：<strong>"+loginName+"</strong>");
@@ -26,14 +28,13 @@ function getQueryString(value) {
 //请求表格数据
 function showUserBill(){
 	var url = "bill/findServiceBill";
-	
 	var page = {
 			"page":page,
 			"rows":rows,
 			"params":{
 				"userID":getQueryString("userID"),
 				"year":getQueryString("year"),
-				"month":4,
+				"month":4,//////////////////////////////////////////////////
 			}
 	}
 	$.ajax({
@@ -43,7 +44,6 @@ function showUserBill(){
 		data: page,
 		success: function(msg){
 			showTable(msg);
-//			console.info(msg);
 		}
 	});
 }
@@ -61,13 +61,13 @@ function showTable(msg){
 			"<th>资费套餐</th>" +
 			"</tr></thead><tbody>";
 	for(var i=0;i<msg.datas.length;i++){
-		td += "<tr index='"+msg.datas[i].id+"'>" +
+		td += "<tr index='"+msg.datas[i].id+"' data-toggle='modal' data-target='#myModal_001'>" +
 				"<td>"+msg.datas[i].id+
-				"</td><td>"+msg.datas[i].osName+
+				"</td><td id='osName'>"+msg.datas[i].osName+
 				"</td><td>"+msg.datas[i].unixHost+
-				"</td><td>"+msg.datas[i].serviceYear[0].serviceMonthly[0].cost+
 				"</td><td>"+msg.datas[i].serviceYear[0].serviceMonthly[0].onlineTime+
-				"</td><td>"+msg.datas[i].cost.name+
+				"</td><td>"+msg.datas[i].serviceYear[0].serviceMonthly[0].cost+
+				"</td><td id='costName'>"+msg.datas[i].cost.name+
 				"</td></tr>"
 		if(i = msg.datas.length - 1){
 			td += "</tbody>";
@@ -101,22 +101,72 @@ function showTable(msg){
 function setClick(){
 	$("#table01").children().children("tr").not("#tableHead").each(function(){
 		$(this).click(function (){
-			//得到被选中的元素的ID
-			var id = $(this).attr("index");
-			userID = parseInt(id);
-			loginName = $(this).children("#loginName").html();
-			userName = $(this).children("#userName").html();
-			jumpShowServiceBill();
+			var osName = $(this).children("#osName").html();
+			var costName = $(this).children("#costName").html();
+			jumpShowServiceBill(osName,costName);
 		})
 	});
 }
 
-//跳转页面
-function jumpShowServiceBill(){
-	window.location.href="jsp/bill/servicetimebill.jsp?year="+year+"&month="+month+"&userID="+userID+"&loginName="+loginName+"&userName="+userName;
+//请求数据
+function jumpShowServiceBill(arge,arge1){
+	var url = "bill/findServiceTimeBill";
+	var page = {
+			"page":page,
+			"rows":rows,
+			"params":{
+				"osName":"ttt",//////////////////////////////////////////////////////////
+				"loginTime":loginTime,
+				"logoutTime":logoutTime,
+			}
+	}
+	$.ajax({
+		type: "GET",
+		url: url,
+		async: true,
+		data: page,
+		success: function(msg){
+			showServiceTimeBillTable(msg,arge1);
+		}
+	});
 }
 
-
+//显示表格
+function showServiceTimeBillTable(msg,arge1){
+	//根据数组长度产生tr的数量
+	var td = "";
+	var th = "<thead><tr id='tableHead2'>" +
+			"<th>服务器信息</th>" +
+			"<th>登录时间</th>" +
+			"<th>登出时间</th>" +
+			"<th>使用时长	时:分:秒</th>" +
+			"<th>总费用/元</th>" +
+			"<th>资费套餐</th>" +
+			"</tr></thead><tbody>";
+	for(var i=0;i<msg.datas.length;i++){
+		td += "<tr index='"+msg.datas[i].id+"'>" +
+				"<td>"+msg.datas[i].id+
+				"</td><td >"+msg.datas[i].serviceTime.loginTime+
+				"</td><td>"+msg.datas[i].serviceTime.logoutTime+
+				"</td><td>"+msg.datas[i].serviceTime.onlineTime+
+				"</td><td>"+msg.datas[i].cost+
+				"</td><td>"+arge1+
+				"</td></tr>"
+		if(i = msg.datas.length - 1){
+			td += "</tbody>";
+		}
+	}
+	$("#table02").html(th + td);
+	
+	$("#tableHead2").addClass("am-success");
+	$("th").addClass("table-title am-text-center");
+	$("td").addClass("am-text-center");
+	if(msg.datas.length == 0){
+		$("#table_div2").append("<div class='alert_notfound am-alert am-alert-warning' data-am-alert>" +
+				"<button type='button' class='am-close'>&times;" +
+				"</button><p>未找到匹配数据</p></div>");
+	}
+}
 
 
 

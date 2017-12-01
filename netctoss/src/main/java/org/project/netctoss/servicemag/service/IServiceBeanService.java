@@ -11,4 +11,5 @@ public interface IServiceBeanService {
 	  public void deleteServiceBean(ServiceBean sb);
 	  public ServiceBean getServiceBeanByID(Long ID);
 	  public Set<ServiceBean> getServiceBeansByUserBean(UserBean ub);
+	  public ServiceBean getServiceBeanByOsName(String osName);
 }

@@ -37,9 +37,9 @@ public class ServiceMonthlyServiceImpl implements IServiceMonthlyService {
 	}
 
 	@Override
-	public ServiceMonthlyBean getServiceMonthlyBeanByMonthAndService(String month,String osName) {
+	public ServiceMonthlyBean getServiceMonthlyBeanByMonthAndServiceAndYear(String month,String osName,String year) {
 		// TODO Auto-generated method stub
-		return serviceMonthlyDaoImpl.getServiceMonthlyBeanByMonthAndService(month,osName);
+		return serviceMonthlyDaoImpl.getServiceMonthlyBeanByMonthAndServiceAndYear(month, osName, year);
 	}
 
 }

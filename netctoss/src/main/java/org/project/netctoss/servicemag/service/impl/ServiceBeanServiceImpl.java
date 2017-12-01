@@ -43,4 +43,10 @@ public class ServiceBeanServiceImpl implements IServiceBeanService {
 		return serviceBeanDaoImpl.getServiceBeansByUserBean(ub);
 	}
 
+	@Override
+	public ServiceBean getServiceBeanByOsName(String osName) {
+		// TODO Auto-generated method stub
+		return serviceBeanDaoImpl.getServiceBeanByOsName(osName);
+	}
+
 }

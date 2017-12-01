@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <!-- 1.首先要导入一篇header.jsp ,引入工程名全路径：bathpath-->
     <%@ include file="../../header.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<!-- 2.使用base为本页面设置一个 在相对路径前自动拼接上的路径，此处代表工程名加斜杠，它会使相对路径都变成绝对路径 -->
 <base href="<%=basePath%>" >
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
+<!-- 3.引入自己需要的js、css 文件 此处的basepath可以上略，因为2.中说过 相对路径会自动拼接 -->
     <link rel="stylesheet" href="<%=basePath%>static/css/amazeui.min.css"/>
-    <link rel="stylesheet" href="<%=basePath%>static/css/admin.css">
+    <link rel="stylesheet" href="static/css/admin.css">
     <!--引入自定义样式-->
     <link rel="stylesheet" href="<%=basePath%>static/css/custom.css">
     <%-- <script src="<%=basePath%>static/js/jquery.min.js"></script> --%>
@@ -18,7 +21,7 @@
     <!-- jquery 和 json 的js -->
     <script src="<%=basePath%>static/js/jquery-3.2.1.min.js" charset="utf-8"></script>
 	<script  src="<%=basePath%>static/js/jquery.json-2.4.js"></script>
-    
+ <!-- 4.页面规范的样式 -->
     <style>
         .header{
             width: 100%;
@@ -33,6 +36,7 @@
 </head>
 
 <body>
+<!-- 5.正文的各个模块 按需添加  -->
   		<div class="header">
             <h1>欢迎来到账务查询！</h1>
        </div>      
@@ -115,6 +119,7 @@
 	</form>        
 </body>
 
+<!-- 6.js脚本，使用本jsp的分页 模块 可以将 以下 js脚本全部复用 修改showData()  和 search() 在按需添加 功能按钮的方法  即可-->
 <script type="text/javascript">
 	//定义全局变量
 	

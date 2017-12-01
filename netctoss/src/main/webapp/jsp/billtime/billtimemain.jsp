@@ -6,12 +6,12 @@
 <html>
 <head>
 <!-- 2.使用base为本页面设置一个 在相对路径前自动拼接上的路径，此处代表工程名加斜杠，它会使相对路径都变成绝对路径 -->
-<base href="<%=basePath%>" >
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+	<base href="<%=basePath%>" >
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
 
 <!-- 3.引入自己需要的js、css 文件 此处的basepath可以上略，因为2.中说过 相对路径会自动拼接 -->
+
     <link rel="stylesheet" href="<%=basePath%>static/css/amazeui.min.css"/>
     <link rel="stylesheet" href="static/css/admin.css">
     <!--引入自定义样式-->
@@ -37,7 +37,15 @@
 
 <body>
 <!-- 5.正文的各个模块 按需添加  -->
-  		<div class="header">
+  		
+     <!-- 网站地图 -->
+	<div class="listbiaoti am-cf "  ><!-- style="display:inline" -->
+		<ul class="am-icon-flag on">账务查询</ul>
+		<dl class="am-icon-home" style="float: right;">当前位置： 首页 &gt;&nbsp;<a href="<%=basePath%>jsp/bill/billmain.jsp">账务查询</a></dl>
+	</div>
+	
+	<!-- 页面标题 -->
+	<div class="header">
             <h1>欢迎来到账务查询！</h1>
        </div>      
 	 <!--模糊查询-->
@@ -64,17 +72,7 @@
         
 </form>
 
-<!-- 表格描述部分 -->
-     <div class="listbiaoti am-cf ">
-           <ul class="am-icon-flag on">
-             账务账单 
-           </ul>
-           <dl class="am-icon-home" style="float: right;">
-            当前位置： 首页 &gt;
-           </dl>
-       </div>
- <!-- /表格描述部分 -->  
- 
+
   
 	<form class="am-form am-g">
  			<!-- 主表格 -->  

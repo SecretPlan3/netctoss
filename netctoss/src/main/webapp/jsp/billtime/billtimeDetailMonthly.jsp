@@ -6,8 +6,8 @@
 <head>
 <base href="<%=basePath%>" >
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
 
     <link rel="stylesheet" href="<%=basePath%>static/css/amazeui.min.css"/>
     <link rel="stylesheet" href="<%=basePath%>static/css/admin.css">
@@ -33,45 +33,65 @@
 </head>
 
 <body>
+     <!-- 网站地图 -->
+	<div class="listbiaoti am-cf "  ><!-- style="display:inline" -->
+		<ul class="am-icon-flag on">账务查询</ul>
+		<dl class="am-icon-home" style="float: right;">当前位置： 首页 &gt;&nbsp;<a href="<%=basePath%>jsp/billtime/billtimemain.jsp">账务查询</a> &gt;&nbsp;<a href="<%=basePath%>jsp/billtime/billtimeDetailMonthly.jsp">开放实验室使用时长信息</a></dl>
+	</div>
+	
+	<!-- 页面标题 --> 
   		<div class="header">
             <h1>开放实验室使用时长信息</h1>
-       </div>      
+       </div>
+             
 	 <!--模糊查询-->
 	<form id = "form0" method="POST">
        <div class="search">
            <ul class="am-nav am-nav-pills am-topbar-nav ">
                <li class="soso"> 
-               		<p><button class="am-btn am-btn-xs am-btn-default am-xiao">账务账号编号：</button></p>
-                   	<p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="账务账号编号" id="id" name="id"/></p></li>
-               <li class="soso">
-               		<p><button class="am-btn am-btn-xs am-btn-default am-xiao">身份证号：</button></p>
-                   <p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="身份证号" id="idcard" name="idcard"/></p></li>
+               		<p><button class="am-btn am-btn-xs am-btn-default am-xiao">账务账号：</button></p>
+                   	<p class="ycfg"><input readonly type="text" class="am-form-field am-input-sm"  id="loginName" name="loginName"/></p></li>    
                <li class="soso">
                		<p><button class="am-btn am-btn-xs am-btn-default am-xiao">用户姓名：</button></p>
-                   	<p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="用户姓名"  id="userName" name="userName"/></p> </li>
-               <li class="soso">
-               		<p> <button class="am-btn am-btn-xs am-btn-default am-xiao">账号：</button> </p>
-               		<p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="账号" id="loginName" name="loginName"//> </p></li>
+                   	<p class="ycfg"><input readonly  type="text" class="am-form-field am-input-sm"  id="userName" name="userName"/></p> </li>
+
+              <li class="soso">
+                   <p>
+                       <button class="am-btn am-btn-xs am-btn-default am-xiao">年份</button>
+                   </p>
+                   <p>
+                       <select data-am-selected="{btnWidth: 110, btnSize: 'sm', btnStyle: 'default'}">
+                           <option value="1">2013</option>
+                           <option value="2">2014</option>
+                           <option value="3">2015</option>
+                           <option value="4">2016</option>
+                           <option value="5">2017</option>
+                       </select>
+                   </p>
+                </li>
+              <li class="soso">
+                   <p>
+                       <button class="am-btn am-btn-xs am-btn-default am-xiao">月份</button>
+                   </p>
+                   <p>
+                       <select data-am-selected="{btnWidth: 110, btnSize: 'sm', btnStyle: 'default'}">
+                           <option value="1">1</option>
+                           <option value="2">2</option>
+                           <option value="3">3</option>
+                           <option value="4">4</option>
+                           <option value="5">5</option>
+                       </select>
+                   </p>
+                </li>
+          
                <li class="soso">
                		<p><button type="button" onclick = "search()" class="am-btn am-btn-xs am-btn-default am-xiao"><i class="am-icon-search"></i></button></p></li>
             </ul>
        </div>
         <!--/模糊查询-->
         
-</form>
+	</form>
 
-<!-- 表格描述部分 -->
-     <div class="listbiaoti am-cf ">
-           <ul class="am-icon-flag on">
-             账务账单 
-           </ul>
-           <dl class="am-icon-home" style="float: right;">
-            当前位置： 首页 &gt;
-           </dl>
-       </div>
- <!-- /表格描述部分 -->  
- 
-  
 	<form class="am-form am-g">
  			<!-- 主表格 -->  
            <table id = "table0" class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover" width="100%">
@@ -140,6 +160,7 @@
 
 	//页面加载完组件后，直接执行的内容
 	$(function(){
+		$("#userId").val("");
 		showData();	
 	});
 	
@@ -163,24 +184,28 @@
 				totalRows = msg.totalRows;
 				totalPage = msg.totalPage;
 				var datas = msg.datas;
-				console.info(datas);
-				console.info(datas[0]);
-				console.info(datas[0].id);
-				console.info(datas[0].serviceYear);
-				
+
 				var s = "";
 				for (var i = 0; i < datas.length; i++) {
 					s+= "<tr value="+datas[i].id+"><td class='am-text-center'>"
-					+datas[i].id+"</td>"
-					for ( var y in datas[i].serviceYear) {
-						s+="<td>"+y.onlineTime +"</td> "
-						for ( var m in y.serviceMonthly) {
-							s+="<td>"+m.onlineTime +"</td> "
+					+datas[i].id+"</td>" + "<td class='am-text-center'>"
+					+datas[i].osName+"</td>";
+					var y = datas[i].serviceYear;
+					for ( var j = 0; j < y.length; j++ ) {
+						s+="<td>"+y[j].onlineTime +"</td> ";
+						var m = y[j].serviceMonthly;
+						for ( var k = 0; k < m.length; k++) {
+							var time = timeLongToString(m[k].onlineTime);
+							s+="<td>"+ time +"</td> ";
 						}
 					}
-					s+="</tr>"
+					s+="</tr>";
 				}
 				$("#table0 tbody").html(s);
+				$("#loginName").val(datas[0].user.loginName);
+				$("#userName").val(datas[0].user.userName);
+				
+				
 				//给每行添加点击事件
 			 	//绑定事件******************************************************
 					$("tr").each(function(i,val){ 
@@ -189,6 +214,7 @@
 								var value = $(this).attr("value");
 								$("#chosenId").attr("value",value);//给隐藏的表单元素 赋值 当前行对应的ID
 								alert($("#chosenId").attr("value"));
+								window.location.href="jsp/billtime/billtimeDetailDaily.jsp" + "?id="+ value ;
 							})  
 						}
 						
@@ -197,6 +223,16 @@
 				
 			}
 		});
+	}
+	
+	//long 转String 
+	function timeLongToString(longTime){	
+		var s =  longTime / 1000; //总秒数
+		var hs = parseInt(s /3600); //小时数
+		var mins =  parseInt((s - hs * 3600) / 60) ; //分钟数
+		var ss =  parseInt((s -  hs * 3600 - mins * 60)); //秒数 
+		var time = "" + hs + ":" + mins +  ":" + ss;
+		return time;
 	}
 	
 	//查询函数 ---查询按钮点击事件

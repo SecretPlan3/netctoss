@@ -53,7 +53,7 @@ public class UserDaoImpl extends BaseDao implements IUserDao {
 		query.setString(1, pager.getParams().get("idcard").toString());
 		query.setString(1, pager.getParams().get("status").toString());
 		query.setFirstResult(pager.getIndex());
-		query.setMaxResults(pager.getRows());
+		query.setMaxResults(pager.getRows()); 
 		List<?> datas = query.list();
 		pager.setDatas(datas);
 		return pager;

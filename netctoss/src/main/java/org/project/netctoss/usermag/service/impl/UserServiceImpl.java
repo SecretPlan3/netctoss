@@ -26,7 +26,7 @@ public class UserServiceImpl extends BaseDao implements IUserService {
 	}
 
 	public void addUser(UserBean user) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
 		userDaoImpl.addUser(user);
 	}
 

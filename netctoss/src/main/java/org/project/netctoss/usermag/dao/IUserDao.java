@@ -21,6 +21,6 @@ public interface IUserDao {
 	
 	public UserBean findUserByLoginName(String LoginName);
 	
-	public void addUsersById(Set<UserBean> users);
+	public void addUsersById(Set<UserBean> users); 
 }	
 

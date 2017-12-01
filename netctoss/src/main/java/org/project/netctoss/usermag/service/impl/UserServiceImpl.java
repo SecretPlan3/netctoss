@@ -1,5 +1,7 @@
 package org.project.netctoss.usermag.service.impl;
 
+import java.util.Set;
+
 import javax.annotation.Resource;
 
 import org.project.netctoss.beans.UserBean;
@@ -46,6 +48,12 @@ public class UserServiceImpl extends BaseDao implements IUserService {
 	public UserBean findUserByLoginName(String LoginName) {
 		// TODO Auto-generated method stub
 		return userDaoImpl.findUserByLoginName(LoginName);
+	}
+
+	@Override
+	public void addUsersById(Set<UserBean> users) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

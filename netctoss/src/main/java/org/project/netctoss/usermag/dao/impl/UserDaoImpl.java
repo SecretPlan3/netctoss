@@ -1,6 +1,7 @@
 package org.project.netctoss.usermag.dao.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Query;
 import org.project.netctoss.beans.UserBean;
@@ -74,6 +75,12 @@ public class UserDaoImpl extends BaseDao implements IUserDao {
 		Query query = getSession().createQuery(hql);
 		query.setString(0, LoginName);
 		return  (UserBean) query.uniqueResult();//;
+	}
+
+	@Override
+	public void addUsersById(Set<UserBean> users) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

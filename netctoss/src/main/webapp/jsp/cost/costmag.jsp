@@ -123,13 +123,9 @@
                </tr>
                </tbody>
            </table>
-           <div class="am-btn-group am-btn-group-xs am-fl">
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 删除</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 上架</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 下架</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 保存</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-archive"></span> 移动</button>
+           <div class="am-btn-group am-btn-group-xs ">
+               <button onclick ="seeInfo()"  type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 查看</button>
+               <button onclick ="updateInfo()" type="button" class="am-btn am-btn-default"><span class="am-icon-archive"></span>修改</button>
                <button type="button" class="am-btn am-btn-default"><span class="am-icon-trash-o"></span> 删除</button>
            </div>
            <!-- 翻页按钮组 ul-->
@@ -219,7 +215,8 @@
 		
 		//查询条件
 		var params = {};
-		
+		//获取id值
+		var trId = 0 ;
 
 		//页面加载完组件后，直接执行的内容
 		$(function(){
@@ -265,11 +262,10 @@
 						$("tr").each(function(i,val){ 
 							if(i != 0){//第一行不绑定
 								$(this).on("click",function(){
-									var value = $(this).attr("value");
-									$("#chosenId").attr("value",value);//给隐藏的表单元素 赋值 当前行对应的id
+									trId = $(this).attr("value");
+									/* $("#chosenId").attr("value",trId);//给隐藏的表单元素 赋值 当前行对应的id */
 									//alert($("#chosenId").attr("value"));
-									window.location.href="jsp/billtime/billtimeDetailMonthly.jsp" + "?id="+ value ;
-									
+									/* window.location.href="cost/selectCost" + "?id="+ trId ; */
 								})  
 							}
 							
@@ -279,9 +275,6 @@
 				}
 			});
 		}
-	 
-	 
-	 
 	 
         $("form input").on({
             "blur":function(){
@@ -338,7 +331,22 @@
         		$("#unitCost").attr("disabled", false)
         	}
         }
-        
+      //查看/修改/删除/新增按钮点击事件
+      function seeInfo(){
+    	  if(trId == 0 ){
+    		  alert("请选择你要查看的内容！")
+    	  }else{
+    		  window.location.href="cost/selectCost" + "?id="+ trId + "&task=see";
+    	  }
+      }
+      
+      function updateInfo(){
+    	  if(trId == 0 ){
+    		  alert("请选择你要查看的内容！")
+    	  }else{
+    		  window.location.href="cost/selectCost" + "?id="+ trId + "&task=update";
+    	  }
+      }
       //翻页按钮 绑定的监听事件 ++++++++++++++++++++++++++
     	//跳转
     	 function jump(){

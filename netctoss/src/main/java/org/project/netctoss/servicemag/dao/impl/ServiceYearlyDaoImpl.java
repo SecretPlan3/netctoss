@@ -46,7 +46,7 @@ public class ServiceYearlyDaoImpl extends BaseDao implements IServiceYearlyDao {
 		String hql = "From ServiceYearlyBean as s where s.year=? and s.service.osName=?";
 		Query query = getSession().createQuery(hql);
 		query.setString(0, year);
-		query.setString(2, osName);
+		query.setString(1, osName);
 		return (ServiceYearlyBean) query.uniqueResult();
 	}
 

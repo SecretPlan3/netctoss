@@ -34,7 +34,7 @@ public class TestService {
 		ServiceBean sb = serviceBeanServiceImpl.getServiceBeanByID(7L);
 		System.out.println(sb);
 	}
-	@Test
+	@Ignore
 	public void testGL() {
 		ServiceDailyBean sd=serviceDailyServiceImpl.getServiceDailyBeanByID(11L);
 		ServiceMonthlyBean sm = serviceMonthlyServiceImpl.getServiceMonthlyBeanByID(9L);
@@ -45,5 +45,21 @@ public class TestService {
 		sm.setService(sb);
 		serviceDailyServiceImpl.updateServiceDailyBean(sd);
 		serviceMonthlyServiceImpl.updateServiceMonthlyBean(sm);
+	}
+	@Ignore
+	public void testMonthly() {
+		serviceTimeServiceImpl.saveAsMonthlyService();
+	}
+	@Ignore
+	public void testSumTime() {
+		serviceTimeServiceImpl.findAllOsName("2017-12");
+	}
+	@Ignore
+	public void testSumTime1() {
+		serviceTimeServiceImpl.getSumTimeByOsName("1");
+	}
+	@Test
+	public void testDaily() {
+		serviceTimeServiceImpl.saveAsDailyService();
 	}
 }

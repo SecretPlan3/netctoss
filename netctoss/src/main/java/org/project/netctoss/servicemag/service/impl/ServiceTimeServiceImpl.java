@@ -29,12 +29,20 @@ public class ServiceTimeServiceImpl implements IServiceTimeService {
 		// TODO Auto-generated method stub
 		 serviceTimeDaoImpl.saveAsMonthlyService();
 	}
-
+	/**
+	 * 查找t_service_time表里所有的业务账号
+	 */
 	@Override
 	public List<Map<String, String>> findAllOsName(String beginTime) {
 		// TODO Auto-generated method stub
 		return serviceTimeDaoImpl.findAllOsName(beginTime);
 	}
-
+	/**
+	 * 查找t_service_time表里所有的业务账号
+	 */
+@Override
+public Long getSumTimeByOsName(String osName) {
+	return  serviceTimeDaoImpl.getSumTimeByOsName(osName);
+}
 	
 }

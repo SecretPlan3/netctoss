@@ -227,14 +227,20 @@
 	
 	
 	//long 转String 
-	function timeLongToString(longTime){	
-		var s =  longTime / 1000; //总秒数
-		var hs = parseInt(s /3600); //小时数
-		var mins =  parseInt((s - hs * 3600) / 60) ; //分钟数
-		var ss =  parseInt((s -  hs * 3600 - mins * 60)); //秒数 
+	function timeLongToString(longTime){
+		//总秒数
+		var s =  longTime / 1000;
+		//小时数
+		var hs = parseInt(s/3600); 
+		//分钟数
+		var mins =  parseInt((s-hs*3600)/60); 
+		 //秒数 
+		var ss =  parseInt((s-hs*3600-mins*60));
+		 //最后的String格式的时间
 		var time = "" + hs + ":" + mins +  ":" + ss;
 		return time;
 	}
+	
 	
 	//查询函数 ---查询按钮点击事件
 	function search(){

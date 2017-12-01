@@ -78,10 +78,14 @@ public class CostController {
 	}
 	
 	@RequestMapping(value="/findAllCosts")
-	public PagerBean findAllCostsByPager(PagerBean pager) {
+	public @ResponseBody PagerBean findAllCostsByPager(PagerBean pager) {
 		//查询所有的资费套餐
 		System.out.println("进入CostController的findAllCostsByPager方法");
 		System.out.println("传入的pager为：" + pager);
+		int page = pager.getPage() <= 0 ?1:pager.getPage();
+		int rows = pager.getRows() <= 0 ?5:pager.getRows();
+		pager.setPage(page);
+		pager.setRows(rows);
 		pager = costServiceImpl.findAllCostsByPager(pager);
 		System.out.println("查询后：" + pager);
 		return pager;

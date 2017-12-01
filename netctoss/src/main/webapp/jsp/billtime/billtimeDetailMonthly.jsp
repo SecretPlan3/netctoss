@@ -225,6 +225,7 @@
 		});
 	}
 	
+	
 	//long 转String 
 	function timeLongToString(longTime){	
 		var s =  longTime / 1000; //总秒数

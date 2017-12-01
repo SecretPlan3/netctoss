@@ -184,7 +184,8 @@
 				totalRows = msg.totalRows;
 				totalPage = msg.totalPage;
 				var datas = msg.datas;
-
+				console.info(msg);
+				
 				var s = "";
 				for (var i = 0; i < datas.length; i++) {
 					s+= "<tr value="+datas[i].id+"><td class='am-text-center'>"
@@ -192,11 +193,13 @@
 					+datas[i].osName+"</td>";
 					var y = datas[i].serviceYear;
 					for ( var j = 0; j < y.length; j++ ) {
-						s+="<td>"+y[j].onlineTime +"</td> ";
-						var m = y[j].serviceMonthly;
+						s+="<td>"+timeLongToString(y[j].onlineTime); +"</td> ";
+						var mon = y[j].serviceMonthly;
+						var m =mon.sort(function(a,b){ return parseInt(a.month) - parseInt(b.month); }); //给数组排序 ，形参ab用来制定规则
+						console.info(m);
+
 						for ( var k = 0; k < m.length; k++) {
-							var time = timeLongToString(m[k].onlineTime);
-							s+="<td>"+ time +"</td> ";
+							s+="<td>"+ timeLongToString(m[k].onlineTime); +"</td> ";
 						}
 					}
 					s+="</tr>";

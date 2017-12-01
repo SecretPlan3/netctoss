@@ -92,16 +92,17 @@
            </table>
             <!-- 主表格 -->  
            
+            
           <!-- 功能按钮组div-->
-  		<div class="am-btn-group am-btn-group-xs am-fl">
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 删除</button>
+          <!-- 功能按钮组div-->
+  		<div class="am-btn-group am-btn-group-xs ">
+               <button onclick="delete0()" type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 删除</button>
                <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 上架</button>
                <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 下架</button>
                <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
                <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 保存</button>
                <button type="button" class="am-btn am-btn-default"><span class="am-icon-archive"></span> 移动</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-trash-o"></span> 删除</button>
-           </div>
+        </div>
            <!-- 翻页按钮组 ul-->
            <ul class="am-pagination " style="text-align: right">
                <li  onclick ="first()"><a href="javascript:void(0)">«</a></li>
@@ -195,6 +196,10 @@
 			loginName:$("#loginName").val()
 		}; 
 		showData();	//调用显示数据函数，ajax刷新页面
+	}
+	//删除函数 ---查询按钮点击事件
+	function delete0(){
+			alert("我要删除了");
 	}
 
 	//翻页按钮 绑定的监听事件 ++++++++++++++++++++++++++

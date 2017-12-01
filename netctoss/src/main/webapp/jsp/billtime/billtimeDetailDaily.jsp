@@ -40,22 +40,46 @@
             <h1>开放实验室日使用时长信息</h1>
        </div>
              
-	 <!--模糊查询-->
+ <!--模糊查询-->
 	<form id = "form0" method="POST">
        <div class="search">
            <ul class="am-nav am-nav-pills am-topbar-nav ">
                <li class="soso"> 
-               		<p><button class="am-btn am-btn-xs am-btn-default am-xiao">账务账号编号：</button></p>
-                   	<p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="账务账号编号" id="id" name="id"/></p></li>
-               <li class="soso">
-               		<p><button class="am-btn am-btn-xs am-btn-default am-xiao">身份证号：</button></p>
-                   <p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="身份证号" id="idcard" name="idcard"/></p></li>
+               		<p><button class="am-btn am-btn-xs am-btn-default am-xiao">账务账号：</button></p>
+                   	<p class="ycfg"><input readonly type="text" class="am-form-field am-input-sm"  id="loginName" name="loginName"/></p></li>    
                <li class="soso">
                		<p><button class="am-btn am-btn-xs am-btn-default am-xiao">用户姓名：</button></p>
-                   	<p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="用户姓名"  id="userName" name="userName"/></p> </li>
-               <li class="soso">
-               		<p> <button class="am-btn am-btn-xs am-btn-default am-xiao">账号：</button> </p>
-               		<p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="账号" id="loginName" name="loginName"//> </p></li>
+                   	<p class="ycfg"><input readonly  type="text" class="am-form-field am-input-sm"  id="userName" name="userName"/></p> </li>
+
+              <li class="soso">
+                   <p>
+                       <button class="am-btn am-btn-xs am-btn-default am-xiao">年份</button>
+                   </p>
+                   <p>
+                       <select data-am-selected="{btnWidth: 110, btnSize: 'sm', btnStyle: 'default'}">
+                           <option value="1">2013</option>
+                           <option value="2">2014</option>
+                           <option value="3">2015</option>
+                           <option value="4">2016</option>
+                           <option value="5">2017</option>
+                       </select>
+                   </p>
+                </li>
+              <li class="soso">
+                   <p>
+                       <button class="am-btn am-btn-xs am-btn-default am-xiao">月份</button>
+                   </p>
+                   <p>
+                       <select data-am-selected="{btnWidth: 110, btnSize: 'sm', btnStyle: 'default'}">
+                           <option value="1">1</option>
+                           <option value="2">2</option>
+                           <option value="3">3</option>
+                           <option value="4">4</option>
+                           <option value="5">5</option>
+                       </select>
+                   </p>
+                </li>
+          
                <li class="soso">
                		<p><button type="button" onclick = "search()" class="am-btn am-btn-xs am-btn-default am-xiao"><i class="am-icon-search"></i></button></p></li>
             </ul>
@@ -72,7 +96,8 @@
                		<input type="hidden" id = "chosenId">
                    <th class="table-title">服务器编号</th>
                    <th class="table-title">服务器信息</th>
-                   <th class="table-title">年总时长</th>
+                   <th class="table-title">月总时长</th>
+
                    <th class="table-set" width="125px">详细</th>
                </tr>
                </thead>
@@ -120,6 +145,7 @@
 
 	//页面加载完组件后，直接执行的内容
 	$(function(){
+		$("#userId").val("");
 		showData();	
 	});
 	
@@ -143,27 +169,31 @@
 				totalRows = msg.totalRows;
 				totalPage = msg.totalPage;
 				var datas = msg.datas;
-				console.info(datas);
-				console.info(datas[0]);
-				console.info(datas[0].id);
-				console.info(datas[0].serviceYear);
+				console.info(msg);
 				
 				var s = "";
 				for (var i = 0; i < datas.length; i++) {
 					s+= "<tr value="+datas[i].id+"><td class='am-text-center'>"
 					+datas[i].id+"</td>" + "<td class='am-text-center'>"
-					+datas[i].osName+"</td>"
+					+datas[i].osName+"</td>";
 					var y = datas[i].serviceYear;
 					for ( var j = 0; j < y.length; j++ ) {
-						s+="<td>"+y[j].onlineTime +"</td> "
-						var m = y[j].serviceMonthly;
+						s+="<td>"+timeLongToString(y[j].onlineTime); +"</td> ";
+						var mon = y[j].serviceMonthly;
+						var m =mon.sort(function(a,b){ return parseInt(a.month) - parseInt(b.month); }); //给数组排序 ，形参ab用来制定规则
+						console.info(m);
+
 						for ( var k = 0; k < m.length; k++) {
-							s+="<td>"+m[k].onlineTime +"</td> "
+							s+="<td>"+ timeLongToString(m[k].onlineTime); +"</td> ";
 						}
 					}
-					s+="</tr>"
+					s+="</tr>";
 				}
 				$("#table0 tbody").html(s);
+				$("#loginName").val(datas[0].user.loginName);
+				$("#userName").val(datas[0].user.userName);
+				
+				
 				//给每行添加点击事件
 			 	//绑定事件******************************************************
 					$("tr").each(function(i,val){ 
@@ -172,6 +202,7 @@
 								var value = $(this).attr("value");
 								$("#chosenId").attr("value",value);//给隐藏的表单元素 赋值 当前行对应的ID
 								alert($("#chosenId").attr("value"));
+								window.location.href="jsp/billtime/billtimeDetailDaily.jsp" + "?id="+ value ;
 							})  
 						}
 						
@@ -181,6 +212,23 @@
 			}
 		});
 	}
+	
+	
+	//long 转String 
+	function timeLongToString(longTime){
+		//总秒数
+		var s =  longTime / 1000;
+		//小时数
+		var hs = parseInt(s/3600); 
+		//分钟数
+		var mins =  parseInt((s-hs*3600)/60); 
+		 //秒数 
+		var ss =  parseInt((s-hs*3600-mins*60));
+		 //最后的String格式的时间
+		var time = "" + hs + ":" + mins +  ":" + ss;
+		return time;
+	}
+	
 	
 	//查询函数 ---查询按钮点击事件
 	function search(){

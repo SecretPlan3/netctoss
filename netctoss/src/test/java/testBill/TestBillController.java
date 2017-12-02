@@ -40,8 +40,23 @@ public class TestBillController {
 		System.err.println(page);
 		
 	}
-	
 	@Test
+	public void test2() {
+		PagerBean page = new PagerBean();
+		// 模拟参数
+		Map<String, Object> params = new HashMap<>();
+		params.put("userID", "1");
+		params.put("year", "2017");
+		params.put("month", "10");
+		page.setParams(params);
+		page.setPage(1);
+		page.setRows(5);
+		
+		page = billController.findServiceBill(page);
+		System.err.println(page.getDatas());
+	}
+	
+	
 	public void testFindYear() {
 		PagerBean page = new PagerBean();
 		PagerBean eee = billController.findAllYear(page);

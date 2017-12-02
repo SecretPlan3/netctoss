@@ -1,4 +1,4 @@
-var page = 1;
+var thePage = 1;
 var rows = 5;
 var year = getQueryString("year");
 var month = getQueryString("month");
@@ -29,7 +29,7 @@ function getQueryString(value) {
 function showUserBill(){
 	var url = "bill/findServiceBill";
 	var page = {
-			"page":page,
+			"page":thePage,
 			"rows":rows,
 			"params":{
 				"userID":getQueryString("userID"),
@@ -52,14 +52,14 @@ function showUserBill(){
 function showTable(msg){
 	//根据数组长度产生tr的数量
 	var td = "";
-	var th = "<thead><tr id='tableHead'>" +
+	var th = "<tr id='tableHead'>" +
 			"<th>业务编号</th>" +
 			"<th>业务账号</th>" +
 			"<th>服务器信息</th>" +
 			"<th>使用时长	时:分:秒</th>" +
 			"<th>总费用/元</th>" +
 			"<th>资费套餐</th>" +
-			"</tr></thead><tbody>";
+			"</tr>";
 	for(var i=0;i<msg.datas.length;i++){
 		td += "<tr index='"+msg.datas[i].id+"' data-toggle='modal' data-target='#myModal_001'>" +
 				"<td>"+msg.datas[i].id+
@@ -69,9 +69,6 @@ function showTable(msg){
 				"</td><td>"+msg.datas[i].serviceYear[0].serviceMonthly[0].cost+
 				"</td><td id='costName'>"+msg.datas[i].cost.name+
 				"</td></tr>"
-		if(i = msg.datas.length - 1){
-			td += "</tbody>";
-		}
 	}
 	$("#table01").html(th + td);
 	
@@ -109,10 +106,10 @@ function setClick(){
 }
 
 //请求数据
-function jumpShowServiceBill(arge,arge1){
+function jumpShowServiceBill(arge,arge6){
 	var url = "bill/findServiceTimeBill";
 	var page = {
-			"page":page,
+			"page":thePage,
 			"rows":rows,
 			"params":{
 				"osName":osName,
@@ -120,30 +117,30 @@ function jumpShowServiceBill(arge,arge1){
 				"logoutTime":logoutTime,
 			}
 	}
-	$.ajax({
-		type: "GET",
-		url: url,
-		async: true,
-		data: page,
-		success: function(msg){
-			console.info(msg);
-			showServiceTimeBillTable(msg,arge1);
-		}
-	});
+//	$.ajax({
+//		type: "GET",
+//		url: url,
+//		async: true,
+//		data: page,
+//		success: function(msg){
+//			console.info(msg);
+////			showServiceTimeBillTable(msg,arge6);
+//		}
+//	});
 }
 
 //显示表格
-function showServiceTimeBillTable(msg,arge1){
+function showServiceTimeBillTable(msg,arge7){
 	//根据数组长度产生tr的数量
 	var td = "";
-	var th = "<thead><tr id='tableHead2'>" +
+	var th = "<tr id='tableHead2'>" +
 			"<th>服务器信息</th>" +
 			"<th>登录时间</th>" +
 			"<th>登出时间</th>" +
 			"<th>使用时长	时:分:秒</th>" +
 			"<th>总费用/元</th>" +
 			"<th>资费套餐</th>" +
-			"</tr></thead><tbody>";
+			"</tr>";
 	for(var i=0;i<msg.datas.length;i++){
 		td += "<tr index='"+msg.datas[i].id+"'>" +
 				"</td><td >"+msg.datas[i].serviceTime.unxiHost+
@@ -151,11 +148,8 @@ function showServiceTimeBillTable(msg,arge1){
 				"</td><td>"+msg.datas[i].serviceTime.logoutTime+
 				"</td><td>"+timeLongToString(msg.datas[i].serviceTime.onlineTime)+
 				"</td><td>"+msg.datas[i].cost+
-				"</td><td>"+arge1+
+				"</td><td>"+arge7+
 				"</td></tr>"
-		if(i = msg.datas.length - 1){
-			td += "</tbody>";
-		}
 	}
 	$("#table02").html(th + td);
 	

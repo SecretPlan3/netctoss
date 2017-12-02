@@ -39,7 +39,7 @@ public class PagerBean {
 		this.rows = rows;
 	}
 	public int getIndex() {
-		index = (page - 1) * rows;
+		index = (this.page - 1) * this.rows;
 		return index;
 	}
 	public void setIndex(int index) {

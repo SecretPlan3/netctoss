@@ -64,9 +64,6 @@
 	<form class="am-form am-g">
 		<div id="table_div">
 			<table id="table01" class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover" width="100%">
-				<thead>
-					<!-- 动态数据 -->
-				</thead>
 				<tbody>
 					<!-- 动态数据 -->
 				</tbody>
@@ -119,9 +116,6 @@
                 <div class="modal-body">
                     <div id='table_div2' class="tc001_body_content">
                     	<table id="table02" class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover" width="100%">
-							<thead>
-								<!-- 动态数据 -->
-							</thead>
 							<tbody>
 								<!-- 动态数据 -->
 							</tbody>

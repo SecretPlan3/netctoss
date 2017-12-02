@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "t_user")
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer","handler"})
 public class UserBean implements Serializable{
 	@Id
 	@Column(name = "id")

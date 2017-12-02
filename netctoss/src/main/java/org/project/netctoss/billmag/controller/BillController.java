@@ -25,12 +25,14 @@ public class BillController {
 	@RequestMapping(value="/findAllYear",method = { RequestMethod.GET },produces= {"application/json;charset=utf-8"})
 	public PagerBean findAllYear(PagerBean page){
 		page = billServiceImpl.findAllYear();
+		System.err.println(page);
 		return page;
 	}
 	
 	@RequestMapping(value="/findUserBill",method = { RequestMethod.GET },produces= {"application/json;charset=utf-8"})
 	public PagerBean findUserBill(PagerBean page) {
 		page = billServiceImpl.findAllUserBillByCondition(page);
+		System.err.println(page);
 		return page;
 	}
 	
@@ -39,6 +41,7 @@ public class BillController {
 		Long userID = Long.parseLong((String) page.getParams().get("userID"));
 		page.getParams().put("userID", userID);
 		page = billServiceImpl.findAllServiceBillByCondition(page);
+		System.err.println(page);
 		return page;
 	}
 	
@@ -49,7 +52,7 @@ public class BillController {
 		page.getParams().put("loginTime", loginTime);
 		page.getParams().put("logoutTime", logoutTime);
 		page = billServiceImpl.findAllServiceTimeBillByCondition(page);
-		System.err.println(page);
+		System.out.println(page);
 		return page;
 	}
 	

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.hibernate.Query;
 import org.project.netctoss.beans.BillBean;
+import org.project.netctoss.beans.ServiceBean;
 import org.project.netctoss.beans.ServiceDetailCostBean;
 import org.project.netctoss.beans.ServiceMonthlyBean;
 import org.project.netctoss.beans.ServiceYearlyBean;
@@ -65,7 +66,6 @@ public class BillDaoImpl extends BaseDao implements IBillDao {
 
 	@Override
 	public PagerBean findAllServiceBillByCondition(PagerBean page) {
-
 		String hql = "SELECT COUNT(s.id) from ServiceBean as s join s.serviceYear as y join y.serviceMonthly as m join s.cost as c join s.user as u WHERE y.year = :year AND m.month = :month AND u.userId = :userID ";
 		Query query = getSession().createQuery(hql.toString());
 		query.setProperties(page.getParams());
@@ -76,8 +76,8 @@ public class BillDaoImpl extends BaseDao implements IBillDao {
 		query.setProperties(page.getParams());
 		query.setFirstResult(page.getIndex());
 		query.setMaxResults(page.getRows());
-		List<ServiceMonthlyBean> allMonthly = query.list();
-		page.setDatas(allMonthly);
+		List<ServiceBean> allservice = query.list();
+		page.setDatas(allservice);
 		return page;
 	}
  

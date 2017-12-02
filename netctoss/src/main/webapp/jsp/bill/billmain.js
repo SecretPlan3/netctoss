@@ -1,4 +1,4 @@
-var page = 1;
+var thePage = 1;
 var rows = 5;
 var year = "";
 var month = "";
@@ -37,7 +37,7 @@ function showUserBill(){
 	var url = "bill/findUserBill";
 	
 	var page = {
-			"page":page,
+			"page":thePage,
 			"rows":rows,
 			"params":{
 				"userName":$("#userName").val(),
@@ -53,6 +53,7 @@ function showUserBill(){
 		async: true,
 		data: page,
 		success: function(msg){
+			console.info(msg);////////////////////////////////////////////////////////////
 			showTable(msg);
 		}
 	});
@@ -75,7 +76,7 @@ function showUserBill(){
 function showTable(msg){
 	//根据数组长度产生tr的数量
 	var td = "";
-	var th = "<thead><tr id='tableHead'>" +
+	var th = "<tr id='tableHead'>" +
 			"<th>账单编号</th>" +
 			"<th>账务账号</th>" +
 			"<th>用户姓名</th>" +
@@ -84,7 +85,7 @@ function showTable(msg){
 			"<th>支付状态</th>" +
 			"<th>支付方式</th>" +
 			"<th>支付时间</th>" +
-			"</tr></thead><tbody>";
+			"</tr>";
 	for(var i=0;i<msg.datas.length;i++){
 		td += "<tr index='"+msg.datas[i].id+"'>" +
 				"<td>"+msg.datas[i].id+
@@ -96,9 +97,6 @@ function showTable(msg){
 				"</td><td>"+payTypeRing(msg.datas[i].payMethod)+
 				"</td><td>"+msg.datas[i].payTime+
 				"</td></tr>"
-		if(i = msg.datas.length - 1){
-			td += "</tbody>";
-		}
 	}
 	$("#table01").html(th + td);
 	

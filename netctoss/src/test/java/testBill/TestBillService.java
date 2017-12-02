@@ -45,14 +45,14 @@ public class TestBillService {
 		System.err.println(page.getDatas());
 	}
 	
-	
+	@Test
 	public void testFindUserAllService() {
 		PagerBean page = new PagerBean();
 		// 模拟参数
 		Map<String, Object> params = new HashMap<>();
 		params.put("userID", 1L);
 		params.put("year", "2017");
-		params.put("month", "4");
+		params.put("month", "10");
 		page.setParams(params);
 		page.setPage(1);
 		page.setRows(5);
@@ -82,7 +82,7 @@ public class TestBillService {
 		}
 	}
 	
-	@Test
+	
 	public void testOther() {
 		Date date = new Date();
 		System.out.println(date.getTime());

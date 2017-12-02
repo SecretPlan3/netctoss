@@ -42,7 +42,7 @@
 		<ul class="am-icon-flag on">账单查询</ul>
 		<dl class="am-icon-home" style="float: right;">当前位置： 首页 &gt;&nbsp;
 		<a href="<%=basePath%>jsp/bill/billmain.jsp">账单查询</a>&gt;&nbsp;
-		<a href="<%=basePath%>jsp/bill/servicebill.jsp">业务账号账单</a></dl>
+		<a href="javascript:void(0)">业务账号账单</a></dl>
 	</div>
 	
 	<!-- 页面标题 -->
@@ -56,7 +56,6 @@
 				<td id="h4_loginName" style="color:gray">账务账号：</td>
 				<td id="h4_userName" style="color:gray">用户姓名：</td>
 				<td id="h4_date" style="color:gray">日期：</td>
-				
 			</tr>
 		</table>
 	</div>
@@ -92,16 +91,18 @@
 				<span class="am-icon-trash-o"></span> 删除
 			</button>
 		</div>
-		<!-- 翻页 -->
-		<ul class="am-pagination " style="text-align: right">
-			<li class="am-disabled"><a href="#">«</a></li>
-			<li class="am-active"><a href="#"><</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">></a></li>
-			<li><a href="#">»</a></li>
-		</ul>
+		<!-- 翻页按钮组 ul-->
+           <ul class="am-pagination " style="text-align: right">
+              	<li  onclick ="first()"><a href="javascript:void(0)">«</a></li>
+               	<li  onclick ="pre()" ><a href="javascript:void(0)"> < </a></li>
+               	<li  onclick ="jump()"><a id="tza" href="javascript:void(0)">跳转</a></li>
+               	<li>
+               		<input style='width:40px;height:24px' type="text" class="am-input-sm" id="page" name="page"/>
+               	</li>
+               	<li onclick ="next()"><a href="javascript:void(0)" >></a></li>
+               	<li onclick ="end()"><a href="javascript:void(0)" >»</a></li>
+               	<li  id="yema1"></li><!-- 这是显示总条数的列表 -->
+            </ul>
 		<hr>
 	</form>
 	</div>  
@@ -121,19 +122,21 @@
 							</tbody>
 						</table>
                     </div>
-                    <!-- 翻页 -->
-					<ul class="am-pagination " style="text-align: right">
-						<li class="am-disabled"><a href="#">«</a></li>
-						<li class="am-active"><a href="#"><</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">></a></li>
-						<li><a href="#">»</a></li>
-					</ul>
+                  <!-- 翻页按钮组 ul-->
+		           <ul class="am-pagination " style="text-align: right">
+		              	<li  onclick ="first2()"><a href="javascript:void(0)">«</a></li>
+		               	<li  onclick ="pre2()" ><a href="javascript:void(0)"> < </a></li>
+		               	<li  onclick ="jump2()"><a id="tza2" href="javascript:void(0)">跳转</a></li>
+		               	<li>
+		               		<input style='width:40px;height:24px' type="text" class="am-input-sm" id="page2" name="page"/>
+		               	</li>
+		               	<li onclick ="next2()"><a href="javascript:void(0)" >></a></li>
+		               	<li onclick ="end2()"><a href="javascript:void(0)" >»</a></li>
+		               	<li  id="yema2"></li><!-- 这是显示总条数的列表 -->
+		            </ul>
                 </div>
                 <div class="tc001_footer_btn" style="align-content: center">
-                	<button type="submit" class="btn btn-primary" data-dismiss="modal" style="width:100px">关闭</button>
+                	<button id="closeTC" type="submit" class="btn btn-primary" data-dismiss="modal" style="width:100px">关闭</button>
                 </div>
                 <hr>
             </div>

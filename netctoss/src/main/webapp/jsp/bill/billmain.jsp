@@ -151,16 +151,18 @@
 				<span class="am-icon-trash-o"></span> 删除
 			</button>
 		</div>
-		<!-- 翻页 -->
-		<ul class="am-pagination " style="text-align: right">
-			<li class="am-disabled"><a href="#">«</a></li>
-			<li class="am-active"><a href="#"><</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">></a></li>
-			<li><a href="#">»</a></li>
-		</ul>
+		 	<!-- 翻页按钮组 ul-->
+           <ul class="am-pagination " style="text-align: right">
+              	<li  onclick ="first()"><a href="javascript:void(0)">«</a></li>
+               	<li  onclick ="pre()" ><a href="javascript:void(0)"> < </a></li>
+               	<li  onclick ="jump()"><a id="tza" href="javascript:void(0)">跳转</a></li>
+               	<li>
+               		<input style='width:40px;height:24px' type="text" class="am-input-sm" id="page" name="page"/>
+               	</li>
+               	<li onclick ="next()"><a href="javascript:void(0)" >></a></li>
+               	<li onclick ="end()"><a href="javascript:void(0)" >»</a></li>
+               	<li  id="yema"></li><!-- 这是显示总条数的列表 -->
+            </ul>
 		<hr>
 	</form>
 	</div>  

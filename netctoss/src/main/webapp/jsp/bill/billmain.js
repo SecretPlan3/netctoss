@@ -1,5 +1,8 @@
 var thePage = 1;
 var rows = 5;
+var totalRows = 0;
+var totalPage = 0;
+
 var year = "";
 var month = "";
 var userID = 0;
@@ -53,7 +56,10 @@ function showUserBill(){
 		async: true,
 		data: page,
 		success: function(msg){
-			console.info(msg);////////////////////////////////////////////////////////////
+			thePage = msg.page;
+			rows = msg.rows;
+			totalRows = msg.totalRows;
+			totalPage = msg.totalPage
 			showTable(msg);
 		}
 	});
@@ -99,6 +105,8 @@ function showTable(msg){
 				"</td></tr>"
 	}
 	$("#table01").html(th + td);
+	//动态显示关于页面的信息
+	$("#yema").html("当前第"+msg.page+"页/共"+msg.totalPage+"页/一共"+msg.totalRows+"条");
 	
 	$("#tableHead").addClass("am-success");
 	$("th").addClass("table-title am-text-center");
@@ -198,5 +206,61 @@ function payTypeRing(args){
 	}
 }
 
+//首页
+function first(){
+	if(thePage != 1){
+		thePage = 1;
+		showUserBill();
+	}
+}
+//上一页
+function pre(){
+	if(thePage > 1){
+		thePage = thePage-1;
+		showUserBill();
+	}
+}
+//跳转
+function jump(){
+	var input = $("#page").val();
+	var inputPage = parseInt(input);
+	if(isNaN(inputPage)){
+		$("#tza").html("<lable id='tza_tza' style='color:red'>请输入范围内的页数：(1~" + totalPage + ")</lable>");
+		$("#tza_tza").mouseout(function () { 
+			window.setTimeout(function(){
+				$("#tza").html("跳转");  
+			},1000);
+	    });
+	}else{
+		if( inputPage > 0 && inputPage <= totalPage ){
+			if(thePage != inputPage){//若页数相同 则不进行跳转
+				thePage = inputPage;
+				showUserBill();
+			}
+		}else{
+			$("#tza").html("<lable id='tza_tza2' style='color:red'>页数(" + inputPage + ")超出范围!\n请输入范围内的页数：1~" + totalPage + ")</lable>");
+			$("#tza_tza2").mouseout(function () {  
+				window.setTimeout(function(){
+					$("#tza").html("跳转");  
+				},1000);
+		    });
+		}
+	}
+	 $("#page").val("");
+}
+//下一页
+function next(){
+	if(thePage < totalPage){
+		thePage = thePage+1;
+		showUserBill()
+	}
+};
+//尾页
+function end(){
+	if(thePage != totalPage){
+		thePage = totalPage;
+		showUserBill()
+	}
+}
 
 

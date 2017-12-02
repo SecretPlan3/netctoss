@@ -33,47 +33,50 @@
 			</div>
 			<div class="modal-body">
 				<div class="tc001_body_content">
-					<form role="form">
+					<form role="form" id="formObj">
 						<div class="form-group">
+							<input type="hidden" value = "${costBean.id}" name = "id">
 							<label>套餐名称</label> <input type="text" class="form-control"
-								value="${costBean.name}">
+								value="${costBean.name}" name="name">
 						</div>
 						<div class="form-group">
 							<label>套餐编号</label> <input type="text" class="form-control"
-								value="${costBean.costNumber}" disabled="disabled">
+								value="${costBean.costNumber}" readonly="" name="costNumber">
 						</div>
 						<div class="form-group">
-							<label>套餐类型</label> <select class="form-control">
-								<option>包月资费套餐</option>
-								<option>计时资费套餐</option>
-								<option>自助资费套餐</option>
+							<label>套餐类型</label> <select class="form-control" name="type">
+								<option value="0">包月资费套餐</option>
+								<option value="1">计时资费套餐</option>
+								<option value="2">自助资费套餐</option>
 							</select>
 						</div>
 						<div class="form-group">
 							<label>基本费用</label> <input id="basicCost" type="text"
-								class="form-control" value="${costBean.basicCost}">
+								class="form-control" value="${costBean.basicCost}" name="basicCost">
 						</div>
 						<div class="form-group">
 							<label>单位费用</label> <input id="unitCost" disabled="disabled"
-								type="text" class="form-control" value="${costBean.unitCost}">
+								type="text" class="form-control" value="${costBean.unitCost}" name="unitCost">
 						</div>
 						<div class="form-group">
 							<label>基本时长</label> <input id="basicTime" disabled="disabled"
-								type="text" class="form-control" value="${costBean.basicTime}">
+								type="text" class="form-control" value="${costBean.basicTime}" name="basicTime">
 						</div>
 						<div class="form-group">
-							<label>业务状态</label> <select class="form-control">
-								<option>暂停</option>
-								<option>开通</option>
+							<label>业务状态</label> <select class="form-control" name="status">
+								<option value="0">暂停</option>
+								<option value="1">开通</option>
 							</select>
 						</div>
 						<div class="form-group">
 							<label>资费说明</label> <input type="text" class="form-control"
-								placeholder="${costBean.description}">
+								value="${costBean.description}" name="description">
 						</div>
 						<div class="tc001_footer_btn postion_center">
 							<button type="submit" class="btn btn-primary"
-								data-dismiss="modal">确认修改</button>
+								data-dismiss="modal" onclick="updateCost()" title="确认修改">确认</button>
+							<a href="jsp/cost/costmag.jsp"><button type="button" class="btn btn-primary"
+								data-dismiss="modal" title="返回资费管理主页">返回</button></a>
 						</div>
 					</form>
 				</div>
@@ -82,6 +85,22 @@
 	</div>
 
 	<script type="text/javascript">
+	
+		//修改資費套餐
+		function updateCost(){
+			var costBean = $("#formObj").serialize();
+			alert(costBean);
+			var url = "cost/updateCosts";
+			$.ajax({
+				   type: "POST",
+				   url: url,
+				   data: costBean,
+				   success: function(msg){
+				     alert( "修改成功！" );
+				   }
+				});
+		}
+		
 		//根据选择的资费套餐类型，显示课填的数据表
 		$("form select").on({
 			"change" : function() {
@@ -92,15 +111,15 @@
 		function choiceSelect(obj) {
 			var text = obj.val();
 			/* alert(text) */
-			if (text == "包月资费套餐") {
+			if (text == 0) {
 				$("#basicCost").attr("disabled", false)
 				$("#unitCost").attr("disabled", true)
 				$("#basicTime").attr("disabled", true)
-			} else if (text == "计时资费套餐") {
+			} else if (text == 1) {
 				$("#unitCost").attr("disabled", false)
 				$("#basicTime").attr("disabled", true)
 				$("#basicCost").attr("disabled", true)
-			} else if (text == "自助资费套餐") {
+			} else if (text == 2) {
 				$("#basicCost").attr("disabled", false)
 				$("#basicTime").attr("disabled", false)
 				$("#unitCost").attr("disabled", false)

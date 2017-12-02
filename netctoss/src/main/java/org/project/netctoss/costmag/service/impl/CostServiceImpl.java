@@ -32,7 +32,10 @@ public class CostServiceImpl implements ICostService {
 	@Override
 	public void updateCosts(CostBean costBean) {
 		// TODO Auto-generated method stub
-		costDaoImpl.updateCosts(costBean);
+		CostBean cb = selectCosts(costBean.getId());
+		int status = (int) costBean.getStatus();
+		cb.setStatus(status);
+		costDaoImpl.updateCosts(cb);
 	}
 
 	@Override

@@ -32,6 +32,8 @@ public class CostController {
 			mv = new ModelAndView("jsp/cost/costInfo");
 		}else if (task.equals("update")){
 			mv = new ModelAndView("jsp/cost/costUpdateInfo");
+		}else if (task.equals("updateStatus")){
+			mv = new ModelAndView("jsp/cost/costUpdateStatus");
 		}
 		
 		mv.addObject("costBean", costBean);

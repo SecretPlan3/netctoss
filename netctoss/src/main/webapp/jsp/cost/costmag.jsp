@@ -85,6 +85,7 @@
            <dl>
                <!-- <a href="addcost.html" target="_self"></a> -->
                <button type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus" data-toggle="modal" data-target="#myModal_001">增加资费套餐</button>
+               <button type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus" onclick="updateStatus()">开通/暂停</button>
            </dl>
            <!--data-am-modal="{target: '#my-popup'}" 弹出层 ID  弹出层 190行 开始  271行结束-->
 
@@ -152,52 +153,56 @@
                 </div>
                 <div class="modal-body">
                     <div class="tc001_body_content">
-                         <form role="form">
+                         <form role="form" id="formObj">
 		                    <div class="form-group">
 		                        <label>套餐名称</label>
-		                        <input type="text" class="form-control" placeholder="套餐名称">
+		                        <input type="text" class="form-control" placeholder="套餐名称" name="name">
 		                    </div>
 		                    <div class="form-group">
 		                        <label>套餐编号</label>
-		                        <input type="text" class="form-control" placeholder="套餐编号" >
+		                        <input type="text" class="form-control" placeholder="套餐编号" name="costNumber">
 		                    </div>
 		                    <div class="form-group">
 		                        <label>套餐类型</label>
-		                        <select class="form-control">
-		                            <option>包月资费套餐</option>
-		                            <option>计时资费套餐</option>
-		                            <option>自助资费套餐</option>
+		                        <select class="form-control" name="type">
+		                            <option value="0">包月资费套餐</option>
+		                            <option value="1">计时资费套餐</option>
+		                            <option value="2">自助资费套餐</option>
 		                        </select>
 		                    </div>
 		                    <div class="form-group">
 		                        <label>基本费用</label>
-		                        <input  id="basicCost"  type="text" class="form-control" placeholder="基本费用(元/月)">
+		                        <input  id="basicCost"  type="text" class="form-control" placeholder="基本费用(元/月)" name="basicCost">
 		                    </div>
 		                    <div class="form-group">
 		                        <label>单位费用</label>
-		                        <input id="unitCost" disabled="disabled" type="text" class="form-control" placeholder="单位费用(元/时)">
+		                        <input id="unitCost" disabled="disabled" type="text" class="form-control" placeholder="单位费用(元/时)" name="unitCost">
 		                    </div>
 		                    <div class="form-group">
 		                        <label>基本时长</label>
-		                        <input id="basicTime" disabled="disabled" type="text" class="form-control" placeholder="基本时长(小时)">
+		                        <input id="basicTime" disabled="disabled" type="text" class="form-control" placeholder="基本时长(小时)" name="basicTime">
+		                    </div>
+		                    <div class="form-group">
+		                        <label>当前日期</label>
+		                        <input type="text" class="form-control" placeholder="当前日期" data-am-datepicker="" readonly="" name="createTime">
 		                    </div>
 		                    <div class="form-group">
 		                        <label>业务状态</label>
-		                        <select class="form-control">
-		                            <option>暂停</option>
-		                            <option>开通</option>
+		                        <select class="form-control" name="status">
+		                            <option value="0">暂停</option>
+		                            <option value="1">开通</option>
 		                        </select>
 		                    </div>
 		                    <div class="form-group">
 		                        <label>资费说明</label>
-		                        <input type="text" class="form-control" placeholder="资费说明" >
+		                        <input type="text" class="form-control" placeholder="资费说明" name="description">
 		                    </div>
 		                </form>
                         
                     </div>
                 </div>
-                <div class="tc001_footer_btn" style="align-content: center">
-                	<button type="submit" class="btn btn-primary" data-dismiss="modal">添加</button>
+                <div class="tc001_footer_btn" style="align-content:center">
+                	<button type="button" class="btn btn-primary" onclick="addCost()">添加</button>
                 	<button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
                 </div>
             </div>
@@ -287,12 +292,25 @@
 							}
 							
 						})
-				//***************************************************************
-					
 				}
 			});
 		}
-	 
+	 	
+		//增加资费
+		function addCost(){
+			var url = "cost/insertCosts";
+			var costBean = $("#formObj").serialize();
+			$.ajax({
+				   type: "POST",
+				   url: url,
+				   data: costBean,
+				   success: function(msg){
+				     alert(msg);
+				   }
+				});
+		}
+		
+		
         $("form input").on({
             "blur":function(){
                 checkNotNull($(this));
@@ -334,15 +352,15 @@
         function choiceSelect(obj){
         	var text = obj.val();
         	/* alert(text) */
-        	if(text == "包月资费套餐"){
+        	if(text == 0){
         		$("#basicCost").attr("disabled", false)
         		$("#unitCost").attr("disabled", true)
         		$("#basicTime").attr("disabled", true)
-        	}else if(text == "计时资费套餐"){
+        	}else if(text == 1){
         		$("#unitCost").attr("disabled", false)
         		$("#basicTime").attr("disabled", true)
         		$("#basicCost").attr("disabled", true)
-        	}else if(text == "自助资费套餐"){
+        	}else if(text == 2){
         		$("#basicCost").attr("disabled", false)
         		$("#basicTime").attr("disabled", false)
         		$("#unitCost").attr("disabled", false)
@@ -359,11 +377,20 @@
       
       function updateInfo(){
     	  if(trId == 0 ){
-    		  alert("请选择你要查看的内容！")
+    		  alert("请选择你要修改的内容！")
     	  }else{
     		  window.location.href="cost/selectCost" + "?id="+ trId + "&task=update";
     	  }
       }
+      //修改状态
+      function updateStatus(){
+    	  if(trId == 0 ){
+    		  alert("请选择你要修改的内容！")
+    	  }else{
+    		  window.location.href="cost/selectCost" + "?id="+ trId + "&task=updateStatus";
+    	  }
+      }
+      
       //翻页按钮 绑定的监听事件 ++++++++++++++++++++++++++
     	//跳转
     	 function jump(){

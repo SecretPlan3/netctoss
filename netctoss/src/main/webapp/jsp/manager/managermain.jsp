@@ -51,8 +51,8 @@
                	当前位置： 首页 &gt; <a href="#">用户评论</a>
            </dl>
            <dl>
-               <!-- <a href="addcost.html" target="_self"></a> -->
                
+               <!-- 下面四个是相应的模态框按钮(删除按钮不需要),通过data-target="#update"这个属性与下面相应的模态框的id对应就可以跳转了 -->
                <button type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus " data-toggle="modal" data-target="#add">增加</button>
                <button type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus updatefeikong" data-toggle="modal" data-target="#update">修改</button>
                <button type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus deletefeikong" data-toggle="modal">删除</button>

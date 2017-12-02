@@ -36,27 +36,47 @@ public class UserDaoImpl extends BaseDao implements IUserDao {
 		getSession().update(user);
 	}
 	
-	public PagerBean findUserByPager(PagerBean pager) {
-		String hql = "select count(b.id) from UserBean as b where b.userName like CONCAT(?,'%') and b.loginName like CONCAT(?,'%') and b.idcard like CONCAT(?,'%') and b.status like CONCAT(?,'%')";
-		Query query = getSession().createQuery(hql);
-		query.setString(0, pager.getParams().get("userName").toString());
-		query.setString(1, pager.getParams().get("loginName").toString());
-		query.setString(1, pager.getParams().get("idcard").toString());
-		query.setString(1, pager.getParams().get("status").toString());
-		long totalRows = (Long) query.uniqueResult();
-		pager.setTotalRows(Integer.valueOf(String.valueOf(totalRows)));
+	public PagerBean findUserByPager(PagerBean pb) {
+		StringBuilder hql = new StringBuilder( "from UserBean as u  where 1=1");
+		if (pb.getParams().get("id") != null ) {
+			hql.append("and u.id like CONCAT(:id ,'%') ");
+		}
+		if (pb.getParams().get("userName") != null  ) {
+			hql.append(	" and u.userName like CONCAT(:userName,'%') ");
+		}
+		if (pb.getParams().get("idcard") != null ) {
+			hql.append(	"and u.idcard like CONCAT(:idcard ,'%')");
+		}
+		if (pb.getParams().get("loginName") != null ) {
+			hql.append(	"and u.loginName like CONCAT(:loginName ,'%') ");
+		}
+		Query query = getSession().createQuery(hql.toString());// 这行代码，除了创建一个Query接口实例以外，例外一个作用就是预编译上面的HQL语句
+		query.setProperties(pb.getParams());// 要求map键值对中的键，一定要跟我们这里参数别名，保持一致
+		query.setFirstResult(pb.getIndex());//相当于limit第一个参数
+		query.setMaxResults(pb.getRows());//相当于limit第二个参数
 		
-		hql = "From UserBean as b where b.userName like CONCAT(?,'%') and b.loginName like CONCAT(?,'%') and b.idcard like CONCAT(?,'%') and b.status like CONCAT(?,'%')";
-		query = getSession().createQuery(hql);
-		query.setString(0, pager.getParams().get("userName").toString());
-		query.setString(1, pager.getParams().get("loginName").toString());
-		query.setString(1, pager.getParams().get("idcard").toString());
-		query.setString(1, pager.getParams().get("status").toString());
-		query.setFirstResult(pager.getIndex());
-		query.setMaxResults(pager.getRows()); 
-		List<?> datas = query.list();
-		pager.setDatas(datas);
-		return pager;
+		List<?> list = query.list();
+		pb.setDatas(list);
+
+		// 得到数据总数
+		hql = new StringBuilder( "select count(*) from UserBean as u  where 1=1 ");
+		if (pb.getParams().get("id") != null ) {
+			hql.append("and u.id like CONCAT(:id ,'%') ");
+		}
+		if (pb.getParams().get("userName") != null  ) {
+			hql.append(	" and u.userName like CONCAT(:userName,'%') ");
+		}
+		if (pb.getParams().get("idcard") != null ) {
+			hql.append(	"and u.idcard like CONCAT(:idcard ,'%')");
+		}
+		if (pb.getParams().get("loginName") != null ) {
+			hql.append(	"and u.loginName like CONCAT(:loginName ,'%') ");
+		}
+		query = getSession().createQuery(hql.toString());
+		query.setProperties(pb.getParams());
+		pb.setTotalRows(Integer.valueOf(query.uniqueResult() + ""));
+		
+		return pb;
 	}
 
 	

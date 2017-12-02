@@ -21,8 +21,10 @@ public class UserServiceImpl extends BaseDao implements IUserService {
 	}
 
 	public void deleteUserById(UserBean user) {
-		// TODO Auto-generated method stub  
-		userDaoImpl.deleteUserById(user);
+		// TODO Auto-generated method stub
+		UserBean user1 = findUserById(user.getUserId());//根据id查的持久化对象
+		user1.setStatus(user.getStatus());//对持久化对象做修改
+		userDaoImpl.updateUser(user1);//点击删除以后，直接将状态栏修改为关闭。
 	}
 
 	public void addUser(UserBean user) {

@@ -41,66 +41,18 @@
             <h1>用户管理系统</h1>
         </div>
         <div class="listbiaoti am-cf">
-            <ul class="am-icon-flag on"> 增加用户</ul>
-            <dl class="am-icon-home" style="float: right;"> 当前位置：增加用户 > <a href="#">用户管理系统</a></dl>
+            <ul class="am-icon-flag on"> 批量增加用户</ul>
+            <dl class="am-icon-home" style="float: right;"> 当前位置：批量增加用户> <a href="#">用户管理系统</a></dl>
         </div>
         <div class="content">
             <div class="content_add">
                 <form role="form">
-                    <div class="form-group">
-                        <label>用户名</label>
-                        <input type="text" id="userName" class="form-control" placeholder="用户名">
-                    </div>
-                    <div class="form-group">
-                        <label>密码</label>
-                        <input type="password" id="passWord" class="form-control" placeholder="密码" >
-                    </div>
-                     <div class="form-group">
-                        <label>登录名</label>
-                        <input type="text" id="loginName" class="form-control" placeholder="登录名">
-                    </div>
-                    <div class="form-group">
-                        <label>状态</label>
-                        <select id="status" class="form-control">
-                            <option value= "1">开通</option>
-                            <option value= "2">暂停</option>
-                            <option value= "3">关闭</option>
-                        </select> 
-                    </div>
-                    <div class="form-group">
-                        <label>性别</label>
-                        <select id="gender" class="form-control">
-                            <option value= "1">男性</option>
-                            <option value= "2">女性</option>
-                            <option value ="3">未知</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>身份证号</label>
-                        <input type="text" id="idcard" class="form-control" placeholder="身份证号">
-                    </div>
-                    <div class="form-group">
-                        <label>电话号码</label>
-                        <input type="text" id="tel" class="form-control" placeholder="电话号码">
-                    </div>
-                    <div class="form-group">
-                        <label>地址</label>
-                        <input type="text" id="address" class="form-control" placeholder="地址">
-                    </div>
-                    <div class="form-group">
-                        <label>邮箱</label>
-                        <input type="text" id="postcode" class="form-control" placeholder="邮箱" >
-                    </div>
-                     <div class="form-group">
-                        <label>QQ号码</label>
-                        <input type="text" id="qq" class="form-control" placeholder="QQ号码" >
-                    </div>
+                   
                    	<div class="form-group">
-                        <label>账户余额</label>
-                        <input type="text" id="balance" class="form-control" placeholder="账户余额" >
+                        <label>选择文件</label>
+                        <input type="file" id="balance" class="form-control"  >
                     </div>
                     <button type="submit" id="btn" class="btn  btn-xs">确定</button>
-                    <button type="submit" id="btn2" class="btn  btn-xs">返回</button>
                 </form>
             </div>
         </div>
@@ -108,14 +60,7 @@
     
     <script type="text/javascript" src="<%=basePath%>static/jquery-easyui-1.5.1/jquery.min.js"></script>
     <script type="text/javascript">
-    	$(function(){  
-        $("#btn2").click(function(){  
-        	window.location.href="jsp/user/usermain.jsp";
-             
-           
-        });  
-    });  
-    	$("form input").on({
+        $("form input").on({
             "blur":function(){
                 checkNotNull($(this));
             }
@@ -176,7 +121,6 @@
                 });  
             });  
         });  
-       
     </script>
     
 </body>

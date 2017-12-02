@@ -93,7 +93,7 @@
                </li>
                <li onclick ="next()"><a href="javascript:void(0)" >></a></li>
                <li onclick ="end()"><a href="javascript:void(0)" >»</a></li>
-               <li  id="yema"></li>
+               <li  id="yema"></li><!-- 这是显示总条数的列表 -->
            </ul>
        </form>
    </div>
@@ -294,7 +294,7 @@
 						$("#yema").html("当前第"+page+"页/共"+totalPage+"页/一共"+totalRows+"条");
 				//***************************************************************
 				 
-				//调用点击变色的方法
+				//调用点击取id和点击变色的方法
 				addTableClick();	
 				}
 			});
@@ -337,12 +337,57 @@
 		}
 		
 		
-		
-		
 		//模糊查询点搜索按钮时：
 		$("#sousuo").click(function(){
-			showData();
+			
+			showData();//调主方法刷新主页
 		});
+		
+		 //监听主页上面的修改按钮
+	    $(".updatefeikong").click(function(){
+	        $(this).removeAttr("data-target");
+	        if($(".hidden1").attr("index")
+	         != null){
+	             $(this).attr("data-target","#update");
+	             updatefindone($(".hidden1").attr("index"));
+	        }else{
+	            alert("请选择需要修改的信息");
+	        }
+	        
+	    });
+		 
+	  //监听主页上面的删除按钮
+	    $(".deletefeikong").click(function(){
+	        if($(".hidden1").attr("index")!= null){
+	      //  var manager = {"id":$(".hidden1").attr("index")};
+	        //删除一个管理员的方法
+	     			$.ajax({
+	     					type : "POST",
+	     					url : "managermag/managerdelete",
+	     					async : true,
+	     					data :  {"id":$(".hidden1").attr("index")},
+	     					success : function(msg) {
+	     						showData();
+	     					}
+	     			 })
+	        }else{
+	            alert("请选择需要删除的信息");
+	        }
+	        
+	    });  
+	  
+	  //监听主页上面的查看详细信息按钮
+	    $(".findfeikong").click(function(){
+	        $(this).removeAttr("data-target");
+	        if($(".hidden1").attr("index")
+	         != null){
+	             $(this).attr("data-target","#find");
+	             findone($(".hidden1").attr("index"));
+	        }else{
+	            alert("请选择需要查看的信息");
+	        }
+	        
+	    });  
 		
 		//监听添加功能模块的确定键
 		$(".quedingadd").click(function(){
@@ -355,7 +400,7 @@
 				success : function(msg) {
 				}
 			})
-			showData();
+			showData();//调主方法刷新主页
 		});
 		
 		//监听修改功能模块的确定键
@@ -369,7 +414,7 @@
 				success : function(msg) {
 				}
 			})
-			showData();
+			showData();//调主方法刷新主页
 		});
 		
 		//翻页按钮 绑定的监听事件 ++++++++++++++++++++++++++
@@ -392,8 +437,10 @@
 			 $("#page").val("");
 		}
 		
-		//给每行表格添加点击事件
-		    function addTableClick(){
+		//给每行表格添加点击事件,目的是
+		//1、从tr中取出他的id,然后利用表单隐藏动态加载在hidden的index属性里
+		//2、添加点击变色功能 
+		function addTableClick(){
 		        $("table tr").click(function(){
 		        $("table tr").removeClass("as");
 		        if(!$(this).hasClass("th")){
@@ -431,51 +478,7 @@
 			}
 		}
 	 
-		 //针对修改时没有选中行的情况
-	    $(".updatefeikong").click(function(){
-	        $(this).removeAttr("data-target");
-	        if($(".hidden1").attr("index")
-	         != null){
-	             $(this).attr("data-target","#update");
-	             updatefindone($(".hidden1").attr("index"));
-	        }else{
-	            alert("请选择需要修改的信息");
-	        }
-	        
-	    });
-		 
-	  //针对删除时没有选中行的情况
-	    $(".deletefeikong").click(function(){
-	        if($(".hidden1").attr("index")!= null){
-	      //  var manager = {"id":$(".hidden1").attr("index")};
-	        //删除一个管理员的方法
-	     			$.ajax({
-	     					type : "POST",
-	     					url : "managermag/managerdelete",
-	     					async : true,
-	     					data :  {"id":$(".hidden1").attr("index")},
-	     					success : function(msg) {
-	     						showData();
-	     					}
-	     			 })
-	        }else{
-	            alert("请选择需要删除的信息");
-	        }
-	        
-	    });  
-	  
-	  //针对查看详细信息时没有选中行的情况
-	    $(".findfeikong").click(function(){
-	        $(this).removeAttr("data-target");
-	        if($(".hidden1").attr("index")
-	         != null){
-	             $(this).attr("data-target","#find");
-	             findone($(".hidden1").attr("index"));
-	        }else{
-	            alert("请选择需要查看的信息");
-	        }
-	        
-	    });  
+		
 	 
        /*  $("form input").on({
             "blur":function(){

@@ -26,7 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @RequestMapping(value="/managermag")
-@RestController
+@RestController 
 public class ManagerController{
 	
 	@Resource

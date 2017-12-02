@@ -43,7 +43,7 @@ public class TestLogmagService {
 		pb.setIndex(1);
 		pb.setRows(3);
 		Map<String,Object> params = new HashMap<>();
-		params.put("managerId", 1l);
+		//params.put("managerId", 1l);
 		pb.setParams(params);
 		pb = logmagServiceImpl.findManagerLog(pb);
 		System.out.println(pb);

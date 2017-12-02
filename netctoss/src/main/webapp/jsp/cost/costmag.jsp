@@ -246,11 +246,28 @@
 					
 					var s = "";
 					for (var i = 0; i < datas.length; i++) {
+						//资费类型
+						var typeStr = null;
+						if(datas[i].type == 0 ){
+							typeStr = "包月资费套餐";
+						}else if(datas[i].type == 1){
+							typeStr = "计时资费套餐";
+						}else if(datas[i].type == 2){
+							typeStr = "自助资费套餐";
+						}
+						//套餐状态
+						var statusStr = null;
+						if(datas[i].status == 0){
+							statusStr = "暂停";
+						}else if(datas[i].status == 1){
+							statusStr = "开通";
+						}
+						
 						s+= "<tr value="+datas[i].id+"><td class='am-text-center am-hide-sm-only'>"
 						+datas[i].costNumber+"</td> <td>"
 						+datas[i].name+"</td><td>"
-						+datas[i].type+"</td><td>"
-						+datas[i].status+"</td><td>"
+						+typeStr+"</td><td>"
+						+statusStr+"</td><td>"
 						+datas[i].createTime+"</td><td>"
 						+datas[i].startTime+"</td><td>"
 						+datas[i].closeTime+"</td><td>"

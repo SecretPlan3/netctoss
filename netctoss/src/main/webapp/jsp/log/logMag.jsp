@@ -156,11 +156,11 @@
 					totalPage = msg.totalPage;
 					var datas = msg.datas;
 					console.info(datas);
-					
+					console.info(datas[0].managerOperation.magName);
 					var s = "";
 					for (var i = 0; i < datas.length; i++) {
 						s+= "<tr value="+datas[i].id+"><td class='am-text-center am-hide-sm-only'>"
-						+datas[i].managerOperation+"</td> <td>"
+						+datas[i].managerOperation.magName+"</td> <td>"
 						+datas[i].loginTime+"</td><td>"
 						+datas[i].logoutTime+"</td></tr>"
 					}
@@ -200,6 +200,7 @@
     		  window.location.href="cost/selectCost" + "?id="+ trId + "&task=update";
     	  }
       }
+      
       //翻页按钮 绑定的监听事件 ++++++++++++++++++++++++++
     	//跳转
     	 function jump(){

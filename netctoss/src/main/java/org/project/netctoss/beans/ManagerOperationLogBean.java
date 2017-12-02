@@ -9,11 +9,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name="t_manageroperationlog")
@@ -24,14 +26,16 @@ public class ManagerOperationLogBean {
 	private long id;
 	
 	@Column(name="operation_time")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")	//将时间格式转换成自定义格式,timezone设置时区
 	private Date operationTime;//操作时间
 	
 	@Column(name="type")
 	private int type;//操作类型
 	
 	
-	@OneToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="fk_manager_id")
+	
 	private ManagerBean operationManager;//操作管理人员
 	
 	@Column(name="address",length=50)
@@ -72,6 +76,6 @@ public class ManagerOperationLogBean {
 	@Override
 	public String toString() {
 		return "ManagerOperationLogBean [id=" + id + ", operationTime=" + operationTime + ", type=" + type
-				+ ", operationManager=" + operationManager + ", address=" + address + "]";
+				+ ", address=" + address + "]";
 	}
 }

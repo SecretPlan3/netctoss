@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -23,15 +24,17 @@ public class ManagerLogBean {
 	private long id;
 	
 	@Column(name="login_time")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")	//将时间格式转换成自定义格式,timezone设置时区
 	private Date loginTime;//登陆时间
 	
 	@Column(name="logout_time")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")	//将时间格式转换成自定义格式,timezone设置时区
 	private Date logoutTime;//退出时间
 	
 	
 	@ManyToOne
 	@JoinColumn(name="fk_manager_id")
-	@JsonIgnore	//忽略jackson使用延迟加载
+	
 	private ManagerBean managerOperation;//操作者
 	
 

@@ -10,6 +10,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @Entity
 @Table(name="t_cost")
@@ -44,12 +46,15 @@ public class CostBean {
 	private String description;//资费说明
 	
 	@Column(name="create_time")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")	//将时间格式转换成自定义格式,timezone设置时区
 	private Date createTime;//创建时间
 	
 	@Column(name="start_time")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")	//将时间格式转换成自定义格式,timezone设置时区
 	private Date startTime;//开始时间
 	
 	@Column(name="close_time")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")	//将时间格式转换成自定义格式,timezone设置时区
 	private Date closeTime;//关闭时间
 	
 	public long getId() {

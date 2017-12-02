@@ -25,6 +25,7 @@ public class LogmagController {
 		pager.setPage(page);
 		pager.setRows(rows);
 		pager = logmagService.findManagerLog(pager);
+		System.out.println(pager.getDatas());
 		System.out.println("查询后：" + pager);
 		return pager;
 	}

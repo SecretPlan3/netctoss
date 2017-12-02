@@ -155,12 +155,20 @@
 					totalRows = msg.totalRows;
 					totalPage = msg.totalPage;
 					var datas = msg.datas;
-					
+					console.info(datas);
 					var s = "";
 					for (var i = 0; i < datas.length; i++) {
+						var typeStr = null;
+						if(datas[i].type == 1){
+							typeStr = "增加";
+						}else if(datas[i].type == 2){
+							typeStr = "删除";
+						}else if(datas[i].type == 3){
+							typeStr = "修改";
+						}
 						s+= "<tr value="+datas[i].id+"><td class='am-text-center am-hide-sm-only'>"
-						+datas[i].operationManager+"</td> <td>"
-						+datas[i].type+"</td><td>"
+						+datas[i].operationManager.magName+"</td> <td>"
+						+typeStr+"</td><td>"
 						+datas[i].address+"</td><td>"
 						+datas[i].operationTime+"</td></tr>"
 					}

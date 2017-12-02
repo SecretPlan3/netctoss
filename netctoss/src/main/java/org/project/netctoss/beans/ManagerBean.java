@@ -20,41 +20,43 @@ import org.hibernate.annotations.GenericGenerator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="t_manager")
-public class ManagerBean implements Serializable{
-	
+@Table(name = "t_manager")
+public class ManagerBean implements Serializable {
+
 	@Id
-	@GenericGenerator(name="hibernate.identity",strategy="identity")
-	@GeneratedValue(generator="hibernate.identity")
+	@GenericGenerator(name = "hibernate.identity", strategy = "identity")
+	@GeneratedValue(generator = "hibernate.identity")
 	private Long id;
-	
-	@Column(name="email",length=50)
+
+	@Column(name = "email", length = 50)
 	private String email;
-	@Column(name="login_name",length=20)
+
+	@Column(name = "login_name", length = 20)
 	private String loginName;
-	@Column(name="mag_name",length=20)
+
+	@Column(name = "mag_name", length = 20)
 	private String magName;
-	@Column(name="password",length=32)
+
+	@Column(name = "password", length = 32)
 	private String password;
-	@Column(name="tel",length=11)
+
+	@Column(name = "tel", length = 11)
 	private String tel;
-	
+
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinTable(name = "t_manager_role", joinColumns = @JoinColumn(name = "fk_manager_id"), 
-	inverseJoinColumns = @JoinColumn(name = "fk_role_id"))
-	@JsonIgnore	//忽略jackson使用延迟加载
+	@JoinTable(name = "t_manager_role", joinColumns = @JoinColumn(name = "fk_manager_id"), inverseJoinColumns = @JoinColumn(name = "fk_role_id"))
+	@JsonIgnore // 忽略jackson使用延迟加载
 	private Set<RoleBean> theRole;
 
-	@OneToMany(fetch = FetchType.LAZY,mappedBy="managerOperation")
-	@JsonIgnore	//忽略jackson使用延迟加载
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "managerOperation")
 	private Set<ManagerLogBean> managerLogBean;
-//	
-	@OneToMany(fetch=FetchType.LAZY ,mappedBy="operationManager")
-	@JsonIgnore	//忽略jackson使用延迟加载
-	private Set<ManagerOperationLogBean> operationLog;//在这时间段内该管理员所有的操作
-	
-	
-	public ManagerBean(){
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "operationManager")
+	@JsonIgnore // 忽略jackson使用延迟加载
+	private Set<ManagerOperationLogBean> operationLog;// 在这时间段内该管理员所有的操作
+
+	public ManagerBean() {
 
 	}
 
@@ -106,7 +108,6 @@ public class ManagerBean implements Serializable{
 		this.tel = tel;
 	}
 
-
 	public Set<RoleBean> getTheRole() {
 		return theRole;
 	}
@@ -115,11 +116,25 @@ public class ManagerBean implements Serializable{
 		this.theRole = theRole;
 	}
 
-	@Override
-	public String toString() {
-		return "ManagerBean [email=" + email + ", id=" + id + ", loginName=" + loginName + ", magName=" + magName
-				+ ", password=" + password + ", tel=" + tel  + "]";
+	public Set<ManagerLogBean> getManagerLogBean() {
+		return managerLogBean;
 	}
 
-	
+	public void setManagerLogBean(Set<ManagerLogBean> managerLogBean) {
+		this.managerLogBean = managerLogBean;
+	}
+
+	public Set<ManagerOperationLogBean> getOperationLog() {
+		return operationLog;
+	}
+
+	public void setOperationLog(Set<ManagerOperationLogBean> operationLog) {
+		this.operationLog = operationLog;
+	}
+
+	@Override
+	public String toString() {
+		return "ManagerBean [id=" + id + ", email=" + email + ", loginName=" + loginName + ", magName=" + magName
+				+ ", password=" + password + ", tel=" + tel + ", theRole=" + theRole + "]";
+	}
 }

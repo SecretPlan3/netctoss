@@ -91,7 +91,7 @@ public class UserDaoImpl extends BaseDao implements IUserDao {
 	
 
 	public UserBean findUserByLoginName(String LoginName) {
-		String hql = "From UserBean as b where b.loginName like CONCAT(?,'%') ";
+		String hql = "From UserBean  as b  left join fetch b.roler as r   left join fetch r.pers  as p    where b.loginName like CONCAT(?,'%') ";
 		Query query = getSession().createQuery(hql);
 		query.setString(0, LoginName);
 		return  (UserBean) query.uniqueResult();//;

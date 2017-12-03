@@ -8,7 +8,7 @@
 <!-- 2.使用base为本页面设置一个 在相对路径前自动拼接上的路径，此处代表工程名加斜杠，它会使相对路径都变成绝对路径 -->
 	<base href="<%=basePath%>" >
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
+	<title>账务查询</title>
 
 <!-- 3.引入自己需要的js、css 文件 此处的basepath可以上略，因为2.中说过 相对路径会自动拼接 -->
 
@@ -94,15 +94,8 @@
            
             
           <!-- 功能按钮组div-->
-          <!-- 功能按钮组div-->
-  		<div class="am-btn-group am-btn-group-xs ">
-               <button onclick="delete0()" type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 删除</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 上架</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 下架</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 保存</button>
-               <button type="button" class="am-btn am-btn-default"><span class="am-icon-archive"></span> 移动</button>
-        </div>
+          
+          
            <!-- 翻页按钮组 ul-->
            <ul class="am-pagination " style="text-align: right">
                <li  onclick ="first()"><a href="javascript:void(0)">«</a></li>
@@ -113,8 +106,8 @@
                </li>
                <li onclick ="next()"><a href="javascript:void(0)" >></a></li>
                <li onclick ="end()"><a href="javascript:void(0)" >»</a></li>
+               <li  id="yema"></li><!-- 这是显示总条数的列表 -->
            </ul>
-           <hr>
 	</form>        
 </body>
 
@@ -167,6 +160,11 @@
 					+datas[i].idcard+"</td></tr>"
 				}
 				$("#table0 tbody").html(s);
+
+				//动态显示关于页面的信息
+				$("#yema").html("当前第"+page+"页/共"+totalPage+"页/一共"+totalRows+"条");
+		
+				
 				//给每行添加点击事件
 			 	//绑定事件******************************************************
 					$("tr").each(function(i,val){ 
@@ -197,6 +195,7 @@
 		}; 
 		showData();	//调用显示数据函数，ajax刷新页面
 	}
+	
 	//删除函数 ---查询按钮点击事件
 	function delete0(){
 			alert("我要删除了");

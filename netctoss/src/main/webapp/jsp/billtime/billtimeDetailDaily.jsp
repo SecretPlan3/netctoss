@@ -25,6 +25,11 @@
             text-align: center;
             line-height: 80px;
         }
+        #div_table0{
+        	
+        	width: 100%!important;
+        	overflow: scroll!important;
+        }
     </style>
 </head>
 
@@ -97,10 +102,13 @@
 	<form class="am-form am-g">
  			<!-- 主表格 -->  
  			<input type="hidden" id = "chosenId">
-           <table id = "table0" class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover" width="100%">
+ 			<div id = "div_table0">
+ 			    <table id = "table0" class="am-table am-table-bordered am-table-radius am-table-striped am-table-hover" width="100%">
                <thead></thead>
                <tbody></tbody>
-           </table>
+           		</table>
+ 			</div>
+       
             <!-- /主表格 -->  
            
           
@@ -114,6 +122,7 @@
                </li>
                <li onclick ="next()"><a href="javascript:void(0)" >></a></li>
                <li onclick ="end()"><a href="javascript:void(0)" >»</a></li>
+               <li  id="yema"></li><!-- 这是显示总条数的列表 -->
            </ul>
            <hr>
 	</form>        
@@ -173,7 +182,7 @@
 				
 				for (var i = 0; i < datas.length; i++) {
 					
-					s+= "<tr value="+datas[i].id+"><td class='am-text-center'>"
+					s+= "<tr  value="+datas[i].id+"><td class='am-text-center'>"
 					+datas[i].id+"</td>" + "<td class='am-text-center'>"
 					+datas[i].osName+"</td>";
 					var y = datas[i].serviceYear;
@@ -198,14 +207,17 @@
 					s+="</tr>";
 				}
 				//拼接表头+++++++++++
-				var head0 = "<tr><th>服务器编号</th><th>服务器信息</th><th>全年总时长</th><th>月总时长</th>";
+				var head0 = "<tr ><th>编号</th><th>服务器信息</th><th>全年总时长</th><th>月总时长</th>";
 				for (var i = 0; i < totalDays; i++) {
-					head0 +=  "<th>"+ (i+1) +  "日时长" + "</th>"; 
+					head0 +=  "<th>"+ (i+1) +  "日" + "</th>"; 
 				}
 				s = head0 + "</tr>" + s; 
 				//+++++++++++++++++++
 				
 				$("#table0 tbody").html(s);
+				//动态显示关于页面的信息
+				$("#yema").html("当前第"+page+"页/共"+totalPage+"页/一共"+totalRows+"条");
+				
 				$("#loginName").val(datas[0].user.loginName);
 				$("#userName").val(datas[0].user.userName);
 				

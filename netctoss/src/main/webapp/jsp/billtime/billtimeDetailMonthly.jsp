@@ -7,7 +7,7 @@
 <base href="<%=basePath%>" >
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
+	<title>月账务查询</title>
 
     <link rel="stylesheet" href="<%=basePath%>static/css/amazeui.min.css"/>
     <link rel="stylesheet" href="<%=basePath%>static/css/admin.css">
@@ -41,14 +41,17 @@
 	
 	<!-- 页面标题 --> 
   		<div class="header">
-            <h1>开放实验室使用时长信息</h1>
+            <h1>开放实验室月使用时长信息</h1>
        </div>
-     <!-- 隐藏元素，存放信息 -->        
-    <input type="hidden" id ="userId">
+
     
 	 <!--模糊查询-->
 	<form id = "form0" method="POST">
        <div class="search">
+       
+            <!-- 隐藏元素，存放信息 -->        
+    		<input type="hidden" id ="userId">
+    		
            <ul class="am-nav am-nav-pills am-topbar-nav ">
                <li class="soso"> 
                		<p><button class="am-btn am-btn-xs am-btn-default am-xiao">账务账号：</button></p>
@@ -128,6 +131,7 @@
                </li>
                <li onclick ="next()"><a href="javascript:void(0)" >></a></li>
                <li onclick ="end()"><a href="javascript:void(0)" >»</a></li>
+               <li  id="yema"></li><!-- 这是显示总条数的列表 -->
            </ul>
            <hr>
 	</form>        
@@ -149,13 +153,57 @@
 	//页面加载完组件后，直接执行的内容
 	$(function(){
 		$("#userId").val("${userId}");
+		showYears();
 		params = {
 				userId:$("#userId").val(),
 				year:$("#year").val(),
 				month: $("#month").val(),
 			}; 
 		showData();	
+		
+		
 	});
+	
+	// 加载用户的所有年份
+	
+	function showYears(){
+		var url = "billtime/findMonthly";
+		$.ajax({
+			type : "POST",
+			url : url,
+			async : true,
+			data : {
+				"page":1,
+				"rows":9999,//为了查出所有年份
+				"params":params,
+			},
+			success : function(msg) {
+				//alert("成功返回年"); 
+				//处理返回数据，给全局变量赋值等
+				var datas = msg.datas;
+				console.info(msg);
+				
+				var s = "";
+				
+				var allYears = [];
+				for (var i = 0; i < datas.length; i++) {
+					var y = datas[i].serviceYear;
+					for(var j = 0; j < y.length; j++){
+						allYears.push(y[j]);
+					}
+				}
+				console.info(allYears);
+				allYears.sort(function(a,b){return parseInt(b.year) - parseInt(a.year)});//倒序排列 
+				console.info(allYears);
+					for(varj = 0; j < allYears.length; j++){
+						if( j == 1 || (j> 1 && allYears[j].year != allYears[j-1].year)){
+							s+= "<option>"+ allYears[j].year +"</option>"
+						}
+					}
+				$("#year").html(s);	
+			}
+		});
+	}
 	
 	// 分页查询显示表格数据的方法
 	function showData(){
@@ -188,8 +236,8 @@
 					for ( var j = 0; j < y.length; j++ ) {
 						s+="<td>"+timeLongToString(y[j].onlineTime); +"</td> ";
 						var mon = y[j].serviceMonthly;
-						var m =mon.sort(function(a,b){ return parseInt(a.month) - parseInt(b.month); }); //给数组排序 ，形参ab用来制定规则
-						console.info(m);
+						//给数组排序 ，形参ab用来制定规则
+						var m =mon.sort(function(a,b){ return parseInt(a.month) - parseInt(b.month); }); 
 
 						for ( var k = 0; k < m.length; k++) {
 							s+="<td>"+ timeLongToString(m[k].onlineTime); +"</td> ";
@@ -198,6 +246,11 @@
 					s+="</tr>";
 				}
 				$("#table0 tbody").html(s);
+				
+
+				//动态显示关于页面的信息
+				$("#yema").html("当前第"+page+"页/共"+totalPage+"页/一共"+totalRows+"条");
+		
 				$("#loginName").val(datas[0].user.loginName);
 				$("#userName").val(datas[0].user.userName);
 				

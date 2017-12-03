@@ -8,5 +8,6 @@
 </head>
 <body>
 <h1>403，You don't have permission to access / on this server</h1>
+<a href="javascript:history.go(-1)">返回上一步</a>
 </body>
 </html>

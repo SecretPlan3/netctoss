@@ -130,6 +130,13 @@ public class UserController {
 
 		return "jsp/query";
 	}
+	
+	@RequestMapping(value = "/find")
+	public UserBean finduser(Long userId) {
+		UserBean user = new UserBean(); 
+		user = userServiceImpl.findUserById(userId);
+		return user;
+	}
 
 	public String uplodeEXCEL(@RequestParam("file") CommonsMultipartFile file) {
 

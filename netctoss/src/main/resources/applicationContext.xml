@@ -211,6 +211,7 @@
            		/jsp/userself/** = roles[普通用户]
            			
                 /** = authc
+                
 			</value>
 		</property>
 	</bean>

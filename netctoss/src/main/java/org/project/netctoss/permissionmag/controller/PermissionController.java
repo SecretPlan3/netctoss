@@ -50,7 +50,7 @@ public class PermissionController {
 		System.out.println("进入了查询单个方法，id：" + id);
 		PermissionBean pb = permissionServiceImpl.selectPermissionById(id);
 		System.out.println("查到的单个ManagerBean：" + pb);
-		return pb;
+		return pb; 
 	}
 
 	/**

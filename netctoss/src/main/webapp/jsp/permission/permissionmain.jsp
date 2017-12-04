@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<base href="<%=basePath%>">
+<base href="<%=basePath%>"> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>管理员管理系统</title>
 <link rel="stylesheet" href="<%=basePath%>static/css/amazeui.min.css" />

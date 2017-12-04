@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<!-- 引入头文件 -->
 <%@ include file="../header.jsp"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	<!-- 引入jstl核心库 -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+	<!-- 引入shiro标签库 --> 
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>  
+<!DOCTYPE html>
 <html>
 <head>
 <base href="<%=basePath%>">
@@ -17,7 +22,7 @@
 <link rel="stylesheet" href="static/css/amazeui.min.css" />
 <link rel="stylesheet" href="static/css/admin.css">
 <!--引入自定义样式-->
-<link rel="stylesheet" href="static/css/custom.css">
+ <link rel="stylesheet" href="static/css/custom.css"> 
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/app.js"></script>
 
@@ -28,8 +33,7 @@
 	<header class="am-topbar admin-header">
 	<div class="am-collapse am-topbar-collapse" id="topbar-collapse">
 		<ul class="am-nav am-nav-pills am-topbar-nav admin-header-list">
-			<li class="kuanjie"><a href="#">个人信息</a> <a href="#">修改密码</a> <a
-				href="#">系统设置</a></li>
+			<li class="kuanjie"><a href="personinfo.jsp">个人信息</a> <a href="chgpwd.jsp">修改密码</a> <a href="setting.jsp">系统设置</a> <a href="managermag/logout">退出登录</a></li>
 
 			<li class="soso">
 
@@ -60,11 +64,41 @@
 		</ul>
 	</div>
 	</header>
+	
+	
+	
 
+   	
 	<div class="am-cf admin-main">
 		<div class="nav-navicon admin-main admin-sidebar">
 			<div class="sideMenu am-icon-dashboard"
-				style="color: #aeb2b7; margin: 10px 0 0 0;">欢迎系统管理员：杨鹏</div>
+				style="color: #aeb2b7; margin: 10px 0 0 0;">
+				
+					
+	<!-- 验证登录后shiro中所携带的信息 -->
+	验证开始》
+  <shiro:authenticated>登陆状态 ：已经登陆</shiro:authenticated><br/>  
+   
+    <shiro:hasRole name="超级管理员">认证身份：超级管理员</shiro:hasRole>  
+    <shiro:hasRole name="普通用户">认证身份：普通用户</shiro:hasRole>
+    <shiro:hasRole name="admin">认证身份：普通管理员</shiro:hasRole> 
+    <shiro:hasAnyRoles name="超级管理员,用户管理员"> 超级管理员,用户管理员 角色用户登录显示此内容</shiro:hasAnyRoles>  
+     
+     <h6>当前用户名 :</h6>
+    <shiro:principal/>
+  
+    <h6>权限列表:</h6>
+    <shiro:hasPermission name="用户管理权限">用户权限用户显示此内容---<br></shiro:hasPermission>  
+    <shiro:hasPermission name="资费管理权限">资费权限用户显示此内容---<br/></shiro:hasPermission>
+    <shiro:hasPermission name="权限管理权限">权限权限用户显示此内容---<br></shiro:hasPermission> 
+    <shiro:hasPermission name="/baobiao">baobiao权限用户显示此内容---<br/></shiro:hasPermission>  
+	<br/><br/>
+      
+      
+      《验证结束
+   	<!-- /验证登录后shiro中所携带的信息 --> 
+				
+				</div>
 			<div class="sideMenu">
 				<h3 class="am-icon-flag">
 					<em></em> <a href="#">用户管理系统</a>
@@ -76,7 +110,7 @@
 					<li>xxxx</li>
 				</ul>
 				<h3 class="am-icon-cart-plus">
-					<em></em> <a onclick="javascript:showuser();return false;" href="#"
+					<em></em> <a onclick="javascript:showCost();return false;" href="#"
 						target="myiframe"> 资费管理系统</a>
 				</h3>
 				<ul>
@@ -199,14 +233,39 @@
 	<!--<![endif]-->
 	<script>
 		//给下拉导航菜单绑定监听事件
-		function showuser() {
+		
+		//跳转IFrame到账单页面
+		function showCost() {
 			$("#iframe1").attr("src", "jsp/cost/costmag.jsp");
 		}
 
 		//跳转IFrame到账单页面
-		function showbill() {
+		function showBill() {
 			$("#iframe1").attr("src", "../../jsp/bill/billmain.jsp");
 		};
+		
+		//跳转IFrame到账务查询页面
+		function showBilltime() {
+			$("#iframe1").attr("src", "../../jsp/billtime/billtimemain.jsp");
+		};
+		
+		//跳转IFrame到管理员管理页面
+		function showManager() {
+			$("#iframe1").attr("src", "../../jsp/manager/managermain.jsp");
+		};
+		
+		//跳转IFrame到权限管理页面
+		function showManager() {
+			$("#iframe1").attr("src", "../../jsp/manager/managermain.jsp");
+		};
+		
+		//跳转IFrame到用户管理页面
+		function showUser() {
+			$("#iframe1").attr("src", "../../jsp/user/usermain.jsp");
+		};
+		
+		
+		
 	</script>
 </body>
 </html>

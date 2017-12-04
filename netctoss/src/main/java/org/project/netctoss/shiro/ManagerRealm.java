@@ -28,12 +28,13 @@ public class ManagerRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		// TODO Auto-generated method stub
-		// String LoginName=(String)principals.fromRealm(getName()).iterator().next();
+//		 String LoginName=(String)principals.fromRealm(getName()).iterator().next();
+		System.out.println("getName()得到的名字：" + getName());
 		String LoginName = (String) principals.getPrimaryPrincipal();
 		if (LoginName != null) {
 			ManagerBean manager = managerServiceImpl.findManagerByLoginName(LoginName); // 从数据库获取用户（包括其角色，权限的完整信息）
 			System.out.println("权限" + manager);
-			System.out.println("权限" + manager.getTheRole());
+
 			if (manager != null && manager.getTheRole().size() != 0) {
 				SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 				System.out.println("添加权限");

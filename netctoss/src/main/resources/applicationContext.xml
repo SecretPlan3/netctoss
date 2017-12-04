@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:aop="http://www.springframework.org/schema/aop"
-    xmlns:p="http://www.springframework.org/schema/p"
-    xmlns:tx="http://www.springframework.org/schema/tx"
-    xmlns:cache="http://www.springframework.org/schema/cache"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
@@ -18,143 +15,205 @@
         http://www.springframework.org/schema/cache/spring-cache.xsd
         ">
         
-    <!-- 开启spring容器的自动扫描功能 -->
-    <!-- 让容器在扫描的时候，剔除WEB层的组件 -->
-	 <context:component-scan base-package="org.project.netctoss">
-	 	 <context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
-            <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
-	 </context:component-scan>  
-      
-    <!-- 引入外部的mysql.properties -->
-    <context:property-placeholder location="classpath:mysql.properties" ignore-unresolvable="true" ignore-resource-not-found="true"/>
- 
-   <!-- 配置C3P0数据源连接池,来自于：c3p0.jar -->
-     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-     	<!-- JDBC连接数据库，最基本的4个条件 -->
-     	<property name="driverClass" value="${mysql.driver}"></property>
-     	<property name="jdbcUrl" value="${mysql.url}"></property>
-     	<property name="user" value="${mysql.username}"></property>
-     	<property name="password" value="${mysql.password}"></property>
-     	
-     	<!-- 设置初始化连接数 -->
-     	<property name="initialPoolSize" value="15"></property>
-     	<!-- 设置池中最小连接数量 -->
-     	<property name="minPoolSize" value="15"></property>
-     	<!-- 设置池中最大连接数量 -->
-     	<property name="maxPoolSize" value="50"></property>
-     	<!-- 当连接池中连接不够时，需要自动获取的连接数量 -->
-		<property name="acquireIncrement" value="10"></property>     	
-     	<!-- 设置池中允许出现的最大预编译对象的数量 -->
-     	<property name="maxStatements" value="200"></property>
-     	<!-- 设置最长空闲时间,单位：秒 -->
-     	<property name="maxIdleTime" value="120"></property>
-     	<!-- 设置间隔多长时间，扫描一次空闲连接,单位：秒 -->
-     	<property name="idleConnectionTestPeriod" value="60"></property>
-     	<!-- 设置当数据库连接无法正常获取的情况下，间隔一定的去重复获取的次数,单位：次数 -->
-     	<property name="acquireRetryAttempts" value="20"></property>
-     	<!-- 设置间隔多长时间， 回收一次超时连接 -->
-     	<property name="checkoutTimeout" value="5000"></property>
-     	<!-- 取消自动提交 -->
-     	<property name="autoCommitOnClose" value="false"></property>
-     	<!-- 连接池初始化完毕连接之后，将发送一条SQL语句，目的主要是用于验证连接是可用的，是正常的 -->
-     	<property name="preferredTestQuery" value="select now() from dual"></property>
-     </bean>
-     
-     <!-- 配置SessionFactory,来自于：spring-orm.jar -->
-     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-     	<property name="dataSource" ref="dataSource"></property>
-     	
-     	<!-- hibernateProperties 该属性主要用于配置hibernate相关信息 -->
-     	<property name="hibernateProperties">
-     		<props>
+	<!-- 开启spring容器的自动扫描功能 -->
+	<!-- 让容器在扫描的时候，剔除WEB层的组件 -->
+	<context:component-scan base-package="org.project.netctoss">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Service" />
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Repository" />
+	</context:component-scan>
+
+	<!-- 引入外部的mysql.properties -->
+	<context:property-placeholder location="classpath:mysql.properties"
+		ignore-unresolvable="true" ignore-resource-not-found="true" />
+
+	<!-- 配置C3P0数据源连接池,来自于：c3p0.jar -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<!-- JDBC连接数据库，最基本的4个条件 -->
+		<property name="driverClass" value="${mysql.driver}"></property>
+		<property name="jdbcUrl" value="${mysql.url}"></property>
+		<property name="user" value="${mysql.username}"></property>
+		<property name="password" value="${mysql.password}"></property>
+
+		<!-- 设置初始化连接数 -->
+		<property name="initialPoolSize" value="15"></property>
+		<!-- 设置池中最小连接数量 -->
+		<property name="minPoolSize" value="15"></property>
+		<!-- 设置池中最大连接数量 -->
+		<property name="maxPoolSize" value="50"></property>
+		<!-- 当连接池中连接不够时，需要自动获取的连接数量 -->
+		<property name="acquireIncrement" value="10"></property>
+		<!-- 设置池中允许出现的最大预编译对象的数量 -->
+		<property name="maxStatements" value="200"></property>
+		<!-- 设置最长空闲时间,单位：秒 -->
+		<property name="maxIdleTime" value="120"></property>
+		<!-- 设置间隔多长时间，扫描一次空闲连接,单位：秒 -->
+		<property name="idleConnectionTestPeriod" value="60"></property>
+		<!-- 设置当数据库连接无法正常获取的情况下，间隔一定的去重复获取的次数,单位：次数 -->
+		<property name="acquireRetryAttempts" value="20"></property>
+		<!-- 设置间隔多长时间， 回收一次超时连接 -->
+		<property name="checkoutTimeout" value="5000"></property>
+		<!-- 取消自动提交 -->
+		<property name="autoCommitOnClose" value="false"></property>
+		<!-- 连接池初始化完毕连接之后，将发送一条SQL语句，目的主要是用于验证连接是可用的，是正常的 -->
+		<property name="preferredTestQuery" value="select now() from dual"></property>
+	</bean>
+
+	<!-- 配置SessionFactory,来自于：spring-orm.jar -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+
+		<!-- hibernateProperties 该属性主要用于配置hibernate相关信息 -->
+		<property name="hibernateProperties">
+			<props>
 				<prop key="hibernate.dialect">
 					org.hibernate.dialect.MySQLDialect<!-- 来自于：hibernate-core.jar -->
-				</prop>     		
-     			<prop key="hibernate.show_sql">true</prop>
-     			<prop key="hibernate.format_sql">true</prop>
-     		</props>
-     	</property>
-     	
-     	<!-- 扫描使用的注解的ORM实体类 -->
-     	<property name="packagesToScan">
-     		<list>
-				<value>org.project.netctoss.beans</value>     		
-     			<!-- <value></value>  有多个beans包就多写   -->
-     		</list>
-     	</property>
-     </bean>
-     
-      <!-- 配置数据源的事务管理器,来自于：spring-orm.jar-->
-     <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-     	<property name="sessionFactory" ref="sessionFactory"></property>
-     </bean>
-   <!-- 配置 Annotation 驱动，扫描@Transactional注解的类定义事务 -->
-    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
-     
-   	<!-- 采用springAOP来管理事务 -->
-     <tx:advice id="txAdvice" transaction-manager="txManager">
-        <tx:attributes>
-        	<!-- 所有的方法都是只读的 -->
-            <tx:method name="*" read-only="true"/>
-            <!-- 其他的方法，可以具体情况具体设置 -->
-            <tx:method name="save*" read-only="false" isolation="DEFAULT" propagation="REQUIRED" rollback-for="java.lang.Exception" />
-            <tx:method name="add*" read-only="false" isolation="DEFAULT" propagation="REQUIRED" rollback-for="java.lang.Exception" />
-            <tx:method name="create*" read-only="false" isolation="DEFAULT" propagation="REQUIRED" rollback-for="java.lang.Exception" />
-            <tx:method name="insert*" read-only="false" isolation="DEFAULT" propagation="REQUIRED" rollback-for="java.lang.Exception" />
-            
-            <tx:method name="modify*" read-only="false" isolation="DEFAULT" propagation="REQUIRED" rollback-for="java.lang.Exception" />
-            <tx:method name="update*" read-only="false" isolation="DEFAULT" propagation="REQUIRED" rollback-for="java.lang.Exception" />
-            
-            <tx:method name="delete*" read-only="false" isolation="DEFAULT" propagation="REQUIRED" rollback-for="java.lang.Exception" />
-            <tx:method name="remove*" read-only="false" isolation="DEFAULT" propagation="REQUIRED" rollback-for="java.lang.Exception" />
-            
-            <tx:method name="get*"  rollback-for="java.lang.Exception" />
-            <tx:method name="find*"  rollback-for="java.lang.Exception" />
-            <tx:method name="select*"  rollback-for="java.lang.Exception" />
-            <tx:method name="count*"  rollback-for="java.lang.Exception" />
-            
-        </tx:attributes>
-    </tx:advice>
-	
-	<aop:config> 												  
-        <aop:pointcut id="serviceMethods" expression="execution(* org.project.netctoss.*mag.service.impl.*Impl.*(..))"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
-    </aop:config>
-	
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+			</props>
+		</property>
+
+		<!-- 扫描使用的注解的ORM实体类 -->
+		<property name="packagesToScan">
+			<list>
+				<value>org.project.netctoss.beans</value>
+				<!-- <value></value> 有多个beans包就多写 -->
+			</list>
+		</property>
+	</bean>
+
+	<!-- 配置数据源的事务管理器,来自于：spring-orm.jar -->
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 配置 Annotation 驱动，扫描@Transactional注解的类定义事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="true" />
+
+	<!-- 采用springAOP来管理事务 -->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<!-- 所有的方法都是只读的 -->
+			<tx:method name="*" read-only="true" />
+			<!-- 其他的方法，可以具体情况具体设置 -->
+			<tx:method name="save*" read-only="false" isolation="DEFAULT"
+				propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="add*" read-only="false" isolation="DEFAULT"
+				propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="create*" read-only="false" isolation="DEFAULT"
+				propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="insert*" read-only="false" isolation="DEFAULT"
+				propagation="REQUIRED" rollback-for="java.lang.Exception" />
+
+			<tx:method name="modify*" read-only="false" isolation="DEFAULT"
+				propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="update*" read-only="false" isolation="DEFAULT"
+				propagation="REQUIRED" rollback-for="java.lang.Exception" />
+
+			<tx:method name="delete*" read-only="false" isolation="DEFAULT"
+				propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="remove*" read-only="false" isolation="DEFAULT"
+				propagation="REQUIRED" rollback-for="java.lang.Exception" />
+
+			<tx:method name="get*" rollback-for="java.lang.Exception" />
+			<tx:method name="find*" rollback-for="java.lang.Exception" />
+			<tx:method name="select*" rollback-for="java.lang.Exception" />
+			<tx:method name="count*" rollback-for="java.lang.Exception" />
+
+		</tx:attributes>
+	</tx:advice>
+
+
+	<aop:config>
+		<aop:pointcut id="serviceMethods"
+			expression="execution(* org.project.netctoss.*mag.service.impl.*Impl.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods" />
+	</aop:config>
+
 	<!-- 如果我们自己还要定义切面，需要开启切面的动态代理支持 -->
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
-	
-<!-- 	
-	配置shiro的权限管理器
-	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-      <property name="realm" ref="myRealm"/>
-        使用下面配置的缓存管理器
-        <property name="cacheManager" ref="cacheManager"/>
-   </bean>
-	
-	配置shiro权限（在其中自定义 权限与资源的对应关系）过滤器
-	 <bean id="myRealm" class="org.project.netctoss.shiro.UserRealm"/>
-	 <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-         调用我们配置的权限管理器
-         <property name="securityManager" ref="securityManager"/>
-         配置我们的登录请求地址
-        <property name="loginUrl" value="/login.jsp"/>
-        配置我们在登录页登录成功后的跳转地址，如果你访问的是非/login地址，则跳到登陆的地址
-       <property name="successUrl" value="/jsp/user.jsp"/>
-         如果您请求的资源不再您的权限范围，则跳转到/403请求地址
-         <property name="unauthorizedUrl" value="/403.jsp"/>
-         权限过滤配置 
-       <property name="filterChainDefinitions">
-       		配置各种资源（视图名）对应的可访问权限（以shiro认可的方式： 将我们的 角色（用roles[此处为数据库中的角色名]）(或权限（用pxx[xx]）) 匹配上去）
-            <value>
-                /** = anon
-            </value>
-      </property>
-      
-    </bean>
-    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
-    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>
 
- -->
- 
+<!-- 配置shiro所使用的realm -->
+	<bean id="userRealm" class="org.project.netctoss.shiro.UserRealm" />
+
+	<bean id="managerRealm" class="org.project.netctoss.shiro.ManagerRealm"/>
+
+
+	<!-- 配置shiro的权限管理器 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		   <!-- 使用下面配置的缓存管理器 -->
+		<property name="cacheManager" ref="cacheManager" />
+			<!-- 配置使用自定义认证器 -->
+		<property name="authenticator" ref="authenticator"></property>
+		    <!-- 可以配置多个Realm，其实会把realms属性赋值给ModularRealmAuthenticator的realms属性 -->  
+	    <property name="realms">  
+	        <list>  
+	        	<ref bean="managerRealm"></ref>
+	            <!-- <ref bean="userRealm"></ref>   -->
+	            
+	         </list>  
+	    </property>  
+	</bean>
+	
+<!-- 配置使用自定义认证器，可以实现多Realm认证，并且可以指定特定Realm处理特定类型的验证 -->
+    <bean id="authenticator" class="org.project.netctoss.utils.CustomizedModularRealmAuthenticator">
+        <!-- 配置认证策略，只要有一个Realm认证成功即可，并且返回所有认证成功信息 -->
+        <property name="authenticationStrategy" ref="strategy"></property>
+    </bean>
+     <bean id ="strategy" class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"></bean>
+
+	<!-- 配置shiro权限（在其中自定义 权限与资源的对应关系）过滤器 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!-- 调用我们配置的权限管理器 -->
+		<property name="securityManager" ref="securityManager" />
+		<!-- 配置我们的登录请求地址 ,如果你访问的是非/login地址，则跳到登陆的地址-->
+		<property name="loginUrl" value="/managerlogin.jsp" />
+		<!-- 配置我们在登录页登录成功后的默认跳转地址 -->
+		<property name="successUrl" value="/jsp/user.jsp" />
+		<!-- 如果您请求的资源不在您的权限范围，则跳转到/403请求地址 -->
+		<property name="unauthorizedUrl" value="/403.jsp" />
+		<!-- 权限过滤配置 -->
+		<property name="filterChainDefinitions">
+			<!-- 配置各种资源（视图名）对应的可访问权限（以shiro认可的方式： 将我们的 角色（用roles[此处为数据库中的角色名]）(或权限（用pxx[xx]）) 
+				匹配上去） -->
+			<value>
+				/static/** = anon
+                /css/** = anon
+               	/js/** = anon
+               	/html/** = anon
+               	
+               	/userlogin.jsp = anon
+               	/usermag/login = anon
+               	/usermag/logout = anon
+               	
+               	/managerlogin.jsp = anon
+               	/managermag/login = anon
+               	/managermag/logout = anon
+             	
+             	/jsp/index.jsp = roles[*]
+           		/jsp/index.jsp = anon
+             	
+           		/jsp/**= roles[超级管理员]
+           		/jsp/user/** = roles[用户管理员]
+           		/jsp/cost/** = roles[资费管理员]
+           		/jsp/bill/** = roles[账单管理员]
+           		/jsp/billtime/** = roles[账务管理员]
+           		/jsp/report/** = roles[报表管理员]
+           		/jsp/log/** = roles[日志管理员]
+           		/jsp/permission/** = roles[权限管理员]
+           		/jsp/manager/** = roles[管理员管理员]
+           		/jsp/userself/** = roles[普通用户]
+           		
+           		
+                /** = authc
+			</value>
+		</property>
+	</bean>
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+	<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+   
 </beans>        

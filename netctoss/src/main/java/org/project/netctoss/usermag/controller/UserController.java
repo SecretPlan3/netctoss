@@ -51,7 +51,7 @@ public class UserController {
 		// UsernamePasswordToken token = new
 		// UsernamePasswordToken(user.getUserName(),user.getPassWord());
 		// token.setRememberMe(true);
-		CustomizedToken customizedToken = new CustomizedToken(user.getUserName(), user.getPassWord(), USER_LOGIN_TYPE);
+		CustomizedToken customizedToken = new CustomizedToken(user.getLoginName(), user.getPassWord(), USER_LOGIN_TYPE);
 		customizedToken.setRememberMe(true);
 		Subject currentUser = SecurityUtils.getSubject();
 		if (!currentUser.isAuthenticated()) {

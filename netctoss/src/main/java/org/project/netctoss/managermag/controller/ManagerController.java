@@ -45,7 +45,7 @@ public class ManagerController {
 				MANAGER_LOGIN_TYPE);
 		customizedToken.setRememberMe(true);
 		Subject currentUser = SecurityUtils.getSubject();
-		if (!currentUser.isAuthenticated()) {
+//		if (!currentUser.isAuthenticated()) {
 			try {
 				System.out.println("准备验证……");
 				// 提交凭据
@@ -62,38 +62,39 @@ public class ManagerController {
 			} catch (IncorrectCredentialsException ex) {// 用户名密码不匹配
 				System.out.println("用户名密码不匹配");
 				mav.setViewName("redirect:/managerLogin.jsp");
-				mav.addObject("message", 1);
+				mav.addObject("message", 2);
 				return mav;
 			} catch (LockedAccountException lae) {
 				System.out.println(lae);
 				mav.setViewName("redirect:/managerLogin.jsp");
-				mav.addObject("message", 1);
+				mav.addObject("message", 3);
 				return mav;
 			} catch (ExcessiveAttemptsException eae) {
 				System.out.println(eae);
 				mav.setViewName("redirect:/managerLogin.jsp");
-				mav.addObject("message", 1);
+				mav.addObject("message", 4);
 				return mav;
 			} catch (AuthenticationException ae) {
 				System.out.println(ae);
 				mav.setViewName("redirect:/managerLogin.jsp");
-				mav.addObject("message", 1);
+				mav.addObject("message", 5);
 				return mav;
 			}
-		}
-		mav.setViewName("redirect:/managerLogin.jsp");
-		mav.addObject("message", 1);
-		return mav;
+//		}
+//		mav.setViewName("redirect:/managerLogin.jsp");
+//		mav.addObject("message", 1);
+//		return mav;
 
 	}
 
 	// 退出
-	@RequestMapping(value = "/loginout")
-	public String loginOut() {
-
+	@RequestMapping(value = "/logout")
+	public ModelAndView logout() {
+		ModelAndView mav = new ModelAndView();
 		Subject currentUser = SecurityUtils.getSubject();
 		currentUser.logout();
-		return "managerLogin"; // 退出后跳转的页面（此处有待验证，为何推出后还可以访问该资源）（一般写login.jsp即可）
+		mav.setViewName("redirect:/managerLogin.jsp");
+		return mav; // 退出后跳转的页面（此处有待验证，为何推出后还可以访问该资源）（一般写login.jsp即可）
 	}
 
 	/**

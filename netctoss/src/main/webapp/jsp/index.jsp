@@ -81,11 +81,9 @@
 				<!-- 验证登录后shiro中所携带的信息 -->
 				<shiro:authenticated>登陆状态 ：已经登陆</shiro:authenticated>
 				<br />
-
 				<h6>欢迎您 :</h6>
 				<shiro:principal />
 				，
-
 				<shiro:hasRole name="超级管理员">超级管理员</shiro:hasRole>
 				<shiro:hasRole name="普通用户">普通用户</shiro:hasRole>
 				<shiro:hasRole name="资费管理员">资费管理员</shiro:hasRole>
@@ -95,7 +93,7 @@
 				<shiro:hasRole name="报表管理员">报表管理员</shiro:hasRole>
 				<shiro:hasRole name="日志管理员">日志管理员</shiro:hasRole>
 				<shiro:hasRole name="权限管理员">权限管理员</shiro:hasRole>
-				
+				!
 
 				<%-- <shiro:hasAnyRoles name="超级管理员,用户管理员"> 超级管理员,用户管理员 角色用户登录显示此内容</shiro:hasAnyRoles>  
   --%>
@@ -112,13 +110,19 @@
 
 			</div>
 			<div class="sideMenu">
-				<h3 class="am-icon-flag">
-					<em></em> <a onclick="javascript:showUser();return false;" href="#"
-						target="myiframe">用户管理系统</a>
-				</h3>
-				<ul>
-					<li>xxxx</li>
-				</ul>
+			
+			<!-- 用户权限用户显示此内容--- -->
+			 <shiro:hasPermission name="用户管理权限">
+				 <h3 class="am-icon-flag">
+						<em></em> <a onclick="javascript:showUser();return false;" href="#"
+							target="myiframe">用户管理系统</a>
+					</h3>
+					<ul>
+						<li>xxxx</li>
+					</ul>
+			 </shiro:hasPermission>  
+			 
+			<shiro:hasPermission name="资费管理权限">
 				<h3 class="am-icon-cart-plus">
 					<em></em> <a onclick="javascript:showCost();return false;" href="#"
 						target="myiframe"> 资费管理系统</a>
@@ -129,6 +133,11 @@
 					<li>计时资费套餐</li>
 					<li>包月资费套餐</li>
 				</ul>
+			</shiro:hasPermission>
+			
+			
+			<shiro:hasPermission name="管理员管理权限">
+					
 				<h3 class="am-icon-users">
 					<em></em> <a onclick="javascript:showManager();return false;"
 						href="#" target="myiframe">管理员管理系统</a>
@@ -136,6 +145,10 @@
 				<ul>
 					<li>xxxx</li>
 				</ul>
+			</shiro:hasPermission>
+			
+			
+			<shiro:hasPermission name="账单管理权限">
 				<h3 class="am-icon-volume-up">
 					<em></em> <a onclick="javascript:showBill();return false;" href="#"
 						target="myiframe">账单查询系统</a>
@@ -143,6 +156,9 @@
 				<ul>
 					<li><a href="javaScript:showBill();return false;">账单查询</a></li>
 				</ul>
+			</shiro:hasPermission>  
+			
+			<shiro:hasPermission name="账务管理权限">
 				<h3 class="am-icon-gears">
 					<em></em> <a onclick="javascript:showBilltime();return false;" href="#"
 						target="myiframe">账务查询系统</a>
@@ -151,8 +167,10 @@
 					<li>年详情</li>
 					<li>月详情</li>
 				</ul>
-
-
+			</shiro:hasPermission> 
+			
+			 
+			<shiro:hasPermission name="权限管理权限">
 				<h3 class="am-icon-gears">
 					<em></em> <a onclick="javascript:showPermission();return false;"
 						href="#" target="myiframe">权限管理系统</a>
@@ -162,8 +180,10 @@
 					<li>权限管理</li>
 
 				</ul>
-
-				<h3 class="am-icon-gears">
+			</shiro:hasPermission>  
+				
+		<shiro:hasPermission name="日志管理权限">
+			<h3 class="am-icon-gears">
 					<em></em> <a onclick="javascript:showLog();return false;" href="#"
 						target="myiframe">前台日志系统</a>
 				</h3>
@@ -172,7 +192,10 @@
 					<li>操作日志</li>
 
 				</ul>
+		</shiro:hasPermission> 
+				
 
+		<shiro:hasPermission name="报表管理权限">
 				<h3 class="am-icon-gears">
 					<em></em> <a onclick="javascript:showReport();return false;"
 						href="#" target="myiframe">报表查询系统</a>
@@ -182,6 +205,9 @@
 					<li>走势图</li>
 
 				</ul>
+		</shiro:hasPermission>
+				
+				
 			</div>
 			<!-- 左侧导航栏效果 -->
 			<script type="text/javascript">
@@ -239,7 +265,7 @@
 	<script>
 		//给下拉导航菜单绑定监听事件
 
-		// 跳转IFrame到账单页面
+		// 跳转IFrame到资费页面 
 		function showCost() {
 			$("#iframe1").attr("src", "jsp/cost/costmag.jsp");
 		}
@@ -261,8 +287,7 @@
 
 		//跳转IFrame到权限管理页面
 		function showPermission() {
-			$("#iframe1")
-					.attr("src", "jsp/permission/permissionmain.jsp");
+			$("#iframe1").attr("src", "jsp/permission/permissionmain.jsp");
 		};
 
 		//跳转IFrame到用户管理页面
@@ -270,9 +295,9 @@
 			$("#iframe1").attr("src", "jsp/user/usermain.jsp");
 		};
 
-		//跳转IFrame到报表查询页面
-		function showReport() {
-			$("#iframe1").attr("src", "jsp/report/reportmain.jsp");
+		//跳转IFrame到日志查询页面 
+		function showLog() {
+			$("#iframe1").attr("src", "jsp/log/logMag.jsp");
 		};
 	</script>
 </body>

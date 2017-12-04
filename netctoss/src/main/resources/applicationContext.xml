@@ -198,18 +198,7 @@
                	/managermag/logout = anon
              	
  				/jsp/index.jsp = anon
- 				
-				/jsp/** = roles[超级管理员]
-           		/jsp/user/** = roles[用户管理员]
-           		/jsp/cost/** = roles[资费管理员]
-           		/jsp/bill/** = roles[账单管理员]
-           		/jsp/billtime/** = roles[账务管理员]
-           		/jsp/report/** = roles[报表管理员]
-           		/jsp/log/** = roles[日志管理员]
-           		/jsp/permission/** = roles[权限管理员]
-           		/jsp/manager/** = roles[管理员管理员]
-           		/jsp/userself/** = roles[普通用户]
-           			
+	
                 /** = authc
                 
 			</value>

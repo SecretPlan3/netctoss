@@ -32,7 +32,7 @@
         <div class="page-container">
             <h1>中国电信</h1>
             <form action="<%=basePath %>usermag/login" id = "form0" name="user" method="post">
-                <input type="text" name="userName" class="userName" placeholder="账号">
+                <input type="text" name="loginName" class="loginName" placeholder="账号">
                 <input type="password" name="passWord" id="password" class="password" placeholder="密码">
                 <button type="submit">登 陆</button>
                 <input type="reset" value="重置"/> 

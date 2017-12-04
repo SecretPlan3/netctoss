@@ -26,7 +26,7 @@
     <shiro:hasAnyRoles name="超级管理员,admin">superadmin 和 admin 角色用户登录显示此内容</shiro:hasAnyRoles>  
     <br/><br/>
     <h6>当前用户名 :</h6>
-    <%-- <shiro:principal/> --%>
+    <shiro:principal/> 
     <br/><br/>
     <h6>权限列表:</h6>
     <shiro:hasPermission name="用户管理权限">user权限用户显示此内容---<br></shiro:hasPermission>  

@@ -20,7 +20,7 @@ import org.project.netctoss.utils.CustomizedToken;
 import org.springframework.stereotype.Service;
 
 //这个类 要继承AuthorizingRealm ，重写下列方法供shiro 做登陆以及权限的管理
-@Service
+//@Service
 public class UserRealm extends AuthorizingRealm {
 
 	@Resource
@@ -51,22 +51,22 @@ public class UserRealm extends AuthorizingRealm {
 			throws AuthenticationException {
 
 		// UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-		// String userName = token.getUsername();
+		// String loginName = token.getUsername();
 		// char[] userPwd = token.getPassword();
 
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
 		// 1. 把AuthenticationToken转换为CustomizedToken
 		CustomizedToken customizedToken = (CustomizedToken) authcToken;
 		// 2. 从CustomizedToken中获取username,password
-		String userName = customizedToken.getUsername();
+		String loginName = customizedToken.getUsername();
 		char[] userPwd = customizedToken.getPassword();
 
-		System.out.println(userName + "------------------");
+		System.out.println(loginName + "------------------");
 
-		if (userName != null && !"".equals(userName)) {
+		if (loginName != null && !"".equals(loginName)) {
 			// 以下信息从数据库中获取
 			System.out.println(String.valueOf(userPwd) + "-----666666---------");
-			UserBean user = userServiceImpl.findUserByLoginNameAndPassword(userName, String.valueOf(userPwd)); // 我们自己写的登陆验证方法，匹配好账号密码
+			UserBean user = userServiceImpl.findUserByLoginNameAndPassword(loginName, String.valueOf(userPwd)); // 我们自己写的登陆验证方法，匹配好账号密码
 			System.out.println("查到的user是：" + user);
 
 			// 用框架获取session对象（相当于HTTPSession，jsp中可以从session隐式对象获取）

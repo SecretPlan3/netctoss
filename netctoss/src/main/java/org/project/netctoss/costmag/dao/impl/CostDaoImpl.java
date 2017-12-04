@@ -35,17 +35,17 @@ public class CostDaoImpl extends BaseDao implements ICostDao {
 	public PagerBean findAllCostsByPager(PagerBean pager) {
 		// TODO Auto-generated method stub
 		StringBuilder hql = new StringBuilder("select count(c.id) from CostBean as c where 1 = 1");
-		if(pager.getParams().get("type") != null) {
+		if(pager.getParams().get("costType") != null) {
 			//根据套餐类型查询该套餐类型所有套餐，前台传入的type类型应该为int类型
-			hql.append(" and c.type = :type");
+			hql.append(" and c.type = :costType");
 		}
-		if(pager.getParams().get("name") != null) {
+		if(pager.getParams().get("costName") != null) {
 			//根据套餐名字进行模糊查询
-			hql.append(" and c.name like CONCAT(:name,'%')");
+			hql.append(" and c.name like CONCAT(:costName,'%')");
 		}
 		if(pager.getParams().get("costNumber") != null) {
 			//根据套餐编号进行模糊查询
-			hql.append(" and c.cost_number like CONCAT(:costNumber,'%')");
+			hql.append(" and c.costNumber like CONCAT(:costNumber,'%')");
 		}
 		Query query = getSession().createQuery(hql.toString());
 		query.setProperties(pager.getParams());
@@ -53,17 +53,17 @@ public class CostDaoImpl extends BaseDao implements ICostDao {
 		pager.setTotalRows(Integer.valueOf(String.valueOf(totalRows)));
 		
 		hql = new StringBuilder("from CostBean as c where 1 = 1");
-		if(pager.getParams().get("type") != null) {
+		if(pager.getParams().get("costType") != null) {
 			//根据套餐类型查询该套餐类型所有套餐，前台传入的type类型应该为int类型
-			hql.append(" and c.type = :type");
+			hql.append(" and c.type = :costType");
 		}
-		if(pager.getParams().get("name") != null) {
+		if(pager.getParams().get("costName") != null) {
 			//根据套餐名字进行模糊查询
-			hql.append(" and c.name like CONCAT(:name,'%')");
+			hql.append(" and c.name like CONCAT(:costName,'%')");
 		}
 		if(pager.getParams().get("costNumber") != null) {
 			//根据套餐编号进行模糊查询
-			hql.append(" and c.cost_number like CONCAT(:costNumber,'%')");
+			hql.append(" and c.costNumber like CONCAT(:costNumber,'%')");
 		}
 		
 		query = getSession().createQuery(hql.toString());
@@ -73,6 +73,11 @@ public class CostDaoImpl extends BaseDao implements ICostDao {
 		List<?> datas = query.list();
 		pager.setDatas(datas);
 		return pager;
+	}
+
+	private Object Integer(Object object) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

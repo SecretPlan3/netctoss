@@ -26,7 +26,6 @@
 <!--自定义js-->
     <script src="static/js/custom.js"></script>
     
-
 </head>
 <body>
         <div class="page-container">

@@ -69,7 +69,7 @@ public class CostBean {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public long getType() {
+	public int getType() {
 		return type;
 	}
 	public void setType(int type) {

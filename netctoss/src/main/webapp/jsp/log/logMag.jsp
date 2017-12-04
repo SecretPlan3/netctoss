@@ -148,7 +148,7 @@
 					"params":params,
 				},
 				success : function(msg) {
-					alert("成功返回");
+					alert("欢迎进入日志管理系统！");
 					//处理返回数据，给全局变量赋值等
 					page = msg.page;
 					rows = msg.rows;

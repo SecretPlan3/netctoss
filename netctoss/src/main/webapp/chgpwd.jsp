@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-个人信息……
+修改密码……
 </body>
 </html>

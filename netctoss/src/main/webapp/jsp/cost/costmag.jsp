@@ -43,36 +43,38 @@
             <h1>资费管理系统</h1>
        </div>
        <!--模糊查询-->
-       <div class="search">
+       <form>
+       		<div class="search">
            <ul class="am-nav am-nav-pills am-topbar-nav ">
                <li class="soso">
                    <p>
                        <button class="am-btn am-btn-xs am-btn-default am-xiao">套餐编号</button>
                    </p>
-                   <p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="套餐编号" /></p>
+                   <p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="套餐编号" id="costNumber"/></p>
                </li>
                <li class="soso">
                    <p>
                        <button class="am-btn am-btn-xs am-btn-default am-xiao">套餐名称</button>
                    </p>
-                   <p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="套餐名称" /></p>
+                   <p class="ycfg"><input type="text" class="am-form-field am-input-sm" placeholder="套餐名称" id="costName"/></p>
                </li>
                <li class="soso">
                    <p>
                        <button class="am-btn am-btn-xs am-btn-default am-xiao">套餐类型</button>
                    </p>
                    <p>
-                       <select data-am-selected="{btnWidth: 110, btnSize: 'sm', btnStyle: 'default'}">
-                           <option value="1">所有资费套餐</option>
-                           <option value="2">包月资费套餐</option>
-                           <option value="3">计时资费套餐</option>
-                           <option value="4">自助资费套餐</option>
+                       <select data-am-selected="{btnWidth: 110, btnSize: 'sm', btnStyle: 'default'}" id="costType">
+                           <option value="3">所有资费套餐</option>
+                           <option value="0">包月资费套餐</option>
+                           <option value="1">计时资费套餐</option>
+                           <option value="2">自助资费套餐</option>
                        </select>
                    </p>
-                   <p><button class="am-btn am-btn-xs am-btn-default am-xiao"><i class="am-icon-search"></i></button></p>
+                   <p><button type="button" onclick="check()" class="am-btn am-btn-xs am-btn-default am-xiao"><i class="am-icon-search"></i></button></p>
                </li>
             </ul>
        </div>
+       </form>
         <!--表单数据-->
 
        <div class="listbiaoti am-cf ">
@@ -295,7 +297,24 @@
 				}
 			});
 		}
-	 	
+	 	//模糊查询
+	 	function check(){
+	 		var costNumber = $("#costNumber").val();
+	 		var costName = $("#costName").val();
+	 		/* var costType = parseInt($("#costType").val()); */
+	 		alert(costNumber + costName);
+	 		if(costNumber == "" && costName == ""){
+	 			alert("测试");
+	 			showData();
+	 		}else{
+	 			params = {
+		 				costNumber:costNumber,
+		 				costName:costName,
+		 				/* costType:parseInt($("#costType").val()) */
+		 			}; 
+		 			showData();	//调用显示数据函数，ajax刷新页面
+	 		}
+	 	}
 		//增加资费
 		function addCost(){
 			var url = "cost/insertCosts";
@@ -310,12 +329,12 @@
 				});
 		}
 		
-		
-        $("form input").on({
+        $("#formObj input").on({
             "blur":function(){
                 checkNotNull($(this));
             }
         });
+        
         //传入一个obj，判断value是否为空，分别返回true/false
         function checkNotNull(obj){
             var txt = obj.val();

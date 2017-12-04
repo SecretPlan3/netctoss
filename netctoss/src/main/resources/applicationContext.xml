@@ -139,8 +139,8 @@
 
 <!-- 配置shiro所使用的realm -->
 	<bean id="userRealm" class="org.project.netctoss.shiro.UserRealm" />
-
 	<bean id="managerRealm" class="org.project.netctoss.shiro.ManagerRealm"/>
+	<bean id="myRealm" class="org.project.netctoss.shiro.MyRealm"/>
 
 
 	<!-- 配置shiro的权限管理器 -->
@@ -152,8 +152,11 @@
 		    <!-- 可以配置多个Realm，其实会把realms属性赋值给ModularRealmAuthenticator的realms属性 -->  
 	    <property name="realms">  
 	        <list>  
-	        	<ref bean="managerRealm"></ref>
+	        	<!-- <ref bean="managerRealm"></ref> -->
 	            <!-- <ref bean="userRealm"></ref>   -->
+	           <ref bean="myRealm"></ref>  
+	            
+	            
 	            
 	         </list>  
 	    </property>  
@@ -194,10 +197,9 @@
                	/managermag/login = anon
                	/managermag/logout = anon
              	
-             	/jsp/index.jsp = roles[*]
-           		/jsp/index.jsp = anon
-             	
-           		/jsp/**= roles[超级管理员]
+ 				/jsp/index.jsp = anon
+ 				
+				/jsp/** = roles[超级管理员]
            		/jsp/user/** = roles[用户管理员]
            		/jsp/cost/** = roles[资费管理员]
            		/jsp/bill/** = roles[账单管理员]
@@ -207,8 +209,7 @@
            		/jsp/permission/** = roles[权限管理员]
            		/jsp/manager/** = roles[管理员管理员]
            		/jsp/userself/** = roles[普通用户]
-           		
-           		
+           			
                 /** = authc
 			</value>
 		</property>

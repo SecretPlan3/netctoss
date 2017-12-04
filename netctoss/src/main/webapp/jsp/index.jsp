@@ -86,7 +86,7 @@
 				<shiro:principal />
 				，
 
-				<shiro:hasRole name="超级管理员">：超级管理员</shiro:hasRole>
+				<shiro:hasRole name="超级管理员">超级管理员</shiro:hasRole>
 				<shiro:hasRole name="普通用户">普通用户</shiro:hasRole>
 				<shiro:hasRole name="资费管理员">资费管理员</shiro:hasRole>
 				<shiro:hasRole name="用户管理员">用户管理员</shiro:hasRole>
@@ -95,7 +95,7 @@
 				<shiro:hasRole name="报表管理员">报表管理员</shiro:hasRole>
 				<shiro:hasRole name="日志管理员">日志管理员</shiro:hasRole>
 				<shiro:hasRole name="权限管理员">权限管理员</shiro:hasRole>
-				<shiro:hasRole name="管理员管理员">管理员管理员</shiro:hasRole>
+				
 
 				<%-- <shiro:hasAnyRoles name="超级管理员,用户管理员"> 超级管理员,用户管理员 角色用户登录显示此内容</shiro:hasAnyRoles>  
   --%>
@@ -118,9 +118,6 @@
 				</h3>
 				<ul>
 					<li>xxxx</li>
-					<li>xxxx</li>
-					<li>xxxx</li>
-					<li>xxxx</li>
 				</ul>
 				<h3 class="am-icon-cart-plus">
 					<em></em> <a onclick="javascript:showCost();return false;" href="#"
@@ -138,27 +135,21 @@
 				</h3>
 				<ul>
 					<li>xxxx</li>
-					<li>xxxx</li>
-					<li>xxxx</li>
-					<li>xxxx</li>
-					<li>xxxx</li>
 				</ul>
 				<h3 class="am-icon-volume-up">
 					<em></em> <a onclick="javascript:showBill();return false;" href="#"
 						target="myiframe">账单查询系统</a>
 				</h3>
 				<ul>
-					<li><a href="javaScript:showBill()">账单查询</a></li>
+					<li><a href="javaScript:showBill();return false;">账单查询</a></li>
 				</ul>
 				<h3 class="am-icon-gears">
-					<em></em> <a href="#">账务查询系统</a>
+					<em></em> <a onclick="javascript:showBilltime();return false;" href="#"
+						target="myiframe">账务查询系统</a>
 				</h3>
 				<ul>
-					<li>xxxx</li>
-					<li>xxxx</li>
-					<li>xxxx</li>
-					<li>xxxx</li>
-					<li>xxxx</li>
+					<li>年详情</li>
+					<li>月详情</li>
 				</ul>
 
 
@@ -167,11 +158,9 @@
 						href="#" target="myiframe">权限管理系统</a>
 				</h3>
 				<ul>
-					<li>xxxx</li>
-					<li>xxxx</li>
-					<li>xxxx</li>
-					<li>xxxx</li>
-					<li>xxxx</li>
+					<li>用管理员管理</li>
+					<li>权限管理</li>
+
 				</ul>
 
 				<h3 class="am-icon-gears">
@@ -179,11 +168,9 @@
 						target="myiframe">前台日志系统</a>
 				</h3>
 				<ul>
-					<li>xxxx</li>
-					<li>xxxx</li>
-					<li>xxxx</li>
-					<li>xxxx</li>
-					<li>xxxx</li>
+					<li>登陆日志</li>
+					<li>操作日志</li>
+
 				</ul>
 
 				<h3 class="am-icon-gears">
@@ -191,11 +178,9 @@
 						href="#" target="myiframe">报表查询系统</a>
 				</h3>
 				<ul>
-					<li>xxxx</li>
-					<li>xxxx</li>
-					<li>xxxx</li>
-					<li>xxxx</li>
-					<li>xxxx</li>
+					<li>比例图</li>
+					<li>走势图</li>
+
 				</ul>
 			</div>
 			<!-- 左侧导航栏效果 -->
@@ -254,40 +239,40 @@
 	<script>
 		//给下拉导航菜单绑定监听事件
 
-		//跳转IFrame到账单页面
+		// 跳转IFrame到账单页面
 		function showCost() {
 			$("#iframe1").attr("src", "jsp/cost/costmag.jsp");
 		}
 
 		//跳转IFrame到账单页面
 		function showBill() {
-			$("#iframe1").attr("src", "../../jsp/bill/billmain.jsp");
+			$("#iframe1").attr("src", "jsp/bill/billmain.jsp");
 		};
 
 		//跳转IFrame到账务查询页面
 		function showBilltime() {
-			$("#iframe1").attr("src", "../../jsp/billtime/billtimemain.jsp");
+			$("#iframe1").attr("src", "jsp/billtime/billtimemain.jsp");
 		};
 
 		//跳转IFrame到管理员管理页面
 		function showManager() {
-			$("#iframe1").attr("src", "../../jsp/manager/managermain.jsp");
+			$("#iframe1").attr("src", "jsp/manager/managermain.jsp");
 		};
 
 		//跳转IFrame到权限管理页面
 		function showPermission() {
 			$("#iframe1")
-					.attr("src", "../../jsp/permission/permissionmain.jsp");
+					.attr("src", "jsp/permission/permissionmain.jsp");
 		};
 
 		//跳转IFrame到用户管理页面
 		function showUser() {
-			$("#iframe1").attr("src", "../../jsp/user/usermain.jsp");
+			$("#iframe1").attr("src", "jsp/user/usermain.jsp");
 		};
 
 		//跳转IFrame到报表查询页面
 		function showReport() {
-			$("#iframe1").attr("src", "../../jsp/report/reportmain.jsp");
+			$("#iframe1").attr("src", "jsp/report/reportmain.jsp");
 		};
 	</script>
 </body>

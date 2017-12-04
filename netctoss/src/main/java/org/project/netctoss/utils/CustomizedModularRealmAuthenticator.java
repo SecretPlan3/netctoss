@@ -16,42 +16,42 @@ import org.apache.shiro.realm.Realm;
  */
 public class CustomizedModularRealmAuthenticator extends ModularRealmAuthenticator {
 
-	@Override
-	protected AuthenticationInfo doAuthenticate(AuthenticationToken authenticationToken)
-			throws AuthenticationException {
-		// 判断getRealms()是否返回为空
-		assertRealmsConfigured();
-		// 强制转换回自定义的CustomizedToken
-		CustomizedToken customizedToken = (CustomizedToken) authenticationToken;
-		// 登录类型
-		String loginType = customizedToken.getLoginType();
-		// 所有Realm
-		Collection<Realm> realms = getRealms();
-		// 登录类型对应的所有Realm
-		Collection<Realm> typeRealms = new ArrayList<>();
-		for (Realm realm : realms) {
-			System.out.println("当前登陆类型：" + loginType);
-			System.out.println("当前realm名：" + realm.getName());
-
-			if (realm.getName().contains(loginType)) {// 以String的包含方法区分Realm
-				System.out.println("通过验证！ ");
-				System.out.println("验证后登陆类型：" + loginType);
-				System.out.println("验证后realm名：" + realm.getName());
-
-				typeRealms.add(realm);
-			}
-		}
-
-		System.out.println("typeRealms为：" + typeRealms);
-		// 判断是单Realm还是多Realm
-		if (typeRealms.size() == 1) {
-			System.out.println("进入了单个的");
-			return doSingleRealmAuthentication(typeRealms.iterator().next(), customizedToken);
-
-		} else {
-			System.out.println("进入了多个的");
-			return doMultiRealmAuthentication(typeRealms, customizedToken);
-
-		}
-	}
+//	@Override
+//	protected AuthenticationInfo doAuthenticate(AuthenticationToken authenticationToken)
+//			throws AuthenticationException {
+//		// 判断getRealms()是否返回为空
+//		assertRealmsConfigured();
+//		// 强制转换回自定义的CustomizedToken
+//		CustomizedToken customizedToken = (CustomizedToken) authenticationToken;
+//		// 登录类型
+//		String loginType = customizedToken.getLoginType();
+//		// 所有Realm
+//		Collection<Realm> realms = getRealms();
+//		// 登录类型对应的所有Realm
+//		Collection<Realm> typeRealms = new ArrayList<>();
+//		for (Realm realm : realms) {
+//			System.out.println("当前登陆类型：" + loginType);
+//			System.out.println("当前realm名：" + realm.getName());
+//
+//			if (realm.getName().contains(loginType)) {// 以String的包含方法区分Realm
+//				System.out.println("通过验证！ ");
+//				System.out.println("验证后登陆类型：" + loginType);
+//				System.out.println("验证后realm名：" + realm.getName());
+//
+//				typeRealms.add(realm);
+//			}
+//		}
+//
+//		System.out.println("typeRealms为：" + typeRealms);
+//		// 判断是单Realm还是多Realm
+//		if (typeRealms.size() == 1) {
+//			System.out.println("进入了单个的");
+//			return doSingleRealmAuthentication(typeRealms.iterator().next(), customizedToken);
+//
+//		} else {
+//			System.out.println("进入了多个的");
+//			return doMultiRealmAuthentication(typeRealms, customizedToken);
+//
+//		}
+//	}
 }

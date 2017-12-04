@@ -21,6 +21,11 @@
     <!-- jquery 和 json 的js -->
     <script src="<%=basePath%>static/js/jquery-3.2.1.min.js" charset="utf-8"></script>
 	<script  src="<%=basePath%>static/js/jquery.json-2.4.js"></script>
+	<!-- bootstrap -->
+<link rel="stylesheet" href="<%=basePath%>static/css/bootstrap.min.css" />
+<script type="text/javascript"
+	src="<%=basePath%>static/js/bootstrap.min.js"></script>
+	
  <!-- 4.页面规范的样式 -->
     <style>
         .header{
@@ -41,6 +46,7 @@
             <h1>用户管理系统</h1>
        </div>
        <!--模糊查询-->
+       <form >
        <div class="search">
            <ul class="am-nav am-nav-pills am-topbar-nav ">
                <li class="soso">
@@ -109,7 +115,9 @@
           <!-- 功能按钮组div-->
           <!-- 功能按钮组div-->
   		  <div class="am-btn-group am-btn-group-xs ">
-               <button type="button" class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus findfeikong" data-toggle="modal" data-target="#find">查看详细信息</button>
+               <button type="button"
+					class="am-btn am-btn-danger am-round am-btn-xs am-icon-plus findfeikong"
+					data-toggle="modal" data-target="#find"><span class="am-icon-save"></span> 查看详细信息</button>
                <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 查看对应业务</button>
                <button type="button" class="am-btn am-btn-default"><span class="am-icon-save"></span> 暂停</button>
                <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 修改</button>
@@ -136,19 +144,20 @@
 	
     <!-- 查看详细信息的模态框  -->
     
-    <div class="modal fade btn" id="find" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade btn" id="find" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">管理员详细信息</h4>
+                    <h4 class="modal-title" id="myModalLabel">用户详细信息</h4>
                 </div>
                 <div class="modal-body">
                     <div class="tc001_body_content">
                          <form role="form" id="findform">
 		                    <div class="form-group">
-		                        <input type="hidden" class = "find0" name = "id">
+		                        
 		                        <label>姓名</label>
-		                        <input type="text" class="form-control find1" disabled="disabled" name="magName">
+		                        <input type="text" class="form-control find1" disabled="disabled" name="userName">
 		                    </div>
 		                    <div class="form-group">
 		                        <label>登录账号</label>
@@ -156,16 +165,49 @@
 		                    </div>
 		                    <div class="form-group">
 		                        <label>登录密码</label>
-		                        <input type="text" class="form-control find3" disabled="disabled" name="password">
+		                        <input type="text" class="form-control find3" disabled="disabled" name="passWord">
 		                    </div>
 		                    <div class="form-group">
-		                        <label>手机号</label>
-		                        <input type="text" class="form-control find4" disabled="disabled" name="tel">
+		                        <label>状态</label>
+		                        <input type="text" class="form-control find4" disabled="disabled" name="status">
+		                    </div>
+		                    <div class="form-group">
+		                        <label>创建时间</label>
+		                        <input type="text" class="form-control find5" disabled="disabled" name="createDate">
+		                    </div>
+		                    <div class="form-group">
+		                        <label>暂停时间</label>
+		                        <input type="text" class="form-control find6" disabled="disabled" name="pauseDate">
+		                    </div>
+		                    <div class="form-group">
+		                        <label>关闭时间</label>
+		                        <input type="text" class="form-control find7" disabled="disabled" name="closeDate">
+		                    </div>
+		                    <div class="form-group">
+		                        <label>性别</label>
+		                        <input type="text" class="form-control find8" disabled="disabled" name="gender">
+		                    </div>
+		                    <div class="form-group">
+		                        <label>身份证号</label>
+		                        <input type="text" class="form-control find9" disabled="disabled" name="idcard">
+		                    </div>
+		                    <div class="form-group">
+		                        <label>地址</label>
+		                        <input type="text" class="form-control find10" disabled="disabled" name="address">
 		                    </div>
 		                    <div class="form-group">
 		                        <label>邮箱</label>
-		                        <input type="text" class="form-control find5" disabled="disabled" name="email">
+		                        <input type="text" class="form-control find11" disabled="disabled" name="postcode">
 		                    </div>
+		                    <div class="form-group">
+		                        <label>QQ号</label>
+		                        <input type="text" class="form-control find12" disabled="disabled" name="qq">
+		                    </div>
+		               		<div class="form-group">
+		                        <label>余额</label>
+		                        <input type="text" class="form-control find13" disabled="disabled" name="balance">
+		                    </div>
+		                    
 		                </form>
                         
                     </div>
@@ -176,7 +218,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
+    
+    
+
 	       
 </body>
 
@@ -266,13 +311,41 @@
              type:"POST",  
              url:"usermag/delete",
              async: true,
-             data:{"userId":$("#chosenId").attr("value"),status:3},
+             data:{userId:$("#chosenId").attr("value"),status:3},
              success:function(e){   
              	alert("啊 输出成功了");
              	showData();
              }  
          });  
 	}
+	function finddate(){
+		$.ajax({  
+            type:"POST",  
+            url:"usermag/find",
+            async: true,
+            data:{"userId":$("#chosenId").attr("value")},
+            success:function(e){
+            	console.info(e);
+            	$(".find1").val(e.userName);
+				$(".find2").val(e.loginName);
+				$(".find3").val(e.passWord);
+				$(".find4").val(e.status);
+				$(".find5").val(e.createDate);
+				$(".find6").val(e.pauseDate);
+				$(".find7").val(e.closeDate);
+				$(".find8").val(e.gender);
+				$(".find9").val(e.idcard);
+				$(".find10").val(e.tel);
+				$(".find11").val(e.address);
+				$(".find12").val(e.postcode);
+				$(".find13").val(e.qq);
+				$(".find14").val(e.balance);
+				
+            	
+            }  
+        });  
+	}
+	
 
 	//翻页按钮 绑定的监听事件 ++++++++++++++++++++++++++
 	//跳转
@@ -332,7 +405,18 @@
  	});  
       $("#deletebtn").click(function(){  
     	  delete0();
-   	});  
+   	});
+      $(".findfeikong").click(function() {
+			$(this).removeAttr("data-target");
+			if ($("#chosenId").attr("value") != null) {
+				$(this).attr("data-target", "#find");
+				finddate($("#chosenId").attr("value"));
+			} else {
+				alert("请选择需要查看的信息");
+			}
+
+		});
 	</script>
 </body>
 </html>
+				

@@ -15,7 +15,7 @@
     var myChart;
     var myChart2;
     
-    //图表格式对象
+    //图表格式对象 
     var theNormal = {formatter: '{b}：{d}%'};
 	var theLabel = {normal: theNormal};
 

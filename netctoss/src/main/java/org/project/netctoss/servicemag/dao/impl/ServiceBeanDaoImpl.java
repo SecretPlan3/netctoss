@@ -1,5 +1,8 @@
 package org.project.netctoss.servicemag.dao.impl;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Query;
@@ -46,7 +49,8 @@ public class ServiceBeanDaoImpl extends BaseDao  implements IServiceBeanDao  {
 //		}
 		Query query = getSession().createQuery(hql);
 		query.setLong(0, ub.getUserId());
-		return (Set<ServiceBean>) query.list();
+		Set result = new HashSet(query.list());
+		return result;
 	}
 
 	@Override
